@@ -12,9 +12,9 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-    <script src="scripts/script.js"></script>
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script type="text/javascript" src="scripts/registerValidate.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
@@ -22,35 +22,41 @@ session_start();
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div style="max-width:420px;">
-                    <form action="#" class="bg-white border py-4 px-5" method="get">
-                        <div class="text-center mb-3 pb-1">
+                    <form id="register-form" autocomplete="off" novalidate="novalidate"
+                        class="bg-white border py-4 px-5" method="post" action="processRegister.php">
+                        <div class=" text-center mb-3 pb-1">
                             <i class="fab fa-bootstrap fa-5x text-secondary mb-2"></i>
                             <h3 class="text-muted fw-bold">
                                 Sign Up
                             </h3>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="email" placeholder="Email" required=""
-                                type="email" /><label>Email</label>
+                            <input class="form-control" id="email" name="email" placeholder="Email" autocomplete="off
+                                type=" email" /><label>Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="mobile-number" placeholder="Mobile Number" required=""
-                                type="text" /><label>Mobile Number</label>
+                            <input class="form-control" id="mobile-number" name="mobile-number"
+                                placeholder="Mobile Number" autocomplete="off autocomplete="
+                                offtype=" text" /><label>Mobile Number</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="fullname" placeholder="Full Name" required=""
-                                type="text" /><label>Full Name</label>
+                            <input class="form-control" id="full-name" name="full-name" placeholder="Full Name"
+                                autocomplete="off
+                                type=" text" /><label>Full Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="username" placeholder="Username" required=""
-                                type="text" /><label>Username</label>
+                            <input class="form-control" id="username" name="username" placeholder="Username"
+                                autocomplete="off
+                                type=" text" /><label>Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="password" placeholder="Password" required=""
-                                type="password" /><label>Password</label>
+                            <input class="form-control" id="password" name="password" placeholder="Password"
+                                autocomplete="off
+                                type=" password" /><label>Password</label>
                         </div>
                         <div class="mb-2">
-                            <button class="btn btn-primary fw-bold w-100 bg-gradient" href="#" type="submit">Sign
+                            <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
+                                type="submit">Sign
                                 Up</button>
                         </div>
                     </form>
@@ -63,11 +69,6 @@ session_start();
             </div>
         </div>
     </section>
-
-    <?php
-    if (isset($_POST['submit'])) {
-    }
-    ?>
 </body>
 
 </html>

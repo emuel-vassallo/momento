@@ -1,1 +1,3 @@
-decora
+<?php
+echo "INDEX";
+?>
