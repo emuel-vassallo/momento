@@ -36,7 +36,7 @@ function validateForm() {
       },
       {
         rule: "maxLength",
-        value: 50,
+        value: 15,
       },
     ])
     .addField("#username", [
@@ -49,12 +49,16 @@ function validateForm() {
       },
       {
         rule: "maxLength",
-        value: 30,
+        value: 15,
       },
     ])
     .addField("#password", [
       {
         rule: "required",
+      },
+      {
+        rule: "minLength",
+        value: 3,
       },
       {
         rule: "password",

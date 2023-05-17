@@ -1,7 +1,3 @@
-<?php
-require_once('db_functions.php');
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +7,7 @@ session_start();
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script type="text/javascript" src="scripts/registerValidate.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
@@ -31,28 +27,25 @@ session_start();
                             </h3>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="email" name="email" placeholder="Email" autocomplete="off
-                                type=" email" /><label>Email</label>
+                            <input class="form-control" id="email" name="email" placeholder="Email" autocomplete="off"
+                                type="email" /><label>Email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="mobile-number" name="mobile-number"
-                                placeholder="Mobile Number" autocomplete="off autocomplete="
-                                offtype=" text" /><label>Mobile Number</label>
+                                placeholder="Mobile Number" autocomplete="off" autocomplete="off"
+                                type="text" /><label>Mobile Number</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="full-name" name="full-name" placeholder="Full Name"
-                                autocomplete="off
-                                type=" text" /><label>Full Name</label>
+                                autocomplete="off" type=" text" /><label>Full Name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="username" name="username" placeholder="Username"
-                                autocomplete="off
-                                type=" text" /><label>Username</label>
+                                autocomplete="off" type="text" /><label>Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" name="password" placeholder="Password"
-                                autocomplete="off
-                                type=" password" /><label>Password</label>
+                                autocomplete="off" type="password" /><label>Password</label>
                         </div>
                         <div class="mb-2">
                             <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
