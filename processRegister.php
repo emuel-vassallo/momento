@@ -11,8 +11,8 @@ $conn = connect_to_db();
 if (isset($_POST['email']) && !empty($_POST['email'])) {
     $email = mysqli_real_escape_string($conn, trim($_POST['email']));
 }
-if (isset($_POST['mobile-number']) && !empty($_POST['mobile-number'])) {
-    $mobile_number = mysqli_real_escape_string($conn, trim($_POST['mobile-number']));
+if (isset($_POST['phone-number']) && !empty($_POST['phone-number'])) {
+    $phone_number = mysqli_real_escape_string($conn, trim($_POST['phone-number']));
 }
 if (isset($_POST['full-name']) && !empty($_POST['full-name'])) {
     $full_name = mysqli_real_escape_string($conn, trim($_POST['full-name']));
@@ -25,7 +25,7 @@ if (isset($_POST['password']) && !empty($_POST['password'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 }
 
-$result = create_user($conn, $email, $mobile_number, $full_name, $username, $hashed_password);
+$result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password);
 
 if ($result) {
     $_SESSION['full_name'] = $full_name;

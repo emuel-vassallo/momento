@@ -10,7 +10,7 @@ function validateForm() {
         rule: "email",
       },
     ])
-    .addField("#mobile-number", [
+    .addField("#phone-number", [
       {
         rule: "required",
       },
