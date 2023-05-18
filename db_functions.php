@@ -7,11 +7,11 @@ function connect_to_db()
 {
     return mysqli_connect('localhost', 'root', '', 'InstaCloneDB');
 }
-function create_user($conn, $email, $phone_number, $full_name, $username, $password)
+function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $profile_picture_dir)
 {
     $query = "INSERT INTO `users_table` 
-              (`username`, `full_name`, `email`, `phone_number`, `password`) 
-              VALUES ('$username', '$full_name', '$email', '$phone_number', '$password');";
+              (`username`, `full_name`, `email`, `phone_number`, `password`, `profile_picture_dir`) 
+              VALUES ('$username', '$full_name', '$email', '$phone_number', '$hashed_password', '$profile_picture_dir');";
     return mysqli_query($conn, $query);
 }
 

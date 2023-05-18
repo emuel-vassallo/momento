@@ -25,11 +25,11 @@ if (isset($_POST['password']) && !empty($_POST['password'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 }
 
-$result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password);
+$_SESSION['email'] = $email;
+$_SESSION['phone_number'] = $phone_number;
+$_SESSION['full_name'] = $full_name;
+$_SESSION['username'] = $username;
+$_SESSION['hashed_password'] = $hashed_password;
 
-if ($result) {
-    $_SESSION['full_name'] = $full_name;
-    $_SESSION['username'] = $username;
-    header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/profile.php");
-}
+header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/profile.php");
 ?>
