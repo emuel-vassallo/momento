@@ -31,5 +31,5 @@ $_SESSION['full_name'] = $full_name;
 $_SESSION['username'] = $username;
 $_SESSION['hashed_password'] = $hashed_password;
 
-header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/profile.php");
+header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/profile.php");
 ?>

@@ -30,22 +30,21 @@
                                 Log in
                             </h5>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3 row">
                             <input class="form-control" id="username" name="username" type="name" autocomplete="off"
-                                placeholder="Phone number, username or email address" /><label>Phone
+                                placeholder="Phone number, username or email address" /><label class="col text-truncate">Phone
                                 number, username or
                                 email address</label>
                         </div>
-                        <div class=" form-floating mb-3">
+                        <div class=" form-floating mb-3 row">
                             <input class="form-control" id="password" name="password" placeholder="Password"
                                 autocomplete="off" type="password" /><label>Password</label>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-4 row">
                             <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
-                                type="submit">Log
-                                in</button>
+                                type="submit">Log in</button>
                         </div>
-                        <span id="login-error" class='alert'></span>
+                        <div id="login-error" class='alert alert-danger mb-0 row' role='alert'>Sorry, your password was incorrect. Please double-check your password.</div>
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">
                         <p class="m-0">

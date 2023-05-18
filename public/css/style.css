@@ -6,7 +6,7 @@ body {
 }
 
 .login-form {
-  max-width: 520px;
+  max-width: 460px;
 }
 
 .edit-profile {
@@ -15,8 +15,8 @@ body {
 
 .profile-picture-picker-image {
   object-fit: cover;
-  height: 94px;
-  width: 94px;
+  height: 72px;
+  width: 72px;
 }
 
 .choose-profile-picture-label:hover {
@@ -31,4 +31,12 @@ body {
 
 .bio-text {
   resize: none;
+}
+
+#login-error {
+  display: none;
+}
+
+#login-error.visible {
+  display: block;
 }

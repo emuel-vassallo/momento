@@ -15,6 +15,6 @@ if (isset($_FILES['profile-picture-picker']) && !empty($_FILES['profile-picture-
 $result = create_user($conn, $_SESSION['email'], $_SESSION['phone_number'], $_SESSION['full_name'], $_SESSION['username'], $_SESSION['hashed_password'], $profile_picture_dir);
 
 if ($result) {
-    header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/index.php");
+    header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
 }
 ?>

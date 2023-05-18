@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +22,7 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div style="max-width:420px;">
                     <form id="register-form" autocomplete="off" novalidate="novalidate"
-                        class="bg-white border py-4 px-5" method="post" action="processRegister.php">
+                        class="bg-white border py-4 px-5" action="../core/processRegister.php" method="post">
                         <div class=" text-center mb-1 pb-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#595C5F"
                                 class="bi bi-instagram" viewBox="0 0 16 16">
@@ -32,19 +35,19 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="email" name="email" placeholder="Email" autocomplete="off"
-                                type="email" /><label>Email</label>
+                                type="email" value="<?php echo $_SESSION['email']?>"/><label>Email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="phone-number" name="phone-number" placeholder="Phone Number"
-                                autocomplete="off" autocomplete="off" type="text" /><label>Phone Number</label>
+                                autocomplete="off" autocomplete="off" type="text" value="<?php echo $_SESSION['phone_number']?>" /><label>Phone Number</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="full-name" name="full-name" placeholder="Full Name"
-                                autocomplete="off" type=" text" /><label>Full Name</label>
+                                autocomplete="off" type="text" value="<?php echo $_SESSION['full_name']?>"/><label>Full Name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="username" name="username" placeholder="Username"
-                                autocomplete="off" type="text" /><label>Username</label>
+                                autocomplete="off" type="text" value="<?php echo $_SESSION['username']?>" /><label>Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" name="password" placeholder="Password"
