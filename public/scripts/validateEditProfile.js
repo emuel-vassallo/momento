@@ -1,58 +1,66 @@
-const validator = new window.JustValidate('#edit-profile-form', {
-  errorsContainer: '#errors-container_custom-container',
+const validator = new window.JustValidate("#edit-profile-form", {
+  errorsContainer: "#errors-container_custom-container",
 });
 
 function validateForm() {
   validator
     .addField(
-      '#profile-picture-picker',
+      "#profile-picture-picker",
       [
         {
-          rule: 'required',
+          rule: "required",
         },
         {
-          rule: 'minFilesCount',
+          rule: "minFilesCount",
           value: 1,
         },
         {
-          rule: 'maxFilesCount',
+          rule: "maxFilesCount",
           value: 1,
         },
         {
-          rule: 'files',
+          rule: "files",
           value: {
             files: {
-              types: ['image/jpeg', 'image/jpg', 'image/png'],
+              types: ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
             },
           },
         },
       ],
       {
-        errorsContainer: '#errors-container_custom-profile-picture',
+        errorsContainer: "#errors-container_custom-profile-picture",
       }
     )
-    .addField('#edit-profile-display-name', [
+    .addField(
+      "#edit-profile-display-name",
+      [
+        {
+          rule: "required",
+        },
+      ],
       {
-        rule: 'required',
-      },
-    ],
-      {
-        errorsContainer: '#errors-container_custom-display-name',
+        errorsContainer: "#errors-container_custom-display-name",
       }
     )
-    .addField('#bio', [
+    .addField(
+      "#bio",
+      [
+        {
+          rule: "required",
+        },
+        {
+          rule: "maxLength",
+          value: 150,
+        },
+      ],
       {
-        rule: 'required',
-      },
-    ],
-      {
-        errorsContainer: '#errors-container_custom-bio',
+        errorsContainer: "#errors-container_custom-bio",
       }
     );
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const form = document.getElementById('edit-profile-form');
+document.addEventListener("DOMContentLoaded", (event) => {
+  const form = document.getElementById("edit-profile-form");
 
   validateForm();
 
@@ -65,17 +73,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   const profilePicturePicker = document.getElementById(
-    'profile-picture-picker'
+    "profile-picture-picker"
   );
   const profilePictureImage = document.querySelector(
-    '.profile-picture-picker-image'
+    ".profile-picture-picker-image"
   );
 
-  profilePicturePicker.addEventListener('change', (event) => {
+  profilePicturePicker.addEventListener("change", (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.addEventListener('load', (event) => {
+    reader.addEventListener("load", (event) => {
       profilePictureImage.src = event.target.result;
     });
 
