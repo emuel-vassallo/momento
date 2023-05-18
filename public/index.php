@@ -5,5 +5,5 @@ error_reporting(E_ALL);
 
 session_start();
 
-echo $_SESSION['username'];
+var_dump($_SESSION);
 ?>

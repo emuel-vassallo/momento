@@ -18,7 +18,7 @@ if (isset($_POST['full-name']) && !empty($_POST['full-name'])) {
     $full_name = mysqli_real_escape_string($conn, trim($_POST['full-name']));
 }
 if (isset($_POST['username']) && !empty($_POST['username'])) {
-    $username = mysqli_real_escape_string($conn, trim($_POST['username']));
+    $username = strtolower(mysqli_real_escape_string($conn, trim($_POST['username'])));
 }
 if (isset($_POST['password']) && !empty($_POST['password'])) {
     $password = mysqli_real_escape_string($conn, trim($_POST['password']));

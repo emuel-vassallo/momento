@@ -1,77 +1,77 @@
-const validator = new window.JustValidate('#register-form');
+const validator = new window.JustValidate("#register-form");
 
 function validateForm() {
   validator
-    .addField('#email', [
+    .addField("#email", [
       {
-        rule: 'required',
+        rule: "required",
       },
       {
-        rule: 'email',
+        rule: "email",
       },
     ])
-    .addField('#phone-number', [
+    .addField("#phone-number", [
       {
-        rule: 'required',
+        rule: "required",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 3,
       },
       {
-        rule: 'maxLength',
+        rule: "maxLength",
         value: 15,
       },
       {
-        rule: 'number',
+        rule: "number",
       },
     ])
-    .addField('#full-name', [
+    .addField("#full-name", [
       {
-        rule: 'required',
+        rule: "required",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 3,
       },
       {
-        rule: 'maxLength',
+        rule: "maxLength",
         value: 15,
       },
     ])
-    .addField('#username', [
+    .addField("#username", [
       {
-        rule: 'required',
+        rule: "required",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 1,
       },
       {
-        rule: 'maxLength',
+        rule: "maxLength",
         value: 15,
       },
     ])
-    .addField('#password', [
+    .addField("#password", [
       {
-        rule: 'required',
+        rule: "required",
       },
       {
-        rule: 'minLength',
+        rule: "minLength",
         value: 3,
       },
       {
-        rule: 'password',
+        rule: "password",
       },
     ]);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('register-form');
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("register-form");
 
   validateForm();
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (validator.isValid) {

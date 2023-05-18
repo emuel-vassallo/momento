@@ -9,10 +9,22 @@ require_once("db_functions.php");
 $conn = connect_to_db();
 
 if (isset($_FILES['profile-picture-picker']) && !empty($_FILES['profile-picture-picker'])) {
-    $profile_picture_dir = mysqli_real_escape_string($conn, trim($_FILES['profile_picture_dir']['name']));
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
 }
 
-$result = create_user($conn, $_SESSION['email'], $_SESSION['phone_number'], $_SESSION['full_name'], $_SESSION['username'], $_SESSION['hashed_password'], $profile_picture_dir);
+if (isset($_POST['bio']) && !empty($_POST['bio'])) {
+    $bio = mysqli_real_escape_string($conn, trim($_POST['bio']));
+}
+
+$_SESSION['bio'] = $bio;
+
+$email = $_SESSION['email'];
+$phone_number = $_SESSION['phone_number'];
+$full_name = $_SESSION['full_name'];
+$username = $_SESSION['username'];
+$hashed_password = $_SESSION['hashed_password'];
+
+$result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio, $_FILES['profile-picture-picker'], $target_dir);
 
 if ($result) {
     header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
