@@ -8,3 +8,27 @@ body {
 .login-form {
   max-width: 520px;
 }
+
+.edit-profile {
+  max-width: 400px;
+}
+
+.profile-picture-picker-image {
+  object-fit: cover;
+  height: 94px;
+  width: 94px;
+}
+
+.choose-profile-picture-label:hover {
+  cursor: pointer;
+  pointer-events: all !important;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+}
+
+.bio-text {
+  resize: none;
+}
