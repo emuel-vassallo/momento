@@ -11,10 +11,11 @@ $conn = connect_to_db();
 $errors = array();
 
 if (isset($_FILES['profile-picture-picker']) && !empty($_FILES['profile-picture-picker'])) {
-    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Emuel_Vassallo_4.2D/instagram-clone/public/images/profile-pictures/';
 
     $pfp_file = $_FILES['profile-picture-picker'];
-    $pfp_file_ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+    $pfp_file_ext = strtolower(pathinfo($_FILES['profile-picture-picker']['name'], PATHINFO_EXTENSION));
 
     $allowed_extensions = array("jpg", "jpeg", "png", "bmp");
 
