@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_complete'] !== true) {
+    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/register.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +17,7 @@ session_start();
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script type="text/javascript" src="scripts/validateEditProfile.js" defer></script>
+    <script type="text/javascript" src="scripts/validate-profile-setup.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -21,8 +26,8 @@ session_start();
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="edit-profile">
-                    <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="post"
-                        enctype="multipart/form-data" action="../core/processEditProfile.php">
+                    <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
+                        enctype="multipart/form-data" action="../core/process_profile_setup.php">
                         <div class="card edit-profile-card">
                             <div class="card-header fw-bold d-flex align-items-center">
                                 <div class="row d-flex align-items-center w-100">
@@ -44,7 +49,7 @@ session_start();
                                         <div class="btn btn-light btn-rounded p-0">
                                             <label class="choose-profile-picture-label form-label mb-0 w-100 h-100 p-2"
                                                 for="profile-picture-picker">Upload</label>
-                                            <input type="file" name="profile-picture-picker" accept="image/*"
+                                            <input type="file" name="profile_picture_picker" accept="image/*"
                                                 class="form-control d-none" id="profile-picture-picker"
                                                 autocomplete="off" />
                                         </div>
@@ -54,8 +59,10 @@ session_start();
                                 <div class="mb-3">
                                     <label for="edit-profile-display-name" class="form-label">Display Name</label>
                                     <input type="text" class="form-control" id="edit-profile-display-name"
-                                        placeholder="Username" value="<?php echo $_SESSION['full_name'] ?>">
-                                    <div id="errors-container_custom-display-name"></div>
+                                        placeholder="Username" value="<?php echo $_SESSION['full_name'] ?>"
+                                        name="full-name">
+                                    <div id=" errors-container_custom-display-name">
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="bio" class="form-label">Bio</label>

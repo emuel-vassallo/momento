@@ -1,9 +1,10 @@
-const validator = new window.JustValidate("#edit-profile-form", {
-  errorsContainer: "#errors-container_custom-container",
-});
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("edit-profile-form");
 
-function validateForm() {
-  validator
+  new window.JustValidate("#edit-profile-form", {
+    errorsContainer: "#errors-container_custom-container",
+    validateBeforeSubmitting: true,
+  })
     .addField(
       "#profile-picture-picker",
       [
@@ -56,39 +57,25 @@ function validateForm() {
       {
         errorsContainer: "#errors-container_custom-bio",
       }
-    );
-}
-
-document.addEventListener("DOMContentLoaded", (event) => {
-  const form = document.getElementById("edit-profile-form");
-
-  validateForm();
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (validator.isValid) {
-      form.submit();
-    }
-  });
-
-  const profilePicturePicker = document.getElementById(
-    "profile-picture-picker"
-  );
-  const profilePictureImage = document.querySelector(
-    ".profile-picture-picker-image"
-  );
-
-  profilePicturePicker.addEventListener("change", (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener("load", (event) => {
-      profilePictureImage.src = event.target.result;
+    )
+    .onSuccess((event) => {
+      event.preventDefault();
+      HTMLFormElement.prototype.submit.call(form);
     });
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  });
+  document
+    .getElementById("profile-picture-picker")
+    .addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener("load", (event) => {
+        document.querySelector(".profile-picture-picker-image").src =
+          event.target.result;
+      });
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    });
 });

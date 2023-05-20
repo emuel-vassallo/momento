@@ -12,7 +12,7 @@ session_start();
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script type="text/javascript" src="scripts/validateRegister.js" defer></script>
+    <script type="module" src="scripts/validate-register.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -22,7 +22,8 @@ session_start();
             <div class="row d-flex align-items-center justify-content-center">
                 <div style="max-width:420px;">
                     <form id="register-form" autocomplete="off" novalidate="novalidate"
-                        class="bg-white border py-4 px-5" action="../core/processRegister.php" method="post">
+                        class="bg-white border py-4 px-5" method="POST" enctype="multipart/form-data"
+                        action="../core/process_register_form.php">
                         <div class=" text-center mb-1 pb-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#595C5F"
                                 class="bi bi-instagram" viewBox="0 0 16 16">
@@ -35,28 +36,33 @@ session_start();
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="email" name="email" placeholder="Email" autocomplete="off"
-                                type="email" value="<?php echo $_SESSION['email']?>"/><label>Email</label>
+                                type="email" value="<?php echo $_SESSION['email'] ?>" />
+                            <label>Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="phone-number" name="phone-number" placeholder="Phone Number"
-                                autocomplete="off" autocomplete="off" type="text" value="<?php echo $_SESSION['phone_number']?>" /><label>Phone Number</label>
+                            <input class="form-control" id="phone-number" name="phone_number" placeholder="Phone Number"
+                                autocomplete="off" autocomplete="off" type="text"
+                                value="<?php echo $_SESSION['phone_number'] ?>" />
+                            <label>Phone Number</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="full-name" name="full-name" placeholder="Full Name"
-                                autocomplete="off" type="text" value="<?php echo $_SESSION['full_name']?>"/><label>Full Name</label>
+                            <input class="form-control" id="full-name" name="full_name" placeholder="Full Name"
+                                autocomplete="off" type="text" value="<?php echo $_SESSION['full_name'] ?>" />
+                            <label>Full Name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="username" name="username" placeholder="Username"
-                                autocomplete="off" type="text" value="<?php echo $_SESSION['username']?>" /><label>Username</label>
+                                autocomplete="off" type="text" value="<?php echo $_SESSION['username'] ?>" />
+                            <label>Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" name="password" placeholder="Password"
-                                autocomplete="off" type="password" /><label>Password</label>
+                                autocomplete="off" type="password" />
+                            <label>Password</label>
                         </div>
                         <div class="mb-2">
-                            <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
-                                type="submit">Sign
-                                up</button>
+                            <button id="register-submit-button" class="btn btn-primary fw-bold w-100 bg-gradient"
+                                name="submit" type="submit">Sign up</button>
                         </div>
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">

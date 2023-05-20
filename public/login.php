@@ -9,7 +9,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script type="text/javascript" src="scripts/validateLogin.js" defer></script>
+    <script type="module" src="scripts/validate-login.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -32,7 +32,8 @@
                         </div>
                         <div class="form-floating mb-3 row">
                             <input class="form-control" id="username" name="username" type="name" autocomplete="off"
-                                placeholder="Phone number, username or email address" /><label class="col text-truncate">Phone
+                                placeholder="Phone number, username or email address" /><label
+                                class="col text-truncate">Phone
                                 number, username or
                                 email address</label>
                         </div>
@@ -42,9 +43,11 @@
                         </div>
                         <div class="mb-4 row">
                             <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
-                                type="submit">Log in</button>
+                                type="submit">Log
+                                in</button>
                         </div>
-                        <div id="login-error" class='alert alert-danger mb-0 row' role='alert'>Sorry, your password was incorrect. Please double-check your password.</div>
+                        <div id="login-error" class='alert alert-danger mb-0 row' role='alert'>Sorry, your password was
+                            incorrect. Please double-check your password.</div>
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">
                         <p class="m-0">

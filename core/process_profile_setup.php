@@ -10,12 +10,12 @@ $conn = connect_to_db();
 
 $errors = array();
 
-if (isset($_FILES['profile-picture-picker']) && !empty($_FILES['profile-picture-picker'])) {
+if (isset($_FILES['profile_picture_picker']) && !empty($_FILES['profile_picture_picker'])) {
     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Emuel_Vassallo_4.2D/instagram-clone/public/images/profile-pictures/';
 
-    $pfp_file = $_FILES['profile-picture-picker'];
+    $pfp_file = $_FILES['profile_picture_picker'];
 
-    $pfp_file_ext = strtolower(pathinfo($_FILES['profile-picture-picker']['name'], PATHINFO_EXTENSION));
+    $pfp_file_ext = strtolower(pathinfo($_FILES['profile_picture_picker']['name'], PATHINFO_EXTENSION));
 
     $allowed_extensions = array("jpg", "jpeg", "png", "bmp");
 
@@ -43,6 +43,15 @@ if (empty($errors)) {
     $result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio, $pfp_file, $target_dir);
 
     if ($result) {
+        $_SESSION['registration_complete'] = false;
+        $_SESSION['current_user_username'] = $username;
+
+        unset($_SESSION['email']);
+        unset($_SESSION['full_name']);
+        unset($_SESSION['phone_number']);
+        unset($_SESSION['username']);
+        unset($_SESSION['hashed_password']);
+
         header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
     }
 } else {
