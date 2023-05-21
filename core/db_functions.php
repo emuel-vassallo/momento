@@ -17,24 +17,39 @@ function does_value_exist($conn, $table, $column, $value)
 
 function upload_file($file, $target_dir)
 {
-    $filename = uniqid() . '_' . $file['name'];
-    $target_path = $target_dir . $filename;
-
-    if (move_uploaded_file($file['tmp_name'], $target_path)) {
-        return $target_path;
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0755, true);
     }
-    return false;
 
+    $image_name = $file['name'];
+    $image_tmp_name = $file['tmp_name'];
+    $image_error = $file['error'];
+
+    if ($image_error !== 0) {
+        $em = "Unknown error occurred!";
+        header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php?error=$em");
+    }
+
+    $new_image_filename = uniqid() . '_' . $image_name;
+    $image_upload_path = $target_dir . $new_image_filename;
+
+    $_SESSION['profile_picture_dir'] = 'http://localhost/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/' . $new_image_filename;
+
+    if (move_uploaded_file($image_tmp_name, $image_upload_path)) {
+        return $image_upload_path;
+    }
+
+    return false;
 }
 
-function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio, $file, $target_dir)
+function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio)
 {
-    $image_path = upload_file($file, $target_dir);
+    $pfp_file = $_FILES['profile_picture_picker'];
+    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
+    $image_path = upload_file($pfp_file, $target_dir);
 
     if ($image_path) {
         $image_path = mysqli_real_escape_string($conn, $image_path);
-
-        $_SESSION['profile_picture_dir'] = 'http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/images/profile-pictures/' . $file['name'];
 
         $query = "INSERT INTO `users_table` 
                  (`username`, `full_name`, `email`, `phone_number`, `password`, `profile_picture_path`, `bio`) 

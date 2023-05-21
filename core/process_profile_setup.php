@@ -11,13 +11,8 @@ $conn = connect_to_db();
 $errors = array();
 
 if (isset($_FILES['profile_picture_picker']) && !empty($_FILES['profile_picture_picker'])) {
-    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Emuel_Vassallo_4.2D/instagram-clone/public/images/profile-pictures/';
-
-    $pfp_file = $_FILES['profile_picture_picker'];
-
-    $pfp_file_ext = strtolower(pathinfo($_FILES['profile_picture_picker']['name'], PATHINFO_EXTENSION));
-
     $allowed_extensions = array("jpg", "jpeg", "png", "bmp");
+    $pfp_file_ext = strtolower(pathinfo($_FILES['profile_picture_picker']['name'], PATHINFO_EXTENSION));
 
     if (!in_array($pfp_file_ext, $allowed_extensions)) {
         $errors[] = "Invalid file extension. Only JPG, JPEG, and PNG, and BMP files are allowed.";
@@ -40,15 +35,15 @@ if (empty($errors)) {
     $username = $_SESSION['username'];
     $hashed_password = $_SESSION['hashed_password'];
 
-    $result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio, $pfp_file, $target_dir);
+    $result = create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio);
 
     if ($result) {
         $_SESSION['registration_complete'] = false;
         $_SESSION['current_user_username'] = $username;
 
         unset($_SESSION['email']);
-        unset($_SESSION['full_name']);
         unset($_SESSION['phone_number']);
+        unset($_SESSION['full_name']);
         unset($_SESSION['username']);
         unset($_SESSION['hashed_password']);
 
