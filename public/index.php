@@ -4,6 +4,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +24,19 @@ session_start();
 </head>
 
 <body>
-    <img src="<?php echo $_SESSION['profile_picture_dir']; ?>" alt="Profile Picture">
+    <a href="edit_profile.php">Edit Profile</a>
+    <a href="logout.php">Log Out</a>
+    <div class="home-sidebar-profile-container d-flex p-5">
+        <img class="home-sidebar-user-profile-picture me-3" src="<?php echo $_SESSION['user_profile_picture_path']; ?>"
+            alt="User profile picture">
+        <div class="home-sidebar-user-profile-info-container d-flex flex-column justify-content-center">
+            <p class="user-profile-name h5 fw-bold p-0 m-0">
+                <?php echo $_SESSION['user_display_name']; ?>
+            </p>
+            <p class="user-profile-username text-muted p-0 m-0">
+                <?php echo '@' . $_SESSION['user_username']; ?>
+            </p>
+        </div>
+    </div>
 
 </html>

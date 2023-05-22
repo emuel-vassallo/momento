@@ -20,7 +20,7 @@ session_start();
     <section class="py-4 h-100 d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
-                <div style="max-width:420px;">
+                <div class="register-form-container">
                     <form id="register-form" autocomplete="off" novalidate="novalidate"
                         class="bg-white border py-4 px-5" method="POST" enctype="multipart/form-data"
                         action="../core/process_register_form.php">
@@ -62,12 +62,14 @@ session_start();
                         </div>
                         <div class="mb-2">
                             <button id="register-submit-button" class="btn btn-primary fw-bold w-100 bg-gradient"
-                                name="submit" type="submit">Sign up</button>
+                                name="submit" type="submit">Next</button>
                         </div>
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">
                         <p class="m-0">
-                            Have an account? <a href="login.php">Log in</a>
+                            Have an account? <a href="login.php"
+                                class="link-underline link-underline-opacity-0 fw-semibold">Log
+                                in</a>
                         </p>
                     </div>
                 </div>

@@ -1,16 +1,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_complete'] !== true) {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/register.php');
+if (!isset($_SESSION['user_id'])) {
+    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
     exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Setup Profile</title>
+    <title>Edit Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -26,12 +27,12 @@ if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_comple
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="edit-profile">
-                    <form id="setup-profile-form" autocomplete="off" novalidate="novalidate" class="bg-white border"
-                        method="POST" enctype="multipart/form-data" action="../core/process_profile_setup.php">
+                    <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
+                        enctype="multipart/form-data" action="../core/process_edit_profile.php">
                         <div class="card edit-profile-card">
-                            <div class=" card-header fw-bold d-flex align-items-center">
+                            <div class="card-header fw-bold d-flex align-items-center">
                                 <div class="d-flex align-items-center w-100">
-                                    <h5 class="text-center m-0 p-0 text-nowrap">Finish Profile Setup</h5>
+                                    <h5 class="text-center m-0 p-0 text-nowrap">Edit Profile</h5>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -39,7 +40,7 @@ if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_comple
                                     <label for="display-name" class="form-label">Profile Picture</label>
                                     <div class="d-flex align-items-center">
                                         <div class="me-3">
-                                            <img src="images/default-pfp.jpg"
+                                            <img src="<?php echo $_SESSION['user_profile_picture_path'] ?>"
                                                 class="profile-picture-picker-image img-fluid rounded-circle"
                                                 id="profile-picture-picker-image" alt="profile picture" />
                                         </div>
@@ -56,23 +57,20 @@ if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_comple
                                 <div class="mb-3">
                                     <label for="edit-profile-display-name" class="form-label">Display Name</label>
                                     <input type="text" class="form-control" id="edit-profile-display-name"
-                                        placeholder="<?php echo $_SESSION['full_name'] ?>"
-                                        value="<?php echo $_SESSION['full_name'] ?>" name="user_display_name">
+                                        placeholder="<?php echo $_SESSION['user_display_name'] ?>"
+                                        value="<?php echo $_SESSION['user_display_name'] ?>" name="user_display_name">
                                     <div id="errors-container_custom-display-name">
                                     </div>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="bio" class="form-label">Bio</label>
                                     <textarea class="profile-bio-textarea form-control" id="bio" name="bio" rows="
                                         3"
-                                        placeholder="Hi I'm <?php echo explode(' ', $_SESSION['full_name'])[0]; ?>!">Hi I'm <?php echo explode(' ', $_SESSION['full_name'])[0]; ?>!</textarea>
+                                        placeholder="<?php echo $_SESSION['user_bio']; ?>"><?php echo $_SESSION['user_bio']; ?></textarea>
                                     <div id="errors-container_custom-bio"></div>
                                 </div>
-                                <div class="d-flex flex-column align-items-center">
-                                    <button type="submit" name="submit"
-                                        class="btn btn-primary fw-bold w-100 bg-gradient mb-1">Confirm</button>
-                                    <a class="col btn btn-link text-start text-nowrap text-center link-underline link-underline-opacity-0 fw-semibold"
-                                        href="register.php" role="button">Go back</a>
+                                <div class="mb-3 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold w-25 bg-gradient">Save</button>
                                 </div>
                             </div>
                         </div>

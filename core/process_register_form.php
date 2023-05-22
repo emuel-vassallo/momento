@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST[$field]) && !empty($_POST[$field])) {
             $value = mysqli_real_escape_string($conn, trim($_POST[$field]));
 
-            // Check for existing value only for email, phone, and username fields
             if (in_array($field, ['email', 'phone', 'username']) && does_value_exist($conn, 'users_table', $field, $value)) {
                 $errors[] = "$name already exists. Please choose a different $name.";
             } else {
@@ -45,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-
     $errors = [];
 
     validateField('email', 'Email', 1, 255, false, true);
@@ -58,15 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($errors);
         return;
     } else {
-        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['email'] = strtolower($_POST['email']);
         $_SESSION['phone_number'] = $_POST['phone_number'];
         $_SESSION['full_name'] = $_POST['full_name'];
-        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['username'] = strtolower($_POST['username']);
         $_SESSION['hashed_password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
         $_SESSION['registration_complete'] = true;
 
         header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/profile_setup.php');
         echo "valid";
     }
+} else {
+    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
 }
 ?>

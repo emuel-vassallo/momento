@@ -1,39 +1,25 @@
 <?php
-require_once("db_functions.php");
-$conn = connect_to_db();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = array();
+require_once("db_functions.php");
+$conn = connect_to_db();
 
-    if (isset($_POST['username']) && !empty($_POST['username'])) {
-        $username = mysqli_real_escape_string($conn, trim($_POST['username']));
-    } else {
-        $errors[] = "Username is required.";
-    }
+$username = $_POST['username'];
+$password = $_POST['password'];
+$result = get_user_by_credentials($conn, $username, $password);
 
-    if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $password = mysqli_real_escape_string($conn, trim($_POST['password']));
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    } else {
-        $errors[] = "Password is required.";
-    }
+$_SESSION['user_id'] = $result['id'];
+$_SESSION['user_username'] = $result['username'];
+$_SESSION['user_full_name'] = $result['full_name'];
+$_SESSION['user_email'] = $result['email'];
+$_SESSION['user_phone_number'] = $result['phone_number'];
+$_SESSION['user_profile_picture_path'] = $result['profile_picture_path'];
+$_SESSION['user_display_name'] = $result['display_name'];
+$_SESSION['user_bio'] = stripslashes($result['bio']);
 
-    if (empty($errors)) {
-        $result = authenticate_user($conn, $username, $password);
-        if ($result) {
-            $_SESSION['username'] = $username;
-            echo "valid";
-        }
-        else {
-            echo "invalid";
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
-
-}
+header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
 ?>

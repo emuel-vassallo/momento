@@ -42,7 +42,7 @@ const checkExists = (type, value) => {
 };
 
 const validateCredentials = (username, password) => {
-  const url = "../core/process_login.php";
+  const url = "../core/validate_credentials.php";
   const data = `username=${encodeURIComponent(
     username
   )}&password=${encodeURIComponent(password)}`;

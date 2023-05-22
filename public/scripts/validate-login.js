@@ -30,8 +30,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           return;
         }
 
-        window.location.href =
-          "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php";
+        HTMLFormElement.prototype.submit.call(form);
       });
     });
 });

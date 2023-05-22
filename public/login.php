@@ -1,3 +1,10 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +26,7 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="login-form">
                     <form id="login-form" autocomplete="off" novalidate="novalidate" class="bg-white border py-4 px-5"
-                        method="post">
+                        method="POST" action="../core/process_login.php">
                         <div class=" text-center mb-1 pb-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="#595C5F"
                                 class="bi bi-instagram" viewBox="0 0 16 16">
@@ -51,7 +58,8 @@
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">
                         <p class="m-0">
-                            Don't have an account? <a href="register.php">Sign up</a>
+                            Don't have an account? <a href="register.php"
+                                class="link-underline link-underline-opacity-0 fw-semibold">Sign up</a>
                         </p>
                     </div>
                 </div>

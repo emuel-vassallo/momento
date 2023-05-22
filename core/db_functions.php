@@ -17,10 +17,6 @@ function does_value_exist($conn, $table, $column, $value)
 
 function upload_file($file, $target_dir)
 {
-    if (!is_dir($target_dir)) {
-        mkdir($target_dir, 0755, true);
-    }
-
     $image_name = $file['name'];
     $image_tmp_name = $file['tmp_name'];
     $image_error = $file['error'];
@@ -33,48 +29,83 @@ function upload_file($file, $target_dir)
     $new_image_filename = uniqid() . '_' . $image_name;
     $image_upload_path = $target_dir . $new_image_filename;
 
-    $_SESSION['profile_picture_dir'] = 'http://localhost/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/' . $new_image_filename;
+    $relative_image_path = '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/' . $new_image_filename;
+    $_SESSION['user_profile_picture_path'] = $relative_image_path;
+
 
     if (move_uploaded_file($image_tmp_name, $image_upload_path)) {
-        return $image_upload_path;
+        return $relative_image_path;
     }
 
     return false;
 }
 
-function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $bio)
+function upload_profile_picture($file)
+{
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+    return upload_file($file, $target_dir);
+}
+
+
+function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
 {
     $pfp_file = $_FILES['profile_picture_picker'];
-    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
-    $image_path = upload_file($pfp_file, $target_dir);
 
-    if ($image_path) {
-        $image_path = mysqli_real_escape_string($conn, $image_path);
+    if (!empty($pfp_file['name'])) {
+        $profile_picture_path = upload_profile_picture($pfp_file);
 
-        $query = "INSERT INTO `users_table` 
-                 (`username`, `full_name`, `email`, `phone_number`, `password`, `profile_picture_path`, `bio`) 
-                 VALUES ('$username', '$full_name', '$email', '$phone_number', '$hashed_password', '$image_path', '$bio');";
+        if ($profile_picture_path) {
+            $username = mysqli_real_escape_string($conn, strtolower($username));
+            $profile_picture_path = mysqli_real_escape_string($conn, $profile_picture_path);
+            $display_name = mysqli_real_escape_string($conn, $display_name);
+            $bio = mysqli_real_escape_string($conn, $bio);
 
-        return mysqli_query($conn, $query);
+            $query = "INSERT INTO `users_table` 
+                 (`username`, `full_name`, `email`, `phone_number`, `password`, `profile_picture_path`, `display_name`, `bio`) 
+                 VALUES ('$username', '$full_name', '$email', '$phone_number', '$hashed_password', '$profile_picture_path', '$display_name', '$bio');";
+
+            return mysqli_query($conn, $query);
+        }
     }
     return false;
 }
 
-function authenticate_user($conn, $username, $password)
+
+function get_user_by_credentials($conn, $username, $password)
 {
-    $query = "SELECT `password`
-              FROM `users_table`
-              WHERE `username` = '$username'
-                OR `email` = '$username'
-                OR `phone_number` = '$username';";
+    $query = "SELECT * 
+              FROM `users_table` 
+              WHERE `username` = '$username' 
+                OR `email` = '$username' 
+                OR `phone_number` = '$username'";
+
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $hashedPassword = $row['password'];
-        return password_verify($password, $hashedPassword);
+
+        if (password_verify($password, $hashedPassword) || $password === $hashedPassword) {
+            return $row;
+        }
     }
 
     return false;
 }
+
+
+function update_user_profile($conn, $user_id, $display_name, $profile_picture_path, $bio)
+{
+    $display_name = mysqli_real_escape_string($conn, $display_name);
+    $bio = mysqli_real_escape_string($conn, $bio);
+
+    $query = "UPDATE `users_table` SET 
+              `profile_picture_path` = '$profile_picture_path',
+              `display_name` = '$display_name',
+              `bio` = '$bio'
+              WHERE `id` = '$user_id'";
+
+    return mysqli_query($conn, $query);
+}
+
 ?>

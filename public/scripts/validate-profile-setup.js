@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("edit-profile-form");
+  const form =
+    document.getElementById("setup-profile-form") ||
+    document.getElementById("edit-profile-form");
 
-  new window.JustValidate("#edit-profile-form", {
+  const profilePictureImage = document.getElementById(
+    "profile-picture-picker-image"
+  );
+
+  new window.JustValidate(`#${form.id}`, {
     errorsContainer: "#errors-container_custom-container",
     validateBeforeSubmitting: true,
   })
@@ -13,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
           rule: "minFilesCount",
-          value: 1,
+          value: form.id === "edit-profile-form" ? 0 : 1,
         },
         {
           rule: "maxFilesCount",
@@ -59,8 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     )
     .onSuccess((event) => {
-      event.preventDefault();
-      HTMLFormElement.prototype.submit.call(form);
+      const hasProfilePicture =
+        profilePictureImage.src !=
+        "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/images/default-pfp.jpg";
+
+      if (hasProfilePicture) {
+        HTMLFormElement.prototype.submit.call(form);
+      }
     });
 
   document
