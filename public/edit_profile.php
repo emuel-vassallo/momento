@@ -46,6 +46,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 <body class="d-flex">
     <?php include('navbar.php'); ?>
     <div class="main-content d-flex flex-column w-100">
+        <?php include('header.php'); ?>
         <main class="w-100 h-100">
             <section class="py-4 h-100 d-flex align-items-center justify-content-center">
                 <div class="container">
