@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ])
     .addField("#username", [
+      // TODO: fix error message for regex;
       {
         rule: "required",
         errorMessage: "Username is required.",

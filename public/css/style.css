@@ -50,11 +50,34 @@ body {
   display: block;
 }
 
+/*  Navbar */
+
+nav {
+  width: 340px;
+}
+
+.nav-item.active:after {
+  content: "";
+  width: 3px;
+  height: 24px;
+  background-color: var(--bs-gray-600) !important;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+}
+
+.nav-link-icon {
+  font-size: 1.3rem;
+}
+
 /* Home */
 
 .home-sidebar-user-profile-picture {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   opacity: 1;
   border-radius: 100%;
   object-fit: cover;
