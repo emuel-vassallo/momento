@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "valid";
             }
         }
+    } else {
+        echo "invalid";
     }
 }
 ?>

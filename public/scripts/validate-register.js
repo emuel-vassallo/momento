@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#email", [
       {
         rule: "required",
+        errorMessage: "Email is required.",
       },
       {
         rule: "email",
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#phone-number", [
       {
         rule: "required",
+        errorMessage: "Phone number is required.",
       },
       {
         rule: "minLength",
@@ -42,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#full-name", [
       {
         rule: "required",
+        errorMessage: "Full name is required.",
       },
       {
         rule: "minLength",
@@ -55,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#username", [
       {
         rule: "required",
+        errorMessage: "Username is required.",
       },
       {
         rule: "customRegexp",
@@ -77,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#password", [
       {
         rule: "required",
+        errorMessage: "Password is required.",
       },
       {
         rule: "minLength",
