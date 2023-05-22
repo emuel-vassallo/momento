@@ -50,7 +50,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <?php include('navbar.php'); ?>
     <main>
     </main>
-
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

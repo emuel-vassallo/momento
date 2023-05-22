@@ -18,10 +18,10 @@ session_start();
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <section class="py-4 h-100 d-flex align-items-center justify-content-center">
-        <div class="container">
-            <div class="row d-flex align-items-center justify-content-center">
+<body class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <section class="h-100 w-100 d-flex align-items-center justify-content-center">
+        <div class="container w-100 h-100 align-items-center justify-content-center">
+            <div class="w-100 h-100 row d-flex align-items-center justify-content-center">
                 <div class="register-form-container">
                     <form id="register-form" autocomplete="off" novalidate="novalidate"
                         class="bg-white border py-4 px-5" method="POST" enctype="multipart/form-data"
@@ -78,6 +78,7 @@ session_start();
             </div>
         </div>
     </section>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

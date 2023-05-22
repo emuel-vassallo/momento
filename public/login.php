@@ -22,8 +22,8 @@ session_start();
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <section class="py-4 h-100 d-flex align-items-center justify-content-center">
+<body class="d-flex flex-column">
+    <section class="py-4 h-100 d-flex align-items-center justify-content-center mb-0 pb-0">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="login-form">
@@ -68,6 +68,7 @@ session_start();
             </div>
         </div>
     </section>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

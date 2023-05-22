@@ -9,10 +9,10 @@
         </a>
 
         <!-- User Profile -->
-        <div class="home-sidebar-profile-container d-flex flex-column align-items-center text-center mb-4">
-            <img class="home-sidebar-user-profile-picture mb-2"
+        <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4">
+            <img class="home-navbar-user-profile-picture mb-2"
                 src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
-            <div class="home-sidebar-user-profile-info-container d-flex flex-column justify-content-center">
+            <div class="home-navbar-user-profile-info-container d-flex flex-column justify-content-center">
                 <p class="user-profile-name fs-4 fw-bold p-0 m-0 text-nowrap">
                     <?php echo $_SESSION['user_display_name']; ?>
                 </p>
@@ -23,15 +23,15 @@
         </div>
 
         <!-- User Profile Posts Information -->
-        <div class="sidebar-user-posts-info mb-5 pb-1">
-            <div class="sidebar-user-posts d-flex flex-column align-items-center">
+        <div class="navbar-user-posts-info mb-5 pb-1">
+            <div class="navbar-user-posts d-flex flex-column align-items-center">
                 <p class="fw-bold mb-1">0</p>
                 <p class="m-0 text-secondary">Posts</p>
             </div>
         </div>
 
         <!-- Menu Links -->
-        <ul class="sidebar-menu-links-container d-flex flex-column navbar-nav w-100 ps-0">
+        <ul class="navbar-menu-links-container d-flex flex-column navbar-nav w-100 ps-0">
             <li
                 class="nav-item d-flex mb-2 align-items-center <?php echo ($activePage === 'feed') ? 'fw-semibold active' : ''; ?>">
                 <a class="nav-link d-flex ps-5 w-100" href="index.php">
