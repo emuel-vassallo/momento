@@ -53,9 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ])
     .addField("#username", [
-      // TODO: add custom regexp to only allow letters, numbers, periods and underscores
       {
         rule: "required",
+      },
+      {
+        rule: "customRegexp",
+        value: /^[a-zA-Z0-9._]+$/,
       },
       {
         rule: "minLength",

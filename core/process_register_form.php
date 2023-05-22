@@ -9,40 +9,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         global $errors, $conn;
 
-        if (isset($_POST[$field]) && !empty($_POST[$field])) {
-            $value = mysqli_real_escape_string($conn, trim($_POST[$field]));
-
-            if (in_array($field, ['email', 'phone', 'username']) && does_value_exist($conn, 'users_table', $field, $value)) {
-                $errors[] = "$name already exists. Please choose a different $name.";
-            } else {
-                if ($numeric) {
-                    if (!is_numeric($value) || strlen($value) < $minLength || strlen($value) > $maxLength) {
-                        if (!is_numeric($value)) {
-                            $errors[] = "$name must be numeric.";
-                        } else {
-                            $errors[] = "$name must be between $minLength and $maxLength digits.";
-                        }
-                    }
-                } elseif ($email) {
-                    if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                        $errors[] = "Invalid $name format.";
-                    }
-                } else {
-                    if ($maxLength) {
-                        if (strlen($value) < $minLength || strlen($value) > $maxLength) {
-                            $errors[] = "$name must be between $minLength and $maxLength characters.";
-                        }
-                    } else {
-                        if (strlen($value) < $minLength) {
-                            $errors[] = "$name must be at least $minLength characters long.";
-                        }
-                    }
-                }
-            }
-        } else {
+        if (!isset($_POST[$field]) || empty($_POST[$field])) {
             $errors[] = "$name is required.";
+            return;
+        }
+
+        $value = mysqli_real_escape_string($conn, trim($_POST[$field]));
+
+        if (in_array($field, ['email', 'phone', 'username']) && does_value_exist($conn, 'users_table', $field, $value)) {
+            $errors[] = "$name already exists. Please choose a different $name.";
+            return;
+        }
+
+        if ($numeric && (!is_numeric($value) || strlen($value) < $minLength || strlen($value) > $maxLength)) {
+            if (!is_numeric($value)) {
+                $errors[] = "$name must be numeric.";
+            } else {
+                $errors[] = "$name must be between $minLength and $maxLength digits.";
+            }
+            return;
+        }
+
+        if ($email && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid $name format.";
+            return;
+        }
+
+        if ($field === 'username' && !preg_match('/^[a-zA-Z0-9._]+$/', $value)) {
+            $errors[] = "$name may only contain letters, numbers, periods, and underscores.";
+            return;
+        }
+
+        if ($maxLength && (strlen($value) < $minLength || strlen($value) > $maxLength)) {
+            $errors[] = "$name must be between $minLength and $maxLength characters.";
+            return;
+        }
+
+        if (strlen($value) < $minLength) {
+            $errors[] = "$name must be at least $minLength characters long.";
+            return;
         }
     }
+
 
     $errors = [];
 
