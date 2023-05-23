@@ -18,6 +18,34 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     $activePage = 'logout';
 }
 
+require_once("../core/db_functions.php");
+$conn = connect_to_db();
+$posts = get_all_posts($conn);
+
+function display_posts($posts)
+{
+    foreach ($posts as $post) {
+        $poster_profile_picture = $post['profile_picture_path'];
+        $poster_display_name = $post['display_name'];
+        $poster_username = $post['username'];
+        $imageDir = $post['image_dir'];
+        $caption = $post['caption'];
+
+        echo "<div class='post d-flex flex-column w-100 mb-5 pb-2'>
+                <div class='post-top d-flex align-items-center mb-3'>
+                  <img class='feed-card-profile-picture' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
+                  <div>
+                    <p class='m-0'>$poster_display_name</p>
+                    <p class='m-0 text-dark-emphasis'>$poster_username</p>
+                  </div>
+                </div>
+                <img class='feed-post-image' src='$imageDir' alt='Post Image'>
+                <div>
+                  <p>$caption</p>
+                </div>
+              </div>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,11 +72,10 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <?php include('navbar.php'); ?>
     <main class="d-flex flex-column w-100 h-100">
         <?php include('header.php'); ?>
-        <div class="d-flex feed-container flex-column p-5">
+        <div class="d-flex feed-container flex-column p-5 align-items-center justify-content-center">
             <p class="h3">Feed</p>
-            <div class="feed-posts-container">
-                <div class="feed-post">
-                </div>
+            <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center">
+                <?php display_posts($posts) ?>
             </div>
         </div>
 

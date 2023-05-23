@@ -130,4 +130,23 @@ function process_file_and_execute_query($conn, $file, $target_dir, $directory_na
 
     return $query_callback(mysqli_real_escape_string($conn, $new_image_path));
 }
+
+function get_all_posts($conn)
+{
+    $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
+              FROM `posts_table` AS p
+              JOIN `users_table` AS u ON p.user_id = u.id";
+
+    $result = mysqli_query($conn, $query);
+
+    $posts = array();
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $posts[] = $row;
+        }
+    }
+
+    return $posts;
+}
 ?>

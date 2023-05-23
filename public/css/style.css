@@ -81,10 +81,27 @@ nav {
   opacity: 1;
   border-radius: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
   cursor: pointer;
   transition: opacity 0.7s ease 0s;
   box-shadow: none;
+}
+
+/* Feed */
+
+.feed-post-image {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.feed-card-profile-picture {
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 56px;
+  height: 56px;
 }
 
 /* Search Bar */
