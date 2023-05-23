@@ -63,8 +63,8 @@ session_start();
                             <label>Password</label>
                         </div>
                         <div class="mb-2">
-                            <button id="register-submit-button" class="btn btn-primary fw-bold w-100 bg-gradient"
-                                name="submit" type="submit">Next</button>
+                            <button id="register-submit-button" class="btn btn-primary fw-bold w-100" name="submit"
+                                type="submit">Next</button>
                         </div>
                     </form>
                     <div class="bg-white py-4 px-5 text-center border mt-4">

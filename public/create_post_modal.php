@@ -22,7 +22,7 @@
                         <textarea class="form-control" id="post-caption" name="post_caption" rows="3"
                             placeholder="Write a caption..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary bg-gradient fw-bold">Share</button>
+                    <button type="submit" class="btn btn-primary fw-bold">Share</button>
                 </div>
             </form>
         </div>

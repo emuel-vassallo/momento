@@ -9,6 +9,8 @@
         </a>
 
         <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="login.php" class="nav-link px-2 text-body-secondary">Login</a></li>
+            <li class="nav-item"><a href="register.php" class="nav-link px-2 text-body-secondary">Sign up</a></li>
             <li class="nav-item"><a href="index.php" class="nav-link px-2 text-body-secondary">Feed</a></li>
             <li class="nav-item"><a href="edit_profile.php" class="nav-link px-2 text-body-secondary">Settings</a></li>
         </ul>

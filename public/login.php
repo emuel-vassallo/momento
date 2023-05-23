@@ -51,8 +51,7 @@ session_start();
                                 autocomplete="off" type="password" /><label>Password</label>
                         </div>
                         <div class="mb-4 row">
-                            <button class="btn btn-primary fw-bold w-100 bg-gradient" name="submit-button"
-                                type="submit">Log
+                            <button class="btn btn-primary fw-bold w-100" name="submit-button" type="submit">Log
                                 in</button>
                         </div>
                         <div id="login-error" class='alert alert-danger mb-0 row' role='alert'>Sorry, your password was
