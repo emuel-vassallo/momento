@@ -34,6 +34,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="scripts/validate-profile-setup.js" defer></script>
     <script src="scripts/create-post-modal-handler.js" defer></script>
+    <script src="scripts/validate-create-post-form.js" defer></script>
 </head>
 
 <body class="d-flex">

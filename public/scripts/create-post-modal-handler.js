@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         reader.readAsDataURL(input.files[0]);
       } else {
-        imagePreview.innerHTML = ""; // Clear the image preview div
+        imagePreview.innerHTML = "";
       }
     });
 });
