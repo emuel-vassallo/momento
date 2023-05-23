@@ -100,8 +100,12 @@ nav {
   border-radius: 100%;
   object-fit: cover;
   object-position: center;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
+}
+
+.post-user-info {
+  cursor: pointer;
 }
 
 /* Search Bar */

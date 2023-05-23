@@ -33,10 +33,12 @@ function display_posts($posts)
 
         echo "<div class='post d-flex flex-column w-100 mb-5 pb-2'>
                 <div class='post-top d-flex align-items-center mb-3'>
-                  <img class='feed-card-profile-picture' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
-                  <div>
-                    <p class='m-0'>$poster_display_name</p>
-                    <p class='m-0 text-dark-emphasis'>$poster_username</p>
+                  <div class='post-user-info d-flex align-items-center justify-content-center'>
+                    <img class='feed-card-profile-picture me-2' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
+                    <div class='ps-1 d-flex flex-column'>
+                        <p class='m-0 fw-semibold'>$poster_display_name</p>
+                        <p class='m-0 text-dark-emphasis'><small>@$poster_username</small></p>
+                    </div>
                   </div>
                 </div>
                 <img class='feed-post-image' src='$imageDir' alt='Post Image'>
