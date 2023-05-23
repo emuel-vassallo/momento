@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         errorsContainer: "#errors-container_custom-create-post-picture",
       }
     )
-    .addField("#post-bio", [
+    .addField("#post-caption", [
       {
         rule: "maxLength",
         value: 2200,

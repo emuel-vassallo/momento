@@ -13,13 +13,13 @@
                         <img id="create-post-image" class="w-100 h-100 rounded"
                             src="./images/upload-image-placeholder.jpg">
                         <input type="file" class="form-control-file d-none w-100 h-100" id="post-image"
-                            name="post-image" accept="image/*">
+                            name="new_post_image_picker" accept="image/*">
                     </label>
 
                     <div id="errors-container_custom-create-post-picture" class="pt-1 mb-4"></div>
 
                     <div class=" form-group mb-4 w-100">
-                        <textarea class="form-control" id="post-bio" name="post-bio" rows="3"
+                        <textarea class="form-control" id="post-caption" name="post_caption" rows="3"
                             placeholder="Write a caption..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary bg-gradient fw-bold">Share</button>

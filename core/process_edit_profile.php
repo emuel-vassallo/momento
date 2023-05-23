@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_pfp_file = $_FILES['profile_picture_picker'];
 
         if (!empty($new_pfp_file['name'])) {
-            $profile_picture_path = upload_profile_picture($new_pfp_file);
+            $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+            $profile_picture_path = upload_image_file_to_dir($new_pfp_file, $target_dir, 'profile-pictures');
         } else {
             $profile_picture_path = $_SESSION['user_profile_picture_path'];
         }
