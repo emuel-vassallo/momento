@@ -36,7 +36,7 @@
                 <?php echo $_SESSION['user_display_name']; ?>
             </p>
             <p class="m-0 text-secondary">
-                <?php echo $_SESSION['user_bio']; ?>
+                <?php echo $_SESSION['user_bio'] ?>
             </p>
         </div>
 

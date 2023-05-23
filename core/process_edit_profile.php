@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['bio']) && !empty($_POST['bio'])) {
-        $bio = stripslashes(mysqli_real_escape_string($conn, trim($_POST['bio'])));
+        $bio = mysqli_real_escape_string($conn, trim($_POST['bio']));
         if (strlen($bio) > 150) {
             $errors[] = "Bio must not exceed 150 characters.";
         }
@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result) {
             $_SESSION['user_display_name'] = $user_display_name;
-            $_SESSION['user_bio'] = stripslashes($bio);
+             // TODO: Fix bio \n not being registered as a break in the text
+            $_SESSION['user_bio'] = $bio;
             header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
         }
     } else {

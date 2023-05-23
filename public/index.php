@@ -26,30 +26,31 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <title>Instagram Clone</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    <!-- Bootstrap Bundle JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-
-    <!-- JustValidate JavaScript -->
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
-    <!-- Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="scripts/create-post-modal-handler.js" defer></script>
 </head>
 
 <body class="d-flex">
     <?php include('navbar.php'); ?>
     <main class="d-flex flex-column w-100 h-100">
         <?php include('header.php'); ?>
+        <div class="d-flex feed-container flex-column p-5">
+            <p class="h3">Feed</p>
+            <div class="feed-posts-container">
+                <div class="feed-post">
+                </div>
+            </div>
+        </div>
+
         <?php include('footer.php'); ?>
     </main>
 </body>

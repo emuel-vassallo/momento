@@ -32,7 +32,7 @@ body {
   pointer-events: all !important;
 }
 
-.profile-bio-textarea {
+textarea {
   resize: none;
 }
 
@@ -103,4 +103,24 @@ nav {
   text-align: center;
   pointer-events: none;
   color: #aaa;
+}
+
+
+/* Create Post */
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+.create-post-image-container {
+  width: 100%;
+  height: 300px;
+  cursor: pointer;
+}
+
+#create-post-image {
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  object-position: center;
 }
