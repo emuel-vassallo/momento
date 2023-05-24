@@ -150,15 +150,37 @@ textarea {
 }
 
 #search-results {
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   background-color: #ffffff;
   border-radius: 0 0 5px 5px;
 }
+
+#search-results.hidden {
+  visibility: hidden;
+  display: none;
+}
+
 #search-results > li {
   cursor: pointer;
+  border-radius: 8px;
 }
+
 #search-results > li:hover {
-  background-color: #dddddd;
+  background-color: #cecece;
+}
+
+#search-results > li > p.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-result-profile-picture {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 100%;
 }
 
 /* Create Post */

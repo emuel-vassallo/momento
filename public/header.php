@@ -13,7 +13,9 @@
                     <input id="search-bar" type="search" class="form-control mr-sm-2 bg-light" placeholder="Search"
                         aria-label="Search">
                 </div>
-                <ul id="search-results"></ul>
+                <ul id="search-results"
+                    class="d-flex flex-column align-items-center justify-content-center m-0 p-0 mt-2 p-2 border rounded gap-2 hidden">
+                </ul>
             </form>
         </div>
 
