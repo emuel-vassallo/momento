@@ -43,7 +43,7 @@ require_once('post_display.php');
 
 <body class="d-flex">
     <?php include('navbar.php'); ?>
-    <main class="d-flex flex-column w-100 h-100">
+    <main class="main-content d-flex flex-column h-100">
         <?php include('header.php'); ?>
         <div class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
             <div class="feed-top w-100 mb-4">
@@ -53,7 +53,6 @@ require_once('post_display.php');
                 <?php display_posts($posts) ?>
             </div>
         </div>
-
         <?php include('footer.php'); ?>
     </main>
 </body>

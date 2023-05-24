@@ -4,7 +4,8 @@ $conn = connect_to_db();
 $user_post_count = get_user_post_count($conn, $_SESSION['user_id']);
 ?>
 
-<nav class="d-flex flex-column navbar navbar-light bg-light justify-space-between mt-1 ps-0 pe-0 pb-4 flex-shrink-0">
+<nav
+    class="d-flex flex-column navbar navbar-light bg-light justify-space-between mt-1 ps-0 pe-0 pb-4 flex-shrink-0 fixed-top h-100">
     <div class="navbar-top w-100">
 
         <!-- Logo -->
@@ -15,7 +16,7 @@ $user_post_count = get_user_post_count($conn, $_SESSION['user_id']);
         </a>
 
         <!-- User Profile -->
-        <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4">
+        <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4 pb-3">
             <img class="home-navbar-user-profile-picture mb-2"
                 src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
             <div class="home-navbar-user-profile-info-container d-flex flex-column justify-content-center">
@@ -29,7 +30,7 @@ $user_post_count = get_user_post_count($conn, $_SESSION['user_id']);
         </div>
 
         <!-- User Profile Posts Information -->
-        <div class="navbar-user-posts-info mb-4">
+        <div class="navbar-user-posts-info mb-4 pb-3">
             <div class="navbar-user-posts d-flex flex-column align-items-center">
                 <p class="fw-bold mb-1">
                     <?php echo $user_post_count ?>

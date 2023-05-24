@@ -1,13 +1,14 @@
-<div class="d-flex justify-content-between w-100 feed-top-section mt-2 pt-4 pe-5 pb-4 ps-5">
+<div
+    class="navbar navbar-expand-lg navbar-light d-flex justify-content-between w-100 feed-top-section mt-2 pt-4 pe-5 pb-4 ps-5">
     <!--  Search Bar -->
-    <div class="form-group has-search d-flex align-items-center">
+    <div class="form-group has-search d-flex align-items-center w-25">
         <span class="bi bi-search form-control-feedback"></span>
         <input type="search" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
     </div>
 
     <!--  Create Post Button Trigger -->
     <button type="button"
-        class="btn btn-primary d-flex align-items-center justify-content-center text-nowrap fw-semibold"
+        class="btn btn-primary d-flex align-items-center justify-content-center text-nowrap fw-semibold w-25"
         data-toggle="modal" data-target="#create-post-modal" id="create-post-modal-trigger">
         <i class="bi bi-plus fs-4 d-flex me-1"></i>
         Create Post

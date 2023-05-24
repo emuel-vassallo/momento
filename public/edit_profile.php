@@ -39,73 +39,62 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
 <body class="d-flex">
     <?php include('navbar.php'); ?>
-    <div class="main-content d-flex flex-column w-100">
+    <main class="main-content d-flex flex-column h-100">
         <?php include('header.php'); ?>
-        <main class="w-100 h-100">
-            <section class="py-4 h-100 d-flex align-items-center justify-content-center">
-                <div class="container">
-                    <div class="row d-flex align-items-center justify-content-center">
-                        <div class="edit-profile">
-                            <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
-                                enctype="multipart/form-data" action="../core/process_edit_profile.php">
-                                <div class="card edit-profile-card">
-                                    <div class="card-header fw-bold d-flex align-items-center">
-                                        <div class="d-flex align-items-center w-100">
-                                            <h5 class="text-center m-0 p-0 text-nowrap">Edit Profile</h5>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <label for="display-name" class="form-label">Profile Picture</label>
-                                            <div class="d-flex align-items-center">
-                                                <div class="me-3">
-                                                    <img src="<?php echo $_SESSION['user_profile_picture_path'] ?>"
-                                                        class="profile-picture-picker-image img-fluid rounded-circle"
-                                                        id="profile-picture-picker-image" alt="profile picture" />
-                                                </div>
-                                                <div class="btn btn-light btn-rounded p-0">
-                                                    <label
-                                                        class="choose-profile-picture-label form-label mb-0 w-100 h-100 p-2"
-                                                        for="profile-picture-picker">Upload</label>
-                                                    <input type="file" name="profile_picture_picker" accept="image/*"
-                                                        class="form-control d-none" id="profile-picture-picker"
-                                                        autocomplete="off" />
-                                                </div>
-                                            </div>
-                                            <div id="errors-container_custom-profile-picture"></div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="edit-profile-display-name" class="form-label">Display
-                                                Name</label>
-                                            <input type="text" class="form-control" id="edit-profile-display-name"
-                                                placeholder="<?php echo $_SESSION['user_display_name'] ?>"
-                                                value="<?php echo $_SESSION['user_display_name'] ?>"
-                                                name="user_display_name">
-                                            <div id="errors-container_custom-display-name">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="bio" class="form-label">Bio</label>
-                                            <textarea class="profile-bio-textarea form-control" id="bio" name="bio"
-                                                rows="
-                                        3" placeholder="<?php echo $_SESSION['user_bio']; ?>"><?php echo $_SESSION['user_bio']; ?></textarea>
-                                            <div id="errors-container_custom-bio"></div>
-                                        </div>
-                                        <div class="mb-3 text-end">
-                                            <button type="submit"
-                                                class="btn btn-primary fw-bold w-25 bg-gradient text-nowrap">Save</button>
-                                        </div>
-                                    </div>
+        <div class="d-flex flex-column py-4 w-100 h-100 align-items-center justify-content-center">
+            <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
+                enctype="multipart/form-data" action="../core/process_edit_profile.php">
+                <div class="card edit-profile-card">
+                    <div class="card-header fw-bold d-flex align-items-center">
+                        <div class="d-flex align-items-center w-100">
+                            <h5 class="text-center m-0 p-0 text-nowrap">Edit Profile</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="display-name" class="form-label">Profile Picture</label>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <img src="<?php echo $_SESSION['user_profile_picture_path'] ?>"
+                                        class="profile-picture-picker-image img-fluid rounded-circle"
+                                        id="profile-picture-picker-image" alt="profile picture" />
                                 </div>
-                                <div id="errors-container_custom-container"></div>
-                            </form>
+                                <div class="btn btn-light btn-rounded p-0">
+                                    <label class="choose-profile-picture-label form-label mb-0 w-100 h-100 p-2"
+                                        for="profile-picture-picker">Upload</label>
+                                    <input type="file" name="profile_picture_picker" accept="image/*"
+                                        class="form-control d-none" id="profile-picture-picker" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div id="errors-container_custom-profile-picture"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-profile-display-name" class="form-label">Display
+                                Name</label>
+                            <input type="text" class="form-control" id="edit-profile-display-name"
+                                placeholder="<?php echo $_SESSION['user_display_name'] ?>"
+                                value="<?php echo $_SESSION['user_display_name'] ?>" name="user_display_name">
+                            <div id="errors-container_custom-display-name">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea class="profile-bio-textarea form-control" id="bio" name="bio" rows="
+                                        3"
+                                placeholder="<?php echo $_SESSION['user_bio']; ?>"><?php echo $_SESSION['user_bio']; ?></textarea>
+                            <div id="errors-container_custom-bio"></div>
+                        </div>
+                        <div class="mb-3 text-end">
+                            <button type="submit"
+                                class="btn btn-primary fw-bold w-25 bg-gradient text-nowrap">Save</button>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
+                <div id="errors-container_custom-container"></div>
+            </form>
+        </div>
         <?php include('footer.php'); ?>
-    </div>
+    </main>
 </body>
 
 </html>

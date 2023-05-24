@@ -53,7 +53,7 @@ textarea {
 /*  Navbar */
 
 nav {
-  width: 340px;
+  width: 380px;
 }
 
 .nav-item.active:after {
@@ -71,6 +71,14 @@ nav {
 
 .nav-link-icon {
   font-size: 1.3rem;
+}
+
+/* Main */
+
+main {
+  margin-left: 380px;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 /* Home */
@@ -127,7 +135,6 @@ nav {
   color: #aaa;
 }
 
-
 /* Create Post */
 .file {
   visibility: hidden;
@@ -141,6 +148,7 @@ nav {
 }
 
 #create-post-image {
+  background-image: '.././images/image-add.png';
   background-size: cover;
   background-position: center;
   object-fit: cover;

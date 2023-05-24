@@ -29,7 +29,7 @@ function display_posts($posts)
         }
 
         echo "<div class='post d-flex w-100 mb-5 pb-4'>
-                <div class='d-flex flex-column w-100 align-items-start'>
+                <div class='d-flex flex-column align-items-start'>
                     <div class='post-top d-flex align-items-center mb-2 pb-2'>
                         <div class='post-user-info d-flex align-items-center justify-content-center'>
                             <img class='feed-card-profile-picture me-2' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
