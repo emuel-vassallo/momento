@@ -4,6 +4,7 @@ require_once("../core/db_functions.php");
 function display_posts($posts)
 {
     foreach ($posts as $post) {
+        $poster_id = $post['user_id'];
         $poster_profile_picture = $post['profile_picture_path'];
         $poster_display_name = $post['display_name'];
         $poster_username = $post['username'];
@@ -26,16 +27,20 @@ function display_posts($posts)
             $time_ago = date("F j, Y", $created_timestamp);
         }
 
+        $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
+
         echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border'>
                 <div class='w-100 d-flex flex-column align-items-start'>
                     <div class='post-top d-flex align-items-center mb-2 pb-2'>
-                        <div class='post-user-info d-flex align-items-center justify-content-center'>
-                            <img class='feed-card-profile-picture me-2 flex-shrink-0' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
-                            <div class='ps-1 d-flex flex-column'>
-                                <p class='m-0 fw-semibold'>$poster_display_name</p>
-                                <p class='m-0 text-secondary'><small>@$poster_username</small></p>
+                        <a href='$user_profile_link' class='text-decoration-none'>
+                            <div class='post-user-info d-flex align-items-center justify-content-center'>
+                                <img class='feed-card-profile-picture me-2 flex-shrink-0' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
+                                <div class='ps-1 d-flex flex-column'>
+                                    <p class='m-0 fw-semibold text-body'>$poster_display_name</p>
+                                    <p class='m-0 text-secondary'><small>@$poster_username</small></p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <img class='feed-post-image mb-3 pb-1' src='$post_image_path' alt='Post Image'>
