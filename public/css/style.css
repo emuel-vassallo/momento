@@ -162,16 +162,16 @@ textarea {
   display: none;
 }
 
-#search-results > li {
+.search-result-item {
   cursor: pointer;
   border-radius: 8px;
 }
 
-#search-results > li:hover {
+.search-result-item:hover {
   background-color: #cecece;
 }
 
-#search-results > li > p.ellipsis {
+.search-result-text.ellipsis {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
