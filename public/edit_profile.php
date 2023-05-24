@@ -5,15 +5,6 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
     exit();
 }
-
-$activePage = '';
-if (basename($_SERVER['PHP_SELF']) === 'index.php') {
-    $activePage = 'feed';
-} elseif (basename($_SERVER['PHP_SELF']) === 'edit_profile.php') {
-    $activePage = 'settings';
-} elseif (basename($_SERVER['PHP_SELF']) === 'logout.php') {
-    $activePage = 'logout';
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +19,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">

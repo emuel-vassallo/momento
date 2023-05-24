@@ -9,15 +9,6 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
 }
 
-$activePage = '';
-if (basename($_SERVER['PHP_SELF']) === 'index.php') {
-    $activePage = 'feed';
-} elseif (basename($_SERVER['PHP_SELF']) === 'edit_profile.php') {
-    $activePage = 'settings';
-} elseif (basename($_SERVER['PHP_SELF']) === 'logout.php') {
-    $activePage = 'logout';
-}
-
 require_once('post_display.php');
 ?>
 <!DOCTYPE html>
