@@ -1,5 +1,4 @@
-<nav
-    class="header navbar navbar-light fixed-top bg-white w-100 border border-top-0 border-start-0 border-end-0 m-0 p-0">
+<nav class="header navbar navbar-light fixed-top bg-white w-100 border-bottom-1 m-0 p-0 border-bottom">
     <div class="container-fluid d-flex justify-content-between w-100 pt-4 pe-5 pb-4 ps-5">
         <a class="navbar-brand d-flex align-items-center justify-content-center align-self-start" href="index.php">
             <img src="images/instagram-logo.png" width="30" height="30" class="d-inline-block align-top me-3" alt="">

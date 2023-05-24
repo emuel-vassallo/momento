@@ -44,7 +44,7 @@ textarea {
 /*  Sidebar */
 
 .sidebar {
-  margin-top: 88px !important;
+  margin-top: 89px !important;
   width: 400px !important;
 }
 
@@ -101,14 +101,13 @@ textarea {
 /* Feed */
 
 .post {
-  max-width: 60%;
   border-radius: 22px;
 }
 
 .feed-post-image {
   width: 100%;
   height: auto;
-  max-height: 500px;
+  max-height: 565px;
   object-fit: cover;
   object-position: center;
   border-radius: 22px;

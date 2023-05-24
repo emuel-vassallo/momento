@@ -13,7 +13,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 }
 ?>
 
-<nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border border-start-0 border-bottom-0">
+<nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end">
     <div class="d-flex flex-column position-sticky h-100 w-100">
         <div class="sidebar-container d-flex flex-column h-100 pt-5">
             <!-- User Profile -->
