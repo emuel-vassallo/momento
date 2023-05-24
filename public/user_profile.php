@@ -9,7 +9,19 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
 }
 
+require_once('../core/db_functions.php');
+
+$conn = connect_to_db();
+
 require_once('post_display.php');
+
+if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
+    $user_id = $_GET['user_id'];
+} else {
+    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +36,7 @@ require_once('post_display.php');
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -42,14 +54,14 @@ require_once('post_display.php');
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('header.php'); ?>
         <?php include('sidebar.php'); ?>
-        <main class="page-home d-flex flex-column h-100 bg-light">
+        <main class="page-user-profile d-flex flex-column h-100 bg-light">
             <div
                 class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
                 <div class="feed-top w-100 mb-4">
-                    <p class="h3 fw-semibold">Feed</p>
+                    <p class="h3 fw-semibold">Posts</p>
                 </div>
                 <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center">
-                    <?php display_all_posts($conn) ?>
+                    <?php display_user_posts($user_id) ?>
                 </div>
             </div>
             <?php include('footer.php'); ?>

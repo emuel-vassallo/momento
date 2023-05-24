@@ -1,7 +1,5 @@
 <?php
 require_once("../core/db_functions.php");
-$conn = connect_to_db();
-$posts = get_all_posts($conn);
 
 function display_posts($posts)
 {
@@ -54,4 +52,19 @@ function display_posts($posts)
               </div>";
     }
 }
+
+function display_all_posts()
+{
+    $conn = connect_to_db();
+    $posts = get_all_posts($conn);
+    display_posts($posts);
+}
+
+function display_user_posts($user_id)
+{
+    $conn = connect_to_db();
+    $posts = get_user_posts($conn, $user_id);
+    display_posts($posts);
+}
+
 ?>

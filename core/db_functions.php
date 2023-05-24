@@ -131,14 +131,8 @@ function process_file_and_execute_query($conn, $file, $target_dir, $directory_na
     return $query_callback(mysqli_real_escape_string($conn, $new_image_path));
 }
 
-function get_all_posts($conn)
+function fetch_posts($conn, $query)
 {
-    $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
-              FROM `posts_table` AS p
-              JOIN `users_table` AS u ON p.user_id = u.id
-              ORDER BY p.created_at DESC;
-              ";
-
     $result = mysqli_query($conn, $query);
 
     $posts = array();
@@ -150,6 +144,29 @@ function get_all_posts($conn)
     }
 
     return $posts;
+}
+
+function get_all_posts($conn)
+{
+    $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
+              FROM `posts_table` AS p
+              JOIN `users_table` AS u ON p.user_id = u.id
+              ORDER BY p.created_at DESC;
+              ";
+
+    return fetch_posts($conn, $query);
+}
+
+function get_user_posts($conn, $user_id)
+{
+    $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
+              FROM `posts_table` AS p
+              JOIN `users_table` AS u ON p.user_id = u.id
+              WHERE u.id = $user_id
+              ORDER BY p.created_at DESC;
+              ";
+
+    return fetch_posts($conn, $query);
 }
 
 function get_user_post_count($conn, $user_id)
