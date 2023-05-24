@@ -11,6 +11,7 @@ function display_posts($posts)
         $post_image_path = $post['image_dir'];
         $caption = $post['caption'];
         $created_at = $post['created_at'];
+
         $created_timestamp = strtotime($created_at);
         $current_timestamp = time();
         $time_diff = $current_timestamp - $created_timestamp;
@@ -23,6 +24,9 @@ function display_posts($posts)
         } elseif ($time_diff < 86400) {
             $hours = floor($time_diff / 3600);
             $time_ago = ($hours == 1) ? "1 hour ago" : $hours . " hours ago";
+        } elseif ($time_diff < (86400 * 7)) {
+            $days = floor($time_diff / 86400);
+            $time_ago = ($days == 1) ? "1 day ago" : $days . " days ago";
         } else {
             $time_ago = date("F j, Y", $created_timestamp);
         }
