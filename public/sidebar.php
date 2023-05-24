@@ -64,7 +64,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                     <a class="nav-link d-flex ps-5 w-100" href="index.php">
                         <i
                             class="nav-link-icon bi <?php echo ($active_page === 'feed') ? 'bi-house-door-fill' : 'bi-house-door'; ?> me-4 d-flex align-items-center justify-content-center"></i>
-                        Feed
+                        Home
                     </a>
                 </li>
                 <li

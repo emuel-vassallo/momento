@@ -205,3 +205,16 @@ textarea {
   object-fit: cover;
   object-position: center;
 }
+
+/*  User Profile */
+.user-profile-profile-picture {
+  width: 177px;
+  height: 177px;
+  opacity: 1;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+  transition: opacity 0.7s ease 0s;
+  box-shadow: none;
+}

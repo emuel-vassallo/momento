@@ -191,4 +191,22 @@ function get_all_users($conn)
     return $profiles;
 }
 
+function get_user_info($conn, $user_id)
+{
+    $query = "SELECT * 
+              FROM `users_table`
+              WHERE `id` = '$user_id'
+              ";
+
+    $result = mysqli_query($conn, $query);
+
+    if (!$result || mysqli_num_rows($result) === 0) {
+        return false;
+    }
+
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}
+
 ?>
