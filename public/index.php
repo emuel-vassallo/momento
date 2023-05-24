@@ -18,7 +18,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     $activePage = 'logout';
 }
 
-require_once('post_display.php')
+require_once('post_display.php');
 ?>
 <!DOCTYPE html>
 <html>

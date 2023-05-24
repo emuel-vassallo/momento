@@ -151,4 +151,14 @@ function get_all_posts($conn)
 
     return $posts;
 }
+
+function get_user_post_count($conn, $user_id)
+{
+    $query = "SELECT COUNT(*) AS post_count FROM posts_table WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result)['post_count'];
+    return $row;
+}
+
+
 ?>

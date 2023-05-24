@@ -1,3 +1,9 @@
+<?php
+require_once('../core/db_functions.php');
+$conn = connect_to_db();
+$user_post_count = get_user_post_count($conn, $_SESSION['user_id']);
+?>
+
 <nav class="d-flex flex-column navbar navbar-light bg-light justify-space-between mt-1 ps-0 pe-0 pb-4 flex-shrink-0">
     <div class="navbar-top w-100">
 
@@ -25,7 +31,9 @@
         <!-- User Profile Posts Information -->
         <div class="navbar-user-posts-info mb-4">
             <div class="navbar-user-posts d-flex flex-column align-items-center">
-                <p class="fw-bold mb-1">0</p>
+                <p class="fw-bold mb-1">
+                    <?php echo $user_post_count ?>
+                </p>
                 <p class="m-0 text-secondary">Posts</p>
             </div>
         </div>
