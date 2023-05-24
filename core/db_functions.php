@@ -160,5 +160,18 @@ function get_user_post_count($conn, $user_id)
     return $row;
 }
 
+function get_all_users($conn)
+{
+    $query = "SELECT id, username, display_name, profile_picture_path FROM users_table";
+    $result = mysqli_query($conn, $query);
+
+    $profiles = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $profiles[] = $row;
+    }
+
+    return $profiles;
+}
 
 ?>
