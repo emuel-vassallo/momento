@@ -32,20 +32,20 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
+
     <script type="text/javascript" src="scripts/validate-profile-setup.js" defer></script>
     <script src="scripts/create-post-modal-handler.js" defer></script>
-    <script src="scripts/validate-create-post-form.js" defer></script>
 </head>
 
 <body>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('sidebar.php'); ?>
         <?php include('header.php'); ?>
-        <main class="page-settings d-flex flex-column h-100 justify-content-between">
+        <main class="page-settings d-flex flex-column h-100 align-items-center justify-content-between bg-light">
             <form class="p-5" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
                 <div class="card edit-profile-card">
-                    <div class="card-header fw-bold d-flex align-items-center">
+                    <div class="card-header fw-bold d-flex align-items-center bg-white">
                         <div class="d-flex align-items-center w-100">
                             <h5 class="text-center m-0 p-0 text-nowrap">Edit Profile</h5>
                         </div>
@@ -71,7 +71,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                         <div class="mb-3">
                             <label for="edit-profile-display-name" class="form-label">Display
                                 Name</label>
-                            <input type="text" class="form-control" id="edit-profile-display-name"
+                            <input type="text" class="form-control bg-light" id="edit-profile-display-name"
                                 placeholder="<?php echo $_SESSION['user_display_name'] ?>"
                                 value="<?php echo $_SESSION['user_display_name'] ?>" name="user_display_name">
                             <div id="errors-container_custom-display-name">
@@ -79,13 +79,13 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                         </div>
                         <div class="mb-3">
                             <label for="bio" class="form-label">Bio</label>
-                            <textarea class="profile-bio-textarea form-control" id="bio" name="bio" rows="
+                            <textarea class="profile-bio-textarea form-control bg-light" id="bio" name="bio" rows="
                                         3"
                                 placeholder="<?php echo $_SESSION['user_bio']; ?>"><?php echo $_SESSION['user_bio']; ?></textarea>
                             <div id="errors-container_custom-bio"></div>
                         </div>
                         <div class="mb-3 text-end">
-                            <button type="submit" class="btn btn-primary fw-bold bg-gradient text-nowrap">Save</button>
+                            <button type="submit" class="btn btn-primary fw-bold text-nowrap">Save</button>
                         </div>
                     </div>
                 </div>
