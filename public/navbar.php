@@ -16,7 +16,7 @@
                 <p class="user-profile-name fs-5 fw-bold p-0 m-0 text-nowrap">
                     <?php echo $_SESSION['user_display_name']; ?>
                 </p>
-                <p class="user-profile-username text-dark-emphasis fs-6 p-0 m-0 text-nowrap">
+                <p class="user-profile-username text-secondary fs-6 p-0 m-0 text-nowrap">
                     <?php echo '@' . $_SESSION['user_username']; ?>
                 </p>
             </div>
