@@ -1,12 +1,10 @@
-/* Register */
-
+/* Register and Login */
 .register-form-container,
 .login-form-container {
   max-width: 432px;
 }
 
 /* Profile Setup */
-
 .edit-profile {
   max-width: 420px;
 }
@@ -32,7 +30,6 @@ textarea {
 }
 
 /* Login */
-
 #login-error {
   display: none;
 }
@@ -41,8 +38,7 @@ textarea {
   display: block;
 }
 
-/*  Sidebar */
-
+/* Sidebar */
 .sidebar {
   margin-top: 89px !important;
   width: 400px !important;
@@ -66,17 +62,22 @@ textarea {
 }
 
 /* Home */
+.page-register,
+.page-login,
+.page-home,
+.page-user-profile,
+.page-settings {
+  min-height: calc(100vh - 88px);
+}
 
 .page-register,
 .page-login {
-  min-height: calc(100vh - (88px + 76px));
   max-height: calc(100vh - (88px + 76px));
 }
 
 .page-home,
 .page-user-profile,
 .page-settings {
-  min-height: calc(100vh - 88px);
   margin-left: 400px !important;
 }
 
@@ -88,7 +89,8 @@ textarea {
   margin-top: 88px !important;
 }
 
-.home-navbar-user-profile-picture {
+.home-navbar-user-profile-picture,
+.user-profile-profile-picture {
   width: 90px;
   height: 90px;
   opacity: 1;
@@ -101,7 +103,6 @@ textarea {
 }
 
 /* Feed */
-
 .post {
   border-radius: 22px;
 }
@@ -128,7 +129,6 @@ textarea {
 }
 
 /* Search Bar */
-
 .has-search .form-control {
   padding-left: 38px;
 }
@@ -148,9 +148,6 @@ textarea {
   list-style: none;
   position: absolute;
   z-index: 1050 !important;
-}
-
-#search-results {
   min-width: 300px;
   max-width: 300px;
   background-color: #ffffff;
@@ -185,7 +182,6 @@ textarea {
 }
 
 /* Create Post */
-
 .file {
   visibility: hidden;
   position: absolute;
@@ -206,7 +202,7 @@ textarea {
   object-position: center;
 }
 
-/*  User Profile */
+/* User Profile */
 .user-profile-profile-picture {
   width: 177px;
   height: 177px;

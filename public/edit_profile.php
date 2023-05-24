@@ -22,13 +22,19 @@ if (!isset($_SESSION['user_id'])) {
         </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
 
-    <script type="text/javascript" src="scripts/validate-profile-setup.js" defer></script>
+    <script src="scripts/validate-profile-setup.js" defer></script>
+    <script src="scripts/show-search-suggestions.js" defer></script>
     <script src="scripts/create-post-modal-handler.js" defer></script>
 </head>
 
 <body>
+    <div class="backdrop hidden">
+    </div>
+    <?php include('create_post_modal.php') ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('sidebar.php'); ?>
         <?php include('header.php'); ?>
