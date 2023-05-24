@@ -143,6 +143,24 @@ textarea {
   color: #aaa;
 }
 
+#search-results {
+  list-style: none;
+  position: absolute;
+  z-index: 1050 !important;
+}
+
+#search-results {
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 0 0 5px 5px;
+}
+#search-results > li {
+  cursor: pointer;
+}
+#search-results > li:hover {
+  background-color: #dddddd;
+}
+
 /* Create Post */
 
 .file {

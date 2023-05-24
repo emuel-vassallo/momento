@@ -32,7 +32,7 @@ function display_posts($posts)
                 <div class='w-100 d-flex flex-column align-items-start'>
                     <div class='post-top d-flex align-items-center mb-2 pb-2'>
                         <div class='post-user-info d-flex align-items-center justify-content-center'>
-                            <img class='feed-card-profile-picture me-2' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
+                            <img class='feed-card-profile-picture me-2 flex-shrink-0' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
                             <div class='ps-1 d-flex flex-column'>
                                 <p class='m-0 fw-semibold'>$poster_display_name</p>
                                 <p class='m-0 text-secondary'><small>@$poster_username</small></p>
