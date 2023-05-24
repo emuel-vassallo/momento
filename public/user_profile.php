@@ -18,6 +18,8 @@ require_once('post_display.php');
 if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
     $user_info = get_user_info($conn, $user_id);
+
+    $user_posts_amount = get_user_post_count($conn, $user_id);
 } else {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
     exit();
@@ -37,7 +39,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -61,15 +63,21 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                     src="<?php echo $user_info['profile_picture_path'] ?>" alt="">
                 <div class="d-flex flex-column p-3 gap-3 w-50">
                     <div>
-                        <p class="user-profile-display-name fs-4 fw-bold text-body m-0">
+                        <p class="user-profile-display-name fs-5 fw-bold text-body m-0">
                             <?php echo $user_info['display_name'] ?>
                         </p>
-                        <p class="user-profile-username text-secondary fs-5 m-0">
+                        <p class="user-profile-username text-secondary fs-6 m-0">
                             <?php echo '@' . $user_info['username'] ?>
                         </p>
                     </div>
+                    <div class="d-flex user-profile-posts-amount-container align-items-center gap-1">
+                        <p class="user-profile-posts-amount fw-bold m-0 fs-6">
+                            <?php echo $user_posts_amount ?>
+                        </p>
+                        <p class="m-0 fs-6">Posts</p>
+                    </div>
                     <div class="user-profile-bio-container">
-                        <p class="fw-semibold m-0 fs-5">Bio</p>
+                        <p class="fw-semibold m-0 fs-6">Bio</p>
                         <p class="user-profile-bio m-0">
                             <?php echo $user_info['bio'] ?>
                         </p>
@@ -79,7 +87,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
             <div
                 class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
                 <div class="feed-top w-100 mb-4">
-                    <p class="fw-semibold h4">Posts</p>
+                    <h4 class="fw-semibold">Posts</h4>
                 </div>
                 <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center w-100">
                     <?php display_user_posts($user_id) ?>
