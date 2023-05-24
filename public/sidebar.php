@@ -8,9 +8,10 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     $active_page = 'feed';
 } elseif (basename($_SERVER['PHP_SELF']) === 'edit_profile.php') {
     $active_page = 'settings';
-} elseif (basename($_SERVER['PHP_SELF']) === 'logout.php') {
-    $active_page = 'logout';
+} elseif (basename($_SERVER['PHP_SELF']) === 'user_profile.php' && isset($_GET['user_id']) && $_GET['user_id'] == $_SESSION['user_id']) {
+    $active_page = 'profile';
 }
+
 ?>
 
 <nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end">
@@ -52,7 +53,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 <p class="user-profile-name fs-6 fw-bold p-0 m-0 mb-2 text-nowrap">
                     <?php echo $_SESSION['user_display_name']; ?>
                 </p>
-                <p class="m-0 text-secondary">
+                <p class="m-0 text-secondary fs-6">
                     <?php echo $_SESSION['user_bio'] ?>
                 </p>
             </div>
@@ -68,14 +69,21 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                     </a>
                 </li>
                 <li
+                    class="nav-item d-flex align-items-center <?php echo ($active_page === 'profile') ? 'fw-semibold active' : ''; ?>">
+                    <a class="nav-link d-flex ps-5 w-100"
+                        href="user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">
+                        <i
+                            class="nav-link-icon bi <?php echo ($active_page === 'profile') ? 'bi-person-fill' : 'bi-person'; ?> me-4 d-flex align-items-center justify-content-center"></i>
+                        Profile
+                    </a>
+                </li>
+                <li
                     class="nav-item d-flex align-items-center <?php echo ($active_page === 'settings') ? 'fw-semibold active' : ''; ?>">
                     <a class="nav-link d-flex ps-5 w-100" href="edit_profile.php">
                         <i
                             class="nav-link-icon bi <?php echo ($active_page === 'settings') ? 'bi-gear-fill' : 'bi-gear'; ?> me-4 d-flex align-items-center justify-content-center"></i>
                         Settings
                     </a>
-                </li>
-                <li class="nav-item">
                 </li>
             </ul>
 
