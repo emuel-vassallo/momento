@@ -42,6 +42,9 @@ require_once('post_display.php');
 </head>
 
 <body class="h-100 w-100 m-0 p-0">
+    <div class="backdrop hidden">
+    </div>
+    <?php include('create_post_modal.php') ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('header.php'); ?>
         <?php include('sidebar.php'); ?>

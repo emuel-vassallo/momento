@@ -1,6 +1,6 @@
 /* Register */
 
-.register-form-container, 
+.register-form-container,
 .login-form-container {
   max-width: 432px;
 }
@@ -73,12 +73,16 @@ textarea {
   max-height: calc(100vh - (88px + 76px));
 }
 
-.page-home, .page-settings {
+.page-home,
+.page-settings {
   min-height: calc(100vh - 88px);
   margin-left: 400px !important;
 }
 
-.page-register, .page-login, .page-home, .page-settings {
+.page-register,
+.page-login,
+.page-home,
+.page-settings {
   margin-top: 88px !important;
 }
 
@@ -118,7 +122,6 @@ textarea {
   height: 60px;
 }
 
-
 .post-user-info {
   cursor: pointer;
 }
@@ -131,7 +134,6 @@ textarea {
 
 .has-search .form-control-feedback {
   position: absolute;
-  z-index: 2;
   display: block;
   width: 2.375rem;
   height: 43px;
@@ -155,9 +157,10 @@ textarea {
 }
 
 #create-post-image {
-  background-image: ".././images/image-add.png";
-  background-size: cover;
+  background-image: url("../images/image-add.png");
+  background-size: 30%;
   background-position: center;
+  background-repeat: no-repeat;
   object-fit: cover;
   object-position: center;
 }

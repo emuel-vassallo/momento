@@ -9,7 +9,7 @@
                 enctype="multipart/form-data" autocomplete="off" novalidate="novalidate">
                 <div class="modal-body d-flex flex-column align-items-center ms-5 me-5 p-5">
                     <label for="post-image"
-                        class="create-post-image-container d-flex align-items-center justify-content-center rounded border">
+                        class="create-post-image-container d-flex align-items-center justify-content-center">
                         <img id="create-post-image" class="w-100 h-100 rounded">
                         <input type="file" class="form-control-file d-none w-100 h-100" id="post-image"
                             name="new_post_image_picker" accept="image/*">

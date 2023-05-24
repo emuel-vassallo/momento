@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("create-post-modal-trigger")
     .addEventListener("click", () => {
-      var modal = new bootstrap.Modal(
+      const modal = new bootstrap.Modal(
         document.getElementById("create-post-modal")
       );
       modal.show();

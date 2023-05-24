@@ -1,5 +1,5 @@
 <nav
-    class="fixed-top m-0 p-0 header navbar navbar-light bg-white w-100 border border-top-0 border-start-0 border-end-0">
+    class="header navbar navbar-light fixed-top bg-white w-100 border border-top-0 border-start-0 border-end-0 m-0 p-0">
     <div class="container-fluid d-flex justify-content-between w-100 pt-4 pe-5 pb-4 ps-5">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center justify-content-center align-self-start" href="index.php">
@@ -20,7 +20,5 @@
             <i class="bi bi-plus fs-4 d-flex me-1"></i>
             Create Post
         </button>
-
-        <?php include('create_post_modal.php') ?>
     </div>
 </nav>
