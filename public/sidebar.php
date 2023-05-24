@@ -18,26 +18,33 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
         <div class="sidebar-container d-flex flex-column h-100 pt-5">
             <!-- User Profile -->
             <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4 pb-3">
-                <img class="home-navbar-user-profile-picture mb-2"
-                    src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
-                <div class="home-navbar-user-profile-info-container d-flex flex-column justify-content-center">
-                    <p class="user-profile-name fs-5 fw-bold p-0 m-0 text-nowrap">
-                        <?php echo $_SESSION['user_display_name']; ?>
-                    </p>
-                    <p class="user-profile-username text-secondary fs-6 p-0 m-0 text-nowrap">
-                        <?php echo '@' . $_SESSION['user_username']; ?>
-                    </p>
-                </div>
+                <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+                    class="text-decoration-none">
+                    <img class="home-navbar-user-profile-picture mb-2"
+                        src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
+                    <div class="home-navbar-user-profile-info-container d-flex flex-column justify-content-center">
+                        <p class="user-profile-name fs-5 fw-bold p-0 m-0 text-nowrap text-body">
+                            <?php echo $_SESSION['user_display_name']; ?>
+                        </p>
+                        <p class="user-profile-username text-secondary fs-6 p-0 m-0 text-nowrap">
+                            <?php echo '@' . $_SESSION['user_username']; ?>
+                        </p>
+                    </div>
+                </a>
             </div>
+
 
             <!-- User Profile Posts Information -->
             <div class="navbar-user-posts-info mb-4 pb-3">
-                <div class="navbar-user-posts d-flex flex-column align-items-center">
-                    <p class="fw-bold mb-1">
-                        <?php echo $user_post_count ?>
-                    </p>
-                    <p class="m-0 text-secondary">Posts</p>
-                </div>
+                <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+                    class="text-decoration-none">
+                    <div class="navbar-user-posts d-flex flex-column align-items-center">
+                        <p class="fw-bold mb-1 text-body">
+                            <?php echo $user_post_count ?>
+                        </p>
+                        <p class="m-0 text-secondary">Posts</p>
+                    </div>
+                </a>
             </div>
 
             <!-- User Bio -->
