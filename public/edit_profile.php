@@ -37,12 +37,12 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     <script src="scripts/validate-create-post-form.js" defer></script>
 </head>
 
-<body class="d-flex">
-    <?php include('navbar.php'); ?>
-    <main class="main-content d-flex flex-column h-100">
+<body>
+    <div class="w-100 h-100 body-container container-fluid m-0 p-0">
+        <?php include('sidebar.php'); ?>
         <?php include('header.php'); ?>
-        <div class="d-flex flex-column py-4 w-100 h-100 align-items-center justify-content-center">
-            <form id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
+        <main class="page-settings d-flex flex-column h-100 justify-content-between">
+            <form class="p-5" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
                 <div class="card edit-profile-card">
                     <div class="card-header fw-bold d-flex align-items-center">
@@ -85,16 +85,15 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                             <div id="errors-container_custom-bio"></div>
                         </div>
                         <div class="mb-3 text-end">
-                            <button type="submit"
-                                class="btn btn-primary fw-bold w-25 bg-gradient text-nowrap">Save</button>
+                            <button type="submit" class="btn btn-primary fw-bold bg-gradient text-nowrap">Save</button>
                         </div>
                     </div>
                 </div>
                 <div id="errors-container_custom-container"></div>
             </form>
-        </div>
-        <?php include('footer.php'); ?>
-    </main>
+            <?php include('footer.php'); ?>
+        </main>
+    </div>
 </body>
 
 </html>

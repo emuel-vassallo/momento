@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addField("#email", [
       {
         rule: "required",
-        errorMessage: "Email is required.",
+        errorMessage: "Email is required",
       },
       {
         rule: "email",
@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         validator: (value) => () =>
           checkExists("email", value).then((exists) => !exists),
-        errorMessage: "Another account is using the same email address.",
+        errorMessage: "Another account is using the same email address",
       },
     ])
     .addField("#phone-number", [
       {
         rule: "required",
-        errorMessage: "Phone number is required.",
+        errorMessage: "Phone number is required",
       },
       {
         rule: "minLength",
@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         validator: (value) => () =>
           checkExists("phone_number", value).then((exists) => !exists),
-        errorMessage: "Another account is using the same phone number.",
+        errorMessage: "Another account is using the same phone number",
       },
     ])
     .addField("#full-name", [
       {
         rule: "required",
-        errorMessage: "Full name is required.",
+        errorMessage: "Full name is required",
       },
       {
         rule: "minLength",
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // TODO: fix error message for regex;
       {
         rule: "required",
-        errorMessage: "Username is required.",
+        errorMessage: "Username is required",
       },
       {
         rule: "customRegexp",
@@ -76,13 +76,13 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         validator: (value) => () =>
           checkExists("username", value).then((exists) => !exists),
-        errorMessage: "This username isn't available. Please try another.",
+        errorMessage: "This username isn't available. Please try another",
       },
     ])
     .addField("#password", [
       {
         rule: "required",
-        errorMessage: "Password is required.",
+        errorMessage: "Password is required",
       },
       {
         rule: "minLength",
