@@ -11,6 +11,10 @@ function get_dropdown_menu_item($icon_class, $text)
         $delete_modal_attributes = "'data-bs-toggle='modal' data-bs-target='#modal-confirm-delete-post'";
     }
 
+    if ($text === 'Copy link') {
+        $custom_class_name = 'post-copy-link-button';
+    }
+
     return "
         <a class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' $delete_modal_attributes>
             <li class='d-flex w-100 gap-2 align-items-center rounded'>

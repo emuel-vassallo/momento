@@ -26,6 +26,15 @@ const deletePost = (postId) => {
     });
 };
 
+const copyToClipboard = (text) => {
+  const tempInput = document.createElement("input");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  navigator.clipboard.writeText(tempInput.value);
+  document.body.removeChild(tempInput);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const deletePostButtons = document.querySelectorAll(".delete-post-button");
   const confirmDeleteButton = document.getElementById("confirm-delete-post");
@@ -45,6 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
         deletePost(postId);
         modal.hide();
       });
+    });
+  });
+
+  const copyLinkButtons = document.querySelectorAll(".post-copy-link-button");
+
+  copyLinkButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const post = button.closest(".post");
+      const postId = post.dataset.postId;
+      const postLink = `http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/post.php?post_id=${postId}`;
+
+      copyToClipboard(postLink);
+      alert("Post link copied to clipboard!");
     });
   });
 });
