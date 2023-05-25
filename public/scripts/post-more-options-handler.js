@@ -16,10 +16,10 @@ const deletePost = (postId) => {
       if (!data.success) {
         throw new Error(data.error);
       }
-      const postElement = document.querySelector(`[data-post-id="${postId}"]`);
-      if (postElement) {
-        postElement.remove();
-      }
+
+      const scrollPosition = window.scrollY;
+      window.location.reload();
+      window.scrollTo(0, scrollPosition);
     })
     .catch((error) => {
       console.error(error.message);
