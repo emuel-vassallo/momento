@@ -53,7 +53,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 <p class="user-profile-name fs-6 fw-bold p-0 m-0 mb-2 text-nowrap">
                     <?php echo $_SESSION['user_display_name']; ?>
                 </p>
-                <p class="m-0 text-secondary fs-6">
+                <p class="m-0 text-secondary fs-6 preformatted">
                     <?php echo $_SESSION['user_bio'] ?>
                 </p>
             </div>

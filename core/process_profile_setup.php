@@ -31,7 +31,7 @@ if (isset($_POST['user_display_name']) && !empty($_POST['user_display_name'])) {
 
 
 if (isset($_POST['bio']) && !empty($_POST['bio'])) {
-    $bio = stripslashes(mysqli_real_escape_string($conn, trim($_POST['bio'])));
+    $bio = mysqli_real_escape_string($conn, trim($_POST['bio']));
     if (strlen($bio) > 150) {
         $errors[] = "Bio must not exceed 150 characters.";
     }

@@ -42,7 +42,7 @@ function display_posts($posts)
 
         echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
-                    <div class='post-top d-flex align-items-center'>
+                    <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='$user_profile_link' class='text-decoration-none'>
                             <div class='post-user-info d-flex align-items-center justify-content-center'>
                                 <img class='feed-card-profile-picture me-2 flex-shrink-0' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
@@ -52,6 +52,7 @@ function display_posts($posts)
                                 </div>
                             </div>
                         </a>
+                        <i class='bi bi-three-dots fs-5 text-secondary post-more-options-menu-button'></i>
                     </div>
 
                     <img class='feed-post-image' src='$post_image_path' alt='Post Image'>

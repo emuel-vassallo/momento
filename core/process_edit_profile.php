@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result) {
             $_SESSION['user_display_name'] = $user_display_name;
-             // TODO: Fix bio \n not being registered as a break in the text
+            // TODO: Fix bio \n not being registered as a break in the text
             $_SESSION['user_bio'] = $bio;
             header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
         }
