@@ -39,7 +39,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -49,7 +49,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <script src="scripts/validate-create-post-form.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
     <script src="scripts/handle-scroll-to.js" defer></script>
-    <script src="scripts/post-more-options-modal-handler.js" defer></script>
+    <script src="scripts/post-more-options-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0">

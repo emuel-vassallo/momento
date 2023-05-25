@@ -1,6 +1,17 @@
 <?php
 require_once("../core/db_functions.php");
 
+function generate_dropdown_menu_item($iconClass, $text)
+{
+    return "<a class='dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' href='#'>
+                <li class='d-flex w-100 gap-2 align-items-center rounded'>
+                    <i class='$iconClass d-flex align-items-center justify-content-center'></i>
+                    <p class='m-0'>$text</p>
+                </li>
+            </a>
+        ";
+}
+
 function display_posts($posts)
 {
     foreach ($posts as $post) {
@@ -35,6 +46,20 @@ function display_posts($posts)
 
         $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
+        $isCurrentUser = $_SESSION['user_id'] === $poster_id;
+
+        $deleteMenuItem = generate_dropdown_menu_item('bi bi-trash', 'Delete');
+        $editMenuItem = generate_dropdown_menu_item('bi bi-pencil-square', 'Edit');
+        $followMenuItem = generate_dropdown_menu_item('bi bi-person-plus', 'Follow');
+        $goToPostMenuItem = generate_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
+        $copyLinkMenuItem = generate_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
+
+        $dropdown_menu_items = $isCurrentUser ?
+            $deleteMenuItem . $editMenuItem :
+            $followMenuItem;
+
+        $dropdown_menu_items .= $goToPostMenuItem . $copyLinkMenuItem;
+
         $caption_html = $caption === '' ? '' : "<p class='post-caption mb-1 fw-medium d-flex align-items-start justify-content-center'>
                                                     <svg class='bi bi-quote flex-shrink-0 me-1' xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 16 16'>
                                                         <path d='M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z'/>
@@ -54,7 +79,12 @@ function display_posts($posts)
                                 </div>
                             </div>
                         </a>
-                        <i class='bi bi-three-dots text-secondary post-more-options-menu-button fs-5'></i>
+                        <div class='dropdown'>
+                            <i class='bi bi-three-dots w-100 h-100 text-secondary post-more-options-menu-button fs-5' data-bs-toggle='dropdown' aria-expanded='false'></i>
+                            <ul class='dropdown-menu p-1'> 
+                                $dropdown_menu_items
+                            </ul>
+                        </div>
                     </div>
 
                     <img class='feed-post-image' src='$post_image_path' alt='Post Image'>

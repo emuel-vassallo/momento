@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const postId = post.dataset.postId;
       const posterId = post.dataset.posterId;
 
-      console.log({ postId, posterId });
+      console.dir({ postId, posterId });
     });
   });
 });
