@@ -5,9 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   moreOptionsButtons.forEach((button) => {
     button.addEventListener("click", function () {
-      const postId = button.closest(".post").dataset.postId;
+      const post = button.closest(".post");
+      const postId = post.dataset.postId;
+      const posterId = post.dataset.posterId;
 
-      console.log(postId);
+      console.log({ postId, posterId });
     });
   });
 });

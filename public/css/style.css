@@ -109,8 +109,8 @@ textarea {
 
 .feed-post-image {
   width: 100%;
-  height: auto;
-  max-height: 565px;
+  height: 100%;
+  max-height: 650px;
   object-fit: cover;
   object-position: center;
   border-radius: 22px;

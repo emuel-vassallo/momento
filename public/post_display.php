@@ -42,7 +42,7 @@ function display_posts($posts)
                                                     $caption
                                                 </p>";
 
-        echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border' data-post-id='$post_id'>
+        echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border' data-post-id='$post_id' data-poster-id='$poster_id'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='$user_profile_link' class='text-decoration-none'>
