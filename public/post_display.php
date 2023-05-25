@@ -3,7 +3,12 @@ require_once("../core/db_functions.php");
 
 function generate_dropdown_menu_item($iconClass, $text)
 {
-    return "<a class='dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' href='#'>
+    $custom_class_name = '';
+    if ($text === 'Delete') {
+        $custom_class_name = 'delete-post-button';
+    }
+
+    return "<a class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1'>
                 <li class='d-flex w-100 gap-2 align-items-center rounded'>
                     <i class='$iconClass d-flex align-items-center justify-content-center'></i>
                     <p class='m-0'>$text</p>

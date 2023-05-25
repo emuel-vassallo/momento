@@ -134,7 +134,8 @@ textarea {
   height: 60px;
 }
 
-.post-user-info {
+.post-user-info,
+.dropdown-item {
   cursor: pointer;
 }
 

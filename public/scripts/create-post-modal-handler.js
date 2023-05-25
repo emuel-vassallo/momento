@@ -8,22 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.show();
     });
 
-  document
-    .getElementById("post-image")
-    .addEventListener("change", function (event) {
-      const input = event.target;
-      const imagePreview = document.getElementById("create-post-image");
+  document.getElementById("post-image").addEventListener("change", (event) => {
+    const input = event.target;
+    const imagePreview = document.getElementById("create-post-image");
 
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
 
-        reader.onload = function (e) {
-          imagePreview.src = e.target.result;
-        };
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+      };
 
-        reader.readAsDataURL(input.files[0]);
-      } else {
-        imagePreview.innerHTML = "";
-      }
-    });
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      imagePreview.innerHTML = "";
+    }
+  });
 });
