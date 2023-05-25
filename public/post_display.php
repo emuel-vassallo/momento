@@ -17,6 +17,44 @@ function generate_dropdown_menu_item($iconClass, $text)
         ";
 }
 
+function format_time_ago($created_at)
+{
+    $created_timestamp = strtotime($created_at);
+    $current_timestamp = time();
+    $time_diff = $current_timestamp - $created_timestamp;
+
+    if ($time_diff < 60) {
+        $time_ago = ($time_diff == 1) ? "1 second ago" : $time_diff . " seconds ago";
+    } elseif ($time_diff < 3600) {
+        $minutes = floor($time_diff / 60);
+        $time_ago = ($minutes == 1) ? "1 minute ago" : $minutes . " minutes ago";
+    } elseif ($time_diff < 86400) {
+        $hours = floor($time_diff / 3600);
+        $time_ago = ($hours == 1) ? "1 hour ago" : $hours . " hours ago";
+    } elseif ($time_diff < (86400 * 7)) {
+        $days = floor($time_diff / 86400);
+        $time_ago = ($days == 1) ? "1 day ago" : $days . " days ago";
+    } else {
+        $time_ago = date("F j, Y", $created_timestamp);
+    }
+
+    return $time_ago;
+}
+
+function generate_dropdown_menu_items($isCurrentUser)
+{
+    $deleteMenuItem = generate_dropdown_menu_item('bi bi-trash', 'Delete');
+    $editMenuItem = generate_dropdown_menu_item('bi bi-pencil-square', 'Edit');
+    $followMenuItem = generate_dropdown_menu_item('bi bi-person-plus', 'Follow');
+    $goToPostMenuItem = generate_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
+    $copyLinkMenuItem = generate_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
+
+    $dropdown_menu_items = $isCurrentUser ? $deleteMenuItem . $editMenuItem : $followMenuItem;
+    $dropdown_menu_items .= $goToPostMenuItem . $copyLinkMenuItem;
+
+    return $dropdown_menu_items;
+}
+
 function display_posts($posts)
 {
     foreach ($posts as $post) {
@@ -30,40 +68,13 @@ function display_posts($posts)
         $caption = $post['caption'];
         $created_at = $post['created_at'];
 
-        $created_timestamp = strtotime($created_at);
-        $current_timestamp = time();
-        $time_diff = $current_timestamp - $created_timestamp;
-
-        if ($time_diff < 60) {
-            $time_ago = ($time_diff == 1) ? "1 second ago" : $time_diff . " seconds ago";
-        } elseif ($time_diff < 3600) {
-            $minutes = floor($time_diff / 60);
-            $time_ago = ($minutes == 1) ? "1 minute ago" : $minutes . " minutes ago";
-        } elseif ($time_diff < 86400) {
-            $hours = floor($time_diff / 3600);
-            $time_ago = ($hours == 1) ? "1 hour ago" : $hours . " hours ago";
-        } elseif ($time_diff < (86400 * 7)) {
-            $days = floor($time_diff / 86400);
-            $time_ago = ($days == 1) ? "1 day ago" : $days . " days ago";
-        } else {
-            $time_ago = date("F j, Y", $created_timestamp);
-        }
+        $time_ago = format_time_ago($created_at);
 
         $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
         $isCurrentUser = $_SESSION['user_id'] === $poster_id;
 
-        $deleteMenuItem = generate_dropdown_menu_item('bi bi-trash', 'Delete');
-        $editMenuItem = generate_dropdown_menu_item('bi bi-pencil-square', 'Edit');
-        $followMenuItem = generate_dropdown_menu_item('bi bi-person-plus', 'Follow');
-        $goToPostMenuItem = generate_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
-        $copyLinkMenuItem = generate_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
-
-        $dropdown_menu_items = $isCurrentUser ?
-            $deleteMenuItem . $editMenuItem :
-            $followMenuItem;
-
-        $dropdown_menu_items .= $goToPostMenuItem . $copyLinkMenuItem;
+        $dropdown_menu_items = generate_dropdown_menu_items($isCurrentUser);
 
         $caption_html = $caption === '' ? '' : "<p class='post-caption mb-1 fw-medium d-flex align-items-start justify-content-center'>
                                                     <svg class='bi bi-quote flex-shrink-0 me-1' xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 16 16'>
@@ -102,6 +113,7 @@ function display_posts($posts)
               </div>";
     }
 }
+
 
 function display_all_posts()
 {
