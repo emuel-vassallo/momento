@@ -214,3 +214,7 @@ textarea {
   transition: opacity 0.7s ease 0s;
   box-shadow: none;
 }
+
+#user-profile-posts-amount {
+  cursor: pointer;
+}
