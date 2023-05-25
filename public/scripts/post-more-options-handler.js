@@ -35,7 +35,7 @@ const copyToClipboard = (text) => {
   document.body.removeChild(tempInput);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const handleDeletePosts = () => {
   const deletePostButtons = document.querySelectorAll(".delete-post-button");
   const confirmDeleteButton = document.getElementById("confirm-delete-post");
 
@@ -56,10 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+};
 
+const handleCopyLinks = () => {
   const copyLinkButtons = document.querySelectorAll(".post-copy-link-button");
-
-  const toastLiveExample = document.getElementById("post-link-copied-toast");
+  const linkCopiedToast = document.getElementById("post-link-copied-toast");
 
   copyLinkButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -69,8 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       copyToClipboard(postLink);
       const toastBootstrap =
-        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        bootstrap.Toast.getOrCreateInstance(linkCopiedToast);
       toastBootstrap.show();
     });
   });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  handleDeletePosts();
+  handleCopyLinks();
 });

@@ -1,10 +1,11 @@
 <?php
 require_once("../core/db_functions.php");
 
-function get_dropdown_menu_item($icon_class, $text)
+function get_dropdown_menu_item($icon_class, $text, $post_id)
 {
     $custom_class_name = '';
     $delete_modal_attributes = '';
+    $link_href = '';
 
     if ($text === 'Delete') {
         $custom_class_name = 'delete-post-button';
@@ -15,8 +16,13 @@ function get_dropdown_menu_item($icon_class, $text)
         $custom_class_name = 'post-copy-link-button';
     }
 
+    if ($text === 'Go to post') {
+        $custom_class_name = 'go-to-post-button';
+        $link_href = 'href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/post.php?post_id=' . $post_id . '"';
+    }
+
     return "
-        <a class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' $delete_modal_attributes>
+        <a $link_href class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' $delete_modal_attributes>
             <li class='d-flex w-100 gap-2 align-items-center rounded'>
                 <i class='$icon_class d-flex align-items-center justify-content-center'></i>
                 <p class='m-0'>$text</p>
@@ -49,16 +55,16 @@ function get_formatted_time_ago($created_at)
     return $time_ago;
 }
 
-function get_dropdown_menu_items($isCurrentUser)
+function get_dropdown_menu_items($is_current_user, $post_id)
 {
-    $deleteMenuItem = get_dropdown_menu_item('bi bi-trash', 'Delete');
-    $editMenuItem = get_dropdown_menu_item('bi bi-pencil-square', 'Edit');
-    $followMenuItem = get_dropdown_menu_item('bi bi-person-plus', 'Follow');
-    $goToPostMenuItem = get_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
-    $copyLinkMenuItem = get_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
+    $delete_menu_item = get_dropdown_menu_item('bi bi-trash', 'Delete', $post_id);
+    $edit_menu_item = get_dropdown_menu_item('bi bi-pencil-square', 'Edit', $post_id);
+    $follow_menu_item = get_dropdown_menu_item('bi bi-person-plus', 'Follow', $post_id);
+    $go_to_post_menu_item = get_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post', $post_id);
+    $copy_link_menu_item = get_dropdown_menu_item('bi bi-link-45deg', 'Copy link', $post_id);
 
-    $dropdown_menu_items = $isCurrentUser ? $deleteMenuItem . $editMenuItem : $followMenuItem;
-    $dropdown_menu_items .= $goToPostMenuItem . $copyLinkMenuItem;
+    $dropdown_menu_items = $is_current_user ? $delete_menu_item . $edit_menu_item : $follow_menu_item;
+    $dropdown_menu_items .= $go_to_post_menu_item . $copy_link_menu_item;
 
     return $dropdown_menu_items;
 }
@@ -80,9 +86,9 @@ function display_posts($posts)
 
         $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
-        $isCurrentUser = $_SESSION['user_id'] === $poster_id;
+        $is_current_user = $_SESSION['user_id'] === $poster_id;
 
-        $dropdown_menu_items = get_dropdown_menu_items($isCurrentUser);
+        $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id);
 
         $caption_html = $caption === '' ? '' : "<p class='post-caption mb-1 fw-medium d-flex align-items-start justify-content-center'>
                                                     <svg class='bi bi-quote flex-shrink-0 me-1' xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 16 16'>
