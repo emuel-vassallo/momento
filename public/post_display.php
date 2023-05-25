@@ -1,23 +1,27 @@
 <?php
 require_once("../core/db_functions.php");
 
-function generate_dropdown_menu_item($iconClass, $text)
+function get_dropdown_menu_item($icon_class, $text)
 {
     $custom_class_name = '';
+    $delete_modal_attributes = '';
+
     if ($text === 'Delete') {
         $custom_class_name = 'delete-post-button';
+        $delete_modal_attributes = "'data-bs-toggle='modal' data-bs-target='#modal-confirm-delete-post'";
     }
 
-    return "<a class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1'>
-                <li class='d-flex w-100 gap-2 align-items-center rounded'>
-                    <i class='$iconClass d-flex align-items-center justify-content-center'></i>
-                    <p class='m-0'>$text</p>
-                </li>
-            </a>
-        ";
+    return "
+        <a class='$custom_class_name dropdown-item px-2 py-1 d-flex rounded align-items-center mb-1' $delete_modal_attributes>
+            <li class='d-flex w-100 gap-2 align-items-center rounded'>
+                <i class='$icon_class d-flex align-items-center justify-content-center'></i>
+                <p class='m-0'>$text</p>
+            </li>
+        </a>
+    ";
 }
 
-function format_time_ago($created_at)
+function get_formatted_time_ago($created_at)
 {
     $created_timestamp = strtotime($created_at);
     $current_timestamp = time();
@@ -41,13 +45,13 @@ function format_time_ago($created_at)
     return $time_ago;
 }
 
-function generate_dropdown_menu_items($isCurrentUser)
+function get_dropdown_menu_items($isCurrentUser)
 {
-    $deleteMenuItem = generate_dropdown_menu_item('bi bi-trash', 'Delete');
-    $editMenuItem = generate_dropdown_menu_item('bi bi-pencil-square', 'Edit');
-    $followMenuItem = generate_dropdown_menu_item('bi bi-person-plus', 'Follow');
-    $goToPostMenuItem = generate_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
-    $copyLinkMenuItem = generate_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
+    $deleteMenuItem = get_dropdown_menu_item('bi bi-trash', 'Delete');
+    $editMenuItem = get_dropdown_menu_item('bi bi-pencil-square', 'Edit');
+    $followMenuItem = get_dropdown_menu_item('bi bi-person-plus', 'Follow');
+    $goToPostMenuItem = get_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post');
+    $copyLinkMenuItem = get_dropdown_menu_item('bi bi-link-45deg', 'Copy link');
 
     $dropdown_menu_items = $isCurrentUser ? $deleteMenuItem . $editMenuItem : $followMenuItem;
     $dropdown_menu_items .= $goToPostMenuItem . $copyLinkMenuItem;
@@ -68,13 +72,13 @@ function display_posts($posts)
         $caption = $post['caption'];
         $created_at = $post['created_at'];
 
-        $time_ago = format_time_ago($created_at);
+        $time_ago = get_formatted_time_ago($created_at);
 
         $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
         $isCurrentUser = $_SESSION['user_id'] === $poster_id;
 
-        $dropdown_menu_items = generate_dropdown_menu_items($isCurrentUser);
+        $dropdown_menu_items = get_dropdown_menu_items($isCurrentUser);
 
         $caption_html = $caption === '' ? '' : "<p class='post-caption mb-1 fw-medium d-flex align-items-start justify-content-center'>
                                                     <svg class='bi bi-quote flex-shrink-0 me-1' xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' viewBox='0 0 16 16'>

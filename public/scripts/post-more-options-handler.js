@@ -28,16 +28,23 @@ const deletePost = (postId) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const deletePostButtons = document.querySelectorAll(".delete-post-button");
+  const confirmDeleteButton = document.getElementById("confirm-delete-post");
 
   deletePostButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const post = button.closest(".post");
       const postId = post.dataset.postId;
 
-      // TODO: Add nicer bootstrap confirm menu.
-      if (confirm("Are you sure you want to delete this post?")) {
+      const modal = new bootstrap.Modal(
+        document.getElementById("modal-confirm-delete-post")
+      );
+
+      modal.show();
+
+      confirmDeleteButton.addEventListener("click", () => {
         deletePost(postId);
-      }
+        modal.hide();
+      });
     });
   });
 });
