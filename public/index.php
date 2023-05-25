@@ -50,8 +50,8 @@ require_once('post_display.php');
                     <?php display_all_posts($conn) ?>
                 </div>
             </div>
-            <?php include('footer.php'); ?>
         </main>
+        <?php include('footer.php'); ?>
     </div>
 </body>
 

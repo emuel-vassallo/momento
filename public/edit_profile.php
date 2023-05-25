@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('sidebar.php'); ?>
         <?php include('header.php'); ?>
-        <main class="page-settings d-flex flex-column h-100 align-items-center justify-content-between bg-light">
+        <main class="page-settings d-flex flex-column align-items-center justify-content-between bg-light">
             <form class="p-5" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
                 <div class="card edit-profile-card">
@@ -88,8 +88,8 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div id="errors-container_custom-container"></div>
             </form>
-            <?php include('footer.php'); ?>
         </main>
+        <?php include('footer.php'); ?>
     </div>
 </body>
 

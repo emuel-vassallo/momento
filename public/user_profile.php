@@ -98,8 +98,8 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                     <?php display_user_posts($user_id) ?>
                 </div>
             </div>
-            <?php include('footer.php'); ?>
         </main>
+        <?php include('footer.php'); ?>
     </div>
 </body>
 

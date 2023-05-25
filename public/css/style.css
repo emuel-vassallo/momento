@@ -71,9 +71,12 @@ textarea {
 .page-register,
 .page-login,
 .page-home,
-.page-user-profile,
-.page-settings {
+.page-user-profile {
   min-height: calc(100vh - 88px);
+}
+
+.page-settings {
+  min-height: calc(100vh - (88px + 76px));
 }
 
 .page-register,
@@ -83,7 +86,8 @@ textarea {
 
 .page-home,
 .page-user-profile,
-.page-settings {
+.page-settings,
+.footer {
   margin-left: 400px !important;
 }
 
