@@ -30,6 +30,7 @@ require_once('post_display.php');
     <script src="scripts/create-post-modal-handler.js" defer></script>
     <script src="scripts/validate-create-post-form.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
+    <script src="scripts/post-more-options-modal-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0">

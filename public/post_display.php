@@ -8,6 +8,8 @@ function display_posts($posts)
         $poster_profile_picture = $post['profile_picture_path'];
         $poster_display_name = $post['display_name'];
         $poster_username = $post['username'];
+
+        $post_id = $post['id'];
         $post_image_path = $post['image_dir'];
         $caption = $post['caption'];
         $created_at = $post['created_at'];
@@ -40,7 +42,7 @@ function display_posts($posts)
                                                     $caption
                                                 </p>";
 
-        echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border'>
+        echo "<div class='post d-flex w-100 mb-5 pb-2 bg-white py-4 px-4 border' data-post-id='$post_id'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='$user_profile_link' class='text-decoration-none'>
@@ -52,7 +54,7 @@ function display_posts($posts)
                                 </div>
                             </div>
                         </a>
-                        <i class='bi bi-three-dots fs-5 text-secondary post-more-options-menu-button'></i>
+                        <i class='bi bi-three-dots text-secondary post-more-options-menu-button'></i>
                     </div>
 
                     <img class='feed-post-image' src='$post_image_path' alt='Post Image'>
