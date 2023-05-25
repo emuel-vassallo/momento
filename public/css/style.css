@@ -71,11 +71,9 @@ textarea {
 .page-register,
 .page-login,
 .page-home,
-.page-user-profile {
-  min-height: calc(100vh - 88px);
-}
-
-.page-settings {
+.page-user-profile,
+.page-settings,
+.page-post {
   min-height: calc(100vh - (88px + 76px));
 }
 
@@ -84,17 +82,28 @@ textarea {
   max-height: calc(100vh - (88px + 76px));
 }
 
-.page-home,
-.page-user-profile,
-.page-settings,
+main {
+  margin-left: 400px !important;
+}
+
 .footer {
   margin-left: 400px !important;
+}
+
+.page-login,
+.page-register,
+.page-profile-setup,
+.page-login + .footer,
+.page-register + .footer,
+.page-profile-setup + .footer {
+  margin-left: 0 !important;
 }
 
 .page-register,
 .page-login,
 .page-home,
 .page-user-profile,
+.page-post,
 .page-settings {
   margin-top: 88px !important;
 }
