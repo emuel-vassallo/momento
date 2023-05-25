@@ -173,15 +173,6 @@ textarea {
   display: none;
 }
 
-.search-result-item {
-  cursor: pointer;
-  border-radius: 8px;
-}
-
-.search-result-item:hover {
-  background-color: #cecece;
-}
-
 .search-result-text.ellipsis {
   text-overflow: ellipsis;
   white-space: nowrap;

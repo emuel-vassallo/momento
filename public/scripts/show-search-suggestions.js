@@ -26,9 +26,9 @@ fetch("../core/get_users_list.php")
       let html = "";
       results.forEach((result) => {
         html += `
-          <li class="search-result-item w-100">
+          <li class="search-result-item w-100 rounded">
                 <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=${result.id}"
-                    class="text-decoration-none w-100 d-flex gap-2 p-2 align-items-center justify-content-start">
+                    class="dropdown-item text-decoration-none w-100 d-flex gap-2 p-2 align-items-center justify-content-start rounded">
               <img class='search-result-profile-picture flex-shrink-0' src='${result.profile_picture_path}' alt='${result.display_name}'s profile picture'>
               <p class="search-result-text text-nowrap m-0 fw-semibold fs-6 overflow-hidden flex-shrink-0 fs-6 text-body">${result.display_name}</p>
               <p class="search-result-text text-nowrap m-0 text-secondary fs-6 overflow-hidden ellipsis fs-6">@${result.username}</p>
