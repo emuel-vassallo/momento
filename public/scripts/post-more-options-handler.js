@@ -59,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const copyLinkButtons = document.querySelectorAll(".post-copy-link-button");
 
+  const toastLiveExample = document.getElementById("post-link-copied-toast");
+
   copyLinkButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const post = button.closest(".post");
@@ -66,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const postLink = `http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/post.php?post_id=${postId}`;
 
       copyToClipboard(postLink);
-      alert("Post link copied to clipboard!");
+      const toastBootstrap =
+        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      toastBootstrap.show();
     });
   });
 });

@@ -57,6 +57,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     </div>
     <?php include('create_post_modal.php') ?>
     <?php include('delete_post_modal.php') ?>
+    <?php include('post_link_copied_toast.php'); ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('header.php'); ?>
         <?php include('sidebar.php'); ?>
