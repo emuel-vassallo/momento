@@ -209,4 +209,13 @@ function get_user_info($conn, $user_id)
     return $row;
 }
 
+function delete_post($conn, $post_id)
+{
+    $post_id = mysqli_real_escape_string($conn, $post_id);
+
+    $query = "DELETE FROM `posts_table` WHERE `id` = '$post_id'";
+
+    return mysqli_query($conn, $query);
+}
+
 ?>
