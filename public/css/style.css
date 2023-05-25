@@ -187,6 +187,19 @@ textarea {
   border-radius: 100%;
 }
 
+.search-result-item {
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.search-result-item:hover {
+  background-color: #e7e7e7;
+}
+
+.search-result-item:active {
+  background-color: #cecece;
+}
+
 /* Create Post */
 .file {
   visibility: hidden;
