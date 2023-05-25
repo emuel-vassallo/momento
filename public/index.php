@@ -21,7 +21,7 @@ require_once('post_display.php');
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -42,7 +42,7 @@ require_once('post_display.php');
         <?php include('sidebar.php'); ?>
         <main class="page-home d-flex flex-column h-100 bg-light">
             <div
-                class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
+                class="d-flex feed-container flex-column pt-5 pb-5 align-items-start align-items-center justify-content-center">
                 <div class="feed-top w-100 mb-4">
                     <p class="h3 fw-semibold">Feed</p>
                 </div>

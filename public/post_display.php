@@ -54,7 +54,7 @@ function display_posts($posts)
                                 </div>
                             </div>
                         </a>
-                        <i class='bi bi-three-dots text-secondary post-more-options-menu-button'></i>
+                        <i class='bi bi-three-dots text-secondary post-more-options-menu-button fs-5'></i>
                     </div>
 
                     <img class='feed-post-image' src='$post_image_path' alt='Post Image'>
