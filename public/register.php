@@ -14,7 +14,7 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
+    </script>
 
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
@@ -25,7 +25,7 @@ session_start();
 <body>
     <div>
         <?php include('partials/header.php'); ?>
-        <main class="page-register d-flex flex-column w-100 h-100 align-items-center justify-content-center">
+        <main class="page-register d-flex flex-column w-100 h-100 align-items-center justify-content-center p-5">
             <div class="register-form-container d-flex flex-column w-100 h-100">
                 <form id="register-form" autocomplete="off" novalidate="novalidate"
                     class="bg-white border py-4 px-5 rounded" method="POST" enctype="multipart/form-data"

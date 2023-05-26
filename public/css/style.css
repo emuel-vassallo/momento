@@ -91,7 +91,6 @@ textarea {
   min-height: calc(100vh - (88px + 76px));
 }
 
-.page-register,
 .page-login {
   max-height: calc(100vh - (88px + 76px));
 }

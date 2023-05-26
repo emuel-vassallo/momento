@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           rule: "minFilesCount",
           value: form.id === "edit-profile-form" ? 0 : 1,
+          errorMessage: "Profile picture is required.",
         },
         {
           rule: "maxFilesCount",
