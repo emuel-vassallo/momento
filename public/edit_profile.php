@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -34,10 +34,10 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <div class="backdrop hidden">
     </div>
-    <?php include('create_post_modal.php') ?>
+    <?php include('partials/create_post_modal.php') ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
-        <?php include('sidebar.php'); ?>
-        <?php include('header.php'); ?>
+        <?php include('partials/sidebar.php'); ?>
+        <?php include('partials/header.php'); ?>
         <main class="page-settings d-flex flex-column align-items-center justify-content-between bg-light">
             <form class="p-5" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div id="errors-container_custom-container"></div>
             </form>
         </main>
-        <?php include('footer.php'); ?>
+        <?php include('partials/footer.php'); ?>
     </div>
 </body>
 

@@ -9,14 +9,18 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
 }
 
-require_once('../core/db_functions.php');
-require_once("post_functions.php");
-
-$conn = connect_to_db();
-
 if (isset($_GET['post_id'])) {
+    require_once('../core/db_functions.php');
+    require_once("partials/post_functions.php");
+
+    $conn = connect_to_db();
     $post_id = $_GET['post_id'];
     $post_info = get_post($conn, $post_id);
+
+    if (!$post_info) {
+        header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+        exit();
+    }
 
     $user_info = get_user_info($conn, $post_info['user_id']);
 
@@ -57,12 +61,12 @@ if (isset($_GET['post_id'])) {
 <body class="h-100 w-100 m-0 p-0">
     <div class="backdrop hidden">
     </div>
-    <?php include('create_post_modal.php') ?>
-    <?php include('delete_post_modal.php') ?>
-    <?php include('post_link_copied_toast.php'); ?>
+    <?php include('partials/create_post_modal.php') ?>
+    <?php include('partials/delete_post_modal.php') ?>
+    <?php include('partials/post_link_copied_toast.php'); ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
-        <?php include('header.php'); ?>
-        <?php include('sidebar.php'); ?>
+        <?php include('partials/header.php'); ?>
+        <?php include('partials/sidebar.php'); ?>
         <main class="page-post d-flex flex-column h-100 bg-light p-5 align-items-center justify-content-center">
             <div class="post row w-100 h-100 bg-white py-4 px-4 border" data-post-id="<?php echo $post_id ?>">
                 <img class="post-page-image col-8 p-0" src="<?php echo $post_info['image_dir']; ?>" alt="Post Image">
@@ -113,7 +117,7 @@ if (isset($_GET['post_id'])) {
                 </div>
             </div>
         </main>
-        <?php include('footer.php'); ?>
+        <?php include('partials/footer.php'); ?>
     </div>
 </body>
 

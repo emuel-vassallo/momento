@@ -1,6 +1,6 @@
 <?php
 require_once("../core/db_functions.php");
-require_once("post_functions.php");
+require_once("partials/post_functions.php");
 function display_posts($posts)
 {
     foreach ($posts as $post) {

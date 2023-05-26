@@ -18,7 +18,7 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
 
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
@@ -28,7 +28,7 @@ session_start();
 
 <body>
     <div>
-        <?php include('header.php'); ?>
+        <?php include('partials/header.php'); ?>
         <main class="page-login d-flex flex-column w-100 h-100 align-items-center justify-content-center">
             <div class="login-form-container d-flex flex-column w-100 h-100">
                 <form id="login-form" autocomplete="off" novalidate="novalidate"
@@ -72,7 +72,7 @@ session_start();
                 </div>
             </div>
         </main>
-        <?php include('footer.php'); ?>
+        <?php include('partials/footer.php'); ?>
     </div>
 </body>
 
