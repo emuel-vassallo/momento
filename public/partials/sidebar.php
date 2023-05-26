@@ -16,7 +16,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
 <nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end">
     <div class="d-flex flex-column position-sticky h-100 w-100">
-        <div class="sidebar-container d-flex flex-column h-100 pt-5">
+        <div class="sidebar-container d-flex flex-column h-100 pt-5 pb-4">
             <!-- User Profile -->
             <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4 pb-3">
                 <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
@@ -88,7 +88,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
             </ul>
 
             <!-- Logout Link -->
-            <div class="w-100 navbar-nav pt-5 mt-5">
+            <div class="w-100 navbar-nav mt-auto">
                 <a class="nav-link d-flex ps-5 w-100" href="logout.php">
                     <i
                         class="nav-link-icon bi bi-box-arrow-right me-4 d-flex align-items-center justify-content-center"></i>
