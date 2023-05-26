@@ -9,7 +9,8 @@
                 <p>Are you sure you want to delete this post?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="delete-post-modal-cancel" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" id="confirm-delete-post">Delete</button>
             </div>
         </div>

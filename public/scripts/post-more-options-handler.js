@@ -49,10 +49,12 @@ const handleDeletePosts = () => {
       );
 
       modal.show();
+      document.body.classList.add("modal-open");
 
       confirmDeleteButton.addEventListener("click", () => {
         deletePost(postId);
         modal.hide();
+        document.body.classList.remove("modal-open");
       });
     });
   });
@@ -76,7 +78,17 @@ const handleCopyLinks = () => {
   });
 };
 
+const handleHideDeletePostModal = () => {
+  document
+    .querySelector("#delete-post-modal-cancel")
+    .addEventListener("click", () => {
+      document.querySelector(".modal-backdrop").remove();
+      document.body.classList.remove("modal-open");
+    });
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   handleDeletePosts();
   handleCopyLinks();
+  handleHideDeletePostModal();
 });

@@ -32,8 +32,6 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <div class="backdrop hidden">
-    </div>
     <?php include('partials/create_post_modal.php') ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/sidebar.php'); ?>

@@ -1,3 +1,17 @@
+body::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+body {
+  scrollbar-width: none;
+  overflow: visible !important;
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
 /* Register and Login */
 .register-form-container,
 .login-form-container {

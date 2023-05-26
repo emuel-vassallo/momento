@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("create-post-modal-trigger")
     .addEventListener("click", () => {
       showModal();
+      document.body.classList.add('modal-open');
     });
 
   document.getElementById("post-image").addEventListener("change", (event) => {
@@ -50,5 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (postIdFromURL && editMode === "1") {
     showModal();
+    document.body.classList.add('modal-open');
   }
 });
