@@ -191,11 +191,11 @@ function get_all_users($conn)
     return $profiles;
 }
 
-function get_user_info($conn, $user_id)
+function get_row_by_id($conn, $table_name, $row_id)
 {
     $query = "SELECT * 
-              FROM `users_table`
-              WHERE `id` = '$user_id'
+              FROM `$table_name`
+              WHERE `id` = '$row_id'
               ";
 
     $result = mysqli_query($conn, $query);
@@ -209,6 +209,16 @@ function get_user_info($conn, $user_id)
     return $row;
 }
 
+function get_user_info($conn, $user_id)
+{
+    return get_row_by_id($conn, 'users_table', $user_id);
+}
+
+function get_post($conn, $post_id)
+{
+    return get_row_by_id($conn, 'posts_table', $post_id);
+}
+
 function delete_post($conn, $post_id)
 {
     $post_id = mysqli_real_escape_string($conn, $post_id);
@@ -217,5 +227,4 @@ function delete_post($conn, $post_id)
 
     return mysqli_query($conn, $query);
 }
-
 ?>

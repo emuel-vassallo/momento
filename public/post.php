@@ -10,19 +10,24 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 require_once('../core/db_functions.php');
+require_once("post_functions.php");
 
 $conn = connect_to_db();
 
-require_once('post_display.php');
-
-if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
+if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
     $post_info = get_post($conn, $post_id);
+
+    $user_info = get_user_info($conn, $post_info['user_id']);
+
+    $time_ago = get_formatted_time_ago($post_info['created_at']);
+
+    $is_current_user = $_SESSION['user_id'] === $user_info['id'];
+    $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, true);
 } else {
     header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
     exit();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +42,7 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
@@ -46,7 +51,6 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
     <script src="scripts/create-post-modal-handler.js" defer></script>
     <script src="scripts/validate-create-post-form.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
-    <script src="scripts/handle-scroll-to.js" defer></script>
     <script src="scripts/post-more-options-handler.js" defer></script>
 </head>
 
@@ -59,43 +63,53 @@ if (isset($_GET['post_id']) && !empty($_GET['post_id'])) {
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('header.php'); ?>
         <?php include('sidebar.php'); ?>
-        <main class="page-user-profile d-flex flex-column h-100 bg-light">
-            <div class="profile-info d-flex p-5 pb-0 gap-3 w-100 align-items-center mb-4">
-                <img class="user-profile-profile-picture flex-shrink-0"
-                    src="<?php echo $user_info['profile_picture_path'] ?>" alt="">
-                <div class="user-profile-text-info d-flex flex-column p-3 gap-3 w-50">
-                    <div>
-                        <p class="user-profile-display-name fs-5 fw-bold text-body m-0">
-                            <?php echo $user_info['display_name'] ?>
-                        </p>
-                        <p class="user-profile-username text-secondary fs-6 m-0">
-                            <?php echo '@' . $user_info['username'] ?>
-                        </p>
-                    </div>
-                    <div>
-                        <a id="user-profile-posts-amount" class='d-flex user-profile-posts-amount-container align-items-center gap-1
-                            text-decoration-none text-body'>
-                            <p class="user-profile-posts-amount fw-bold m-0 fs-6">
-                                <?php echo $user_posts_amount ?>
-                            </p>
-                            <p class="m-0 fs-6">Posts</p>
+        <main class="page-post d-flex flex-column h-100 bg-light p-5 align-items-center justify-content-center">
+            <div class="post row w-100 h-100 bg-white py-4 px-4 border" data-post-id="<?php echo $post_id ?>">
+                <img class="post-page-image col-8 p-0" src="<?php echo $post_info['image_dir']; ?>" alt="Post Image">
+
+                <div class="post-sidebar col-4 d-flex flex-column gap-4 px-5 py-3">
+                    <div class="pt-0 d-flex align-items-center justify-content-between">
+                        <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $user_info['id'] ?>"
+                            class="text-decoration-none">
+                            <div class="post-user-info d-flex align-items-center justify-content-center">
+                                <img class="page-post-profile-picture me-3 flex-shrink-0"
+                                    src="<?php echo $user_info['profile_picture_path']; ?>" alt="Sophia Adams" s=""
+                                    profile="" picture'="">
+                                <div class="ps-1 d-flex flex-column">
+                                    <p class="m-0 fw-semibold text-body fs-5">
+                                        <?php echo $user_info['display_name']; ?>
+                                    </p>
+                                    <p class="m-0 text-secondary">
+                                        <?php echo '@' . $user_info['username']; ?>
+                                    </p>
+                                </div>
+                            </div>
                         </a>
+                        <div class="dropdown">
+                            <i class="bi bi-three-dots w-100 h-100 text-secondary post-more-options-menu-button fs-5"
+                                data-bs-toggle="dropdown" aria-expanded="false"></i>
+                            <ul class="dropdown-menu p-1">
+                                <?php echo $dropdown_menu_items ?>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="user-profile-bio-container">
-                        <p class="fw-semibold m-0 fs-6">Bio</p>
-                        <p class="user-profile-bio m-0">
-                            <?php echo $user_info['bio'] ?>
+
+                    <div class="d-flex flex-column post-bottom align-items-start justify-content-start w-100 fs-6">
+                        <p class="post-caption mb-1 fw-medium d-flex align-items-start justify-content-center">
+                            <svg class="bi bi-quote flex-shrink-0 me-1" xmlns="http://www.w3.org/2000/svg" width="18"
+                                height="18" fill="currentColor" viewBox="0 0 16 16" data-darkreader-inline-fill=""
+                                style="--darkreader-inline-fill: currentColor;">
+                                <path
+                                    d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z">
+                                </path>
+                            </svg>
+                            <?php echo $post_info['caption']; ?>
                         </p>
                     </div>
-                </div>
-            </div>
-            <div
-                class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
-                <div class="feed-top w-100 mb-4">
-                    <h4 id="user-profile-posts" class="fw-semibold">Posts</h4>
-                </div>
-                <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center w-100">
-                    <?php display_user_posts($user_id) ?>
+
+                    <p class="post-creation-date text-secondary flex-shrink-0 p-0 m-0 align-self-end mt-auto">
+                        <?php echo $time_ago ?>
+                    </p>
                 </div>
             </div>
         </main>
