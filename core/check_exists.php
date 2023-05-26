@@ -3,7 +3,7 @@ require_once("db_functions.php");
 $conn = connect_to_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $type = isset($_POST['type']) ? $_POST['type'] : '';
+    $type = isset($_POST['type']) ? mysqli_real_escape_string($conn, trim($_POST['type'])) : '';
     $value = isset($_POST['value']) ? mysqli_real_escape_string($conn, trim($_POST['value'])) : '';
 
     if (!empty($type) && !empty($value)) {
@@ -22,13 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($column)) {
             if (does_value_exist($conn, 'users_table', $column, $value)) {
-                echo "invalid";
+                $response = ['success' => false];
             } else {
-                echo "valid";
+                $response = ['success' => true];
             }
+        } else {
+            $response = ['success' => false];
         }
     } else {
-        echo "invalid";
+        $response = ['success' => false];
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 ?>

@@ -5,35 +5,45 @@ $conn = connect_to_db();
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = array();
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $response = ['success' => false, 'error' => 'Method not allowed'];
+    sendJsonResponse($response);
+    exit;
+}
 
-    if (isset($_POST['username']) && !empty($_POST['username'])) {
-        $username = mysqli_real_escape_string($conn, trim($_POST['username']));
-    } else {
-        $errors[] = "Username is required.";
-    }
+$errors = array();
 
-    if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $password = mysqli_real_escape_string($conn, trim($_POST['password']));
-    } else {
-        $errors[] = "Password is required.";
-    }
+if (isset($_POST['username']) && !empty($_POST['username'])) {
+    $username = mysqli_real_escape_string($conn, trim($_POST['username']));
+} else {
+    $errors[] = "Username is required.";
+}
 
+if (isset($_POST['password']) && !empty($_POST['password'])) {
+    $password = mysqli_real_escape_string($conn, trim($_POST['password']));
+} else {
+    $errors[] = "Password is required.";
+}
 
-    if (empty($errors)) {
-        $result = get_user_by_credentials($conn, $username, $password);
+if (!empty($errors)) {
+    $response = ['success' => false, 'errors' => $errors];
+    sendJsonResponse($response);
+    exit;
+}
 
-        if ($result) {
-            echo "valid";
+$result = get_user_by_credentials($conn, $username, $password);
 
-        } else {
-            echo "invalid";
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
+if ($result) {
+    $response = ['success' => true];
+} else {
+    $response = ['success' => false, 'error' => 'Invalid credentials'];
+}
+
+sendJsonResponse($response);
+
+function sendJsonResponse($response)
+{
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 ?>

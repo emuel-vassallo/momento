@@ -1,4 +1,4 @@
-import { validateCredentials } from "./ajax-request-utils.js";
+import { validateCredentials } from "./request-utils.js";
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const form = document.getElementById("login-form");
@@ -20,17 +20,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
 
-      validateCredentials(username, password).then((isInvalid) => {
-        if (isInvalid) {
-          if (loginError.classList.contains("visible")) {
+      validateCredentials(username, password)
+        .then((response) => {
+          if (!response) {
+            if (loginError.classList.contains("visible")) {
+              return;
+            }
+
+            loginError.classList.add("visible");
             return;
           }
 
-          loginError.classList.add("visible");
-          return;
-        }
-
-        HTMLFormElement.prototype.submit.call(form);
-      });
+          HTMLFormElement.prototype.submit.call(form);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     });
 });

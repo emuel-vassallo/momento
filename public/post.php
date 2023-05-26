@@ -53,13 +53,13 @@ if (isset($_GET['post_id'])) {
 
     <link rel="stylesheet" href="css/style.css">
     <script src="scripts/create-post-modal-handler.js" defer></script>
-    <script src="scripts/validate-create-post-form.js" defer></script>
+    <script src="scripts/validate-post-form.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
-    <script src="scripts/post-more-options-handler.js" defer></script>
+    <script type="module" src="scripts/post-more-options-handler.js"></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0">
-    <?php include('partials/create_post_modal.php') ?>
+    <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
     <?php include('partials/post_link_copied_toast.php'); ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">

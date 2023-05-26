@@ -1,4 +1,4 @@
-import { checkExists } from "./ajax-request-utils.js";
+import { checkExists } from "./request-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#register-form");
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         validator: (value) => () =>
-          checkExists("email", value).then((exists) => !exists),
+          checkExists("email", value).then((exists) => exists),
         errorMessage: "Another account is using the same email address",
       },
     ])
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         validator: (value) => () =>
-          checkExists("phone_number", value).then((exists) => !exists),
+          checkExists("phone_number", value).then((exists) => exists),
         errorMessage: "Another account is using the same phone number",
       },
     ])
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         validator: (value) => () =>
-          checkExists("username", value).then((exists) => !exists),
+          checkExists("username", value).then((exists) => exists),
         errorMessage: "This username isn't available. Please try another",
       },
     ])

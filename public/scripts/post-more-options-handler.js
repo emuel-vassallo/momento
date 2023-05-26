@@ -1,30 +1,4 @@
-const deletePost = (postId) => {
-  fetch("../core/delete_post.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: `post_id=${encodeURIComponent(postId)}`,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error deleting the post");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (!data.success) {
-        throw new Error(data.error);
-      }
-
-      const scrollPosition = window.scrollY;
-      window.location.reload();
-      window.scrollTo(0, scrollPosition);
-    })
-    .catch((error) => {
-      console.error(error.message);
-    });
-};
+import { deletePost } from "./request-utils.js";
 
 const copyToClipboard = (text) => {
   const tempInput = document.createElement("input");
@@ -53,8 +27,9 @@ const handleDeletePosts = () => {
 
       confirmDeleteButton.addEventListener("click", () => {
         deletePost(postId);
-        modal.hide();
-        document.body.classList.remove("modal-open");
+        const scrollPosition = window.scrollY;
+        window.location.reload();
+        window.scrollTo(0, scrollPosition);
       });
     });
   });
