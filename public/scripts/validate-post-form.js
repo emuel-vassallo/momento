@@ -45,7 +45,6 @@ const setupValidation = (mode) => {
     .onSuccess((event) => {
       event.preventDefault();
       HTMLFormElement.prototype.submit.call(form);
-      console.log("success");
     });
 };
 

@@ -10,11 +10,11 @@ $conn = connect_to_db();
 
 $errors = array();
 
-if (isset($_FILES['new_post_image_picker']) && !empty($_FILES['new_post_image_picker'])) {
+if (isset($_FILES['post_modal_image_picker']) && !empty($_FILES['post_modal_image_picker'])) {
     $allowed_extensions = array("jpg", "jpeg", "png", "bmp");
-    $new_post_image_picker_file_ext = strtolower(pathinfo($_FILES['new_post_image_picker']['name'], PATHINFO_EXTENSION));
+    $post_modal_image_picker_file_ext = strtolower(pathinfo($_FILES['post_modal_image_picker']['name'], PATHINFO_EXTENSION));
 
-    if (!in_array($new_post_image_picker_file_ext, $allowed_extensions)) {
+    if (!in_array($post_modal_image_picker_file_ext, $allowed_extensions)) {
         $errors[] = "Invalid file extension. Only JPG, JPEG, and PNG, and BMP files are allowed.";
     }
 }

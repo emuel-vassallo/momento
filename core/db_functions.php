@@ -98,23 +98,46 @@ function update_user_profile($conn, $user_id, $display_name, $profile_picture_pa
 
 function add_post($conn, $user_id, $caption)
 {
-    $new_post_file = $_FILES['new_post_image_picker'];
     $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
     $directory_name = 'posts';
 
-    $query_callback = function ($new_new_post_image_picker_path) use ($conn, $user_id, $caption) {
-        $created_at = date('Y-m-d H:i:s');
+    $query_callback = function ($new_post_modal_image_picker_path) use ($conn, $user_id, $caption) {
         $user_id = mysqli_real_escape_string($conn, $user_id);
         $caption = mysqli_real_escape_string($conn, $caption);
 
         $query = "INSERT INTO `posts_table` (`user_id`, `image_dir`, `caption`, `created_at`) 
-                  VALUES ('$user_id', '$new_new_post_image_picker_path', '$caption', '$created_at')";
+                  VALUES ('$user_id', '$new_post_modal_image_picker_path', '$caption', NOW())";
 
         return mysqli_query($conn, $query);
     };
 
-    return process_file_and_execute_query($conn, $new_post_file, $target_dir, $directory_name, $query_callback);
+    return process_file_and_execute_query($conn, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $query_callback);
 }
+
+function update_post($conn, $post_id, $new_caption)
+{
+    $new_image_file = $_FILES['post_modal_image_picker'];
+    $new_caption = mysqli_real_escape_string($conn, $new_caption);
+
+    if (!empty($new_image_file['name'])) {
+        $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
+        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'posts');
+
+        $query = "UPDATE `posts_table` SET 
+                  `image_dir` = '$new_image_path',
+                  `caption` = '$new_caption',
+                  `updated_at` = NOW()
+                  WHERE `id` = '$post_id'";
+    } else {
+        $query = "UPDATE `posts_table` SET 
+                  `caption` = '$new_caption',
+                  `updated_at` = NOW()
+                  WHERE `id` = '$post_id'";
+    }
+
+    return mysqli_query($conn, $query);
+}
+
 
 function process_file_and_execute_query($conn, $file, $target_dir, $directory_name, $query_callback)
 {

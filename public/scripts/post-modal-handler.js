@@ -1,6 +1,6 @@
 import { setupValidation } from "./validate-post-form.js";
 
-const showModal = (mode) => {
+const showModal = (mode, postId = null) => {
   const modal = new bootstrap.Modal(document.getElementById("post-modal"));
   modal.show();
 
@@ -10,6 +10,7 @@ const showModal = (mode) => {
 
   setupValidation(mode);
   if (mode === "edit") {
+    document.getElementById("post-modal-post-id").value = postId;
     document.getElementById("post-modal-form").action =
       "../core/process_post_edit.php";
     document.getElementById("post-modal-submit-button").textContent = "Done";
@@ -78,10 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
 
       document.body.classList.add("modal-open");
-      showModal("edit");
-
       const post = button.closest(".post");
       const postId = post.dataset.postId;
+
+      showModal("edit", postId);
 
       getPost(postId)
         .then((postData) => {

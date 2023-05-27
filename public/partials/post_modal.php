@@ -11,8 +11,11 @@
                     <label for="post-modal-image-picker" class="post-modal-image-container w-100">
                         <img id="post-modal-image" class="w-100 h-100 rounded">
                         <input type="file" class="form-control-file d-none w-100 h-100" id="post-modal-image-picker"
-                            name="new_post_image_picker" accept="image/*">
+                            name="post_modal_image_picker" accept="image/*">
                     </label>
+
+                    <input type="hidden" id="post-modal-post-id" name="post_modal_post_id" value="">
+
 
                     <div id="errors-container_custom-post-modal-picture" class="pt-1 mb-4"></div>
 
