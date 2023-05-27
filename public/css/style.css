@@ -72,6 +72,11 @@ body.modal-open {
   font-size: 1.3rem;
 }
 
+.sidebar-bio-text {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 /* Home */
 .page-home,
 .page-user-profile {
