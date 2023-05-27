@@ -14,13 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $errors = array();
 
 if (isset($_POST['username']) && !empty($_POST['username'])) {
-    $username = mysqli_real_escape_string($conn, trim($_POST['username']));
+    $username = trim($_POST['username']);
 } else {
     $errors[] = "Username is required.";
 }
 
 if (isset($_POST['password']) && !empty($_POST['password'])) {
-    $password = mysqli_real_escape_string($conn, trim($_POST['password']));
+    $password = trim($_POST['password']);
 } else {
     $errors[] = "Password is required.";
 }

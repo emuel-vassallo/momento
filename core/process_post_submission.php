@@ -20,7 +20,7 @@ if (isset($_FILES['post_modal_image_picker']) && !empty($_FILES['post_modal_imag
 }
 
 if (isset($_POST['post_caption'])) {
-    $caption = mysqli_real_escape_string($conn, trim($_POST['post_caption']));
+    $caption = trim($_POST['post_caption']);
     if (strlen($caption) > 2200) {
         $errors[] = "Caption must not exceed 2,200 characters.";
     }

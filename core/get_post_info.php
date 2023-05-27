@@ -3,7 +3,7 @@ require_once("db_functions.php");
 $conn = connect_to_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $post_id = !empty($_GET['post_id']) ? mysqli_real_escape_string($conn, trim($_GET['post_id'])) : '';
+    $post_id = !empty($_GET['post_id']) ? trim($_GET['post_id']) : '';
 
     if (!empty($post_id)) {
         $post = get_post($conn, $post_id);

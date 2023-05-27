@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = array();
 
     if (isset($_POST['post_caption'])) {
-        $caption = mysqli_real_escape_string($conn, trim($_POST['post_caption']));
+        $caption = trim($_POST['post_caption']);
         if (strlen($caption) > 2200) {
             $errors[] = "Caption must not exceed 2,200 characters.";
         }

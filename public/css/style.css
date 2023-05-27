@@ -19,8 +19,8 @@ body.modal-open {
 }
 
 /* Profile Setup */
-.edit-profile {
-  max-width: 420px;
+#edit-profile-form {
+  max-width: 600px !important;
 }
 
 .edit-profile-card {
@@ -37,10 +37,6 @@ body.modal-open {
 .choose-profile-picture-label:hover {
   cursor: pointer;
   pointer-events: all !important;
-}
-
-textarea {
-  resize: none;
 }
 
 /* Login */

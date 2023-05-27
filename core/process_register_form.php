@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return;
         }
 
-        $value = mysqli_real_escape_string($conn, trim($_POST[$field]));
+        $value = trim($_POST[$field]);
 
         if (in_array($field, ['email', 'phone', 'username']) && does_value_exist($conn, 'users_table', $field, $value)) {
             $errors[] = "$name already exists. Please choose a different $name.";

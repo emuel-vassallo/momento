@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $conn = connect_to_db();
 
-$post_id = isset($_POST['post_id']) ? mysqli_real_escape_string($conn, trim($_POST['post_id'])) : '';
+$post_id = isset($_POST['post_id']) ? trim($_POST['post_id']) : '';
 
 if (empty($post_id)) {
     $response = ['success' => false, 'error' => 'Invalid request: missing post_id parameter'];

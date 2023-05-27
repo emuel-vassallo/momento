@@ -20,7 +20,7 @@ if (isset($_FILES['profile_picture_picker']) && !empty($_FILES['profile_picture_
 }
 
 if (isset($_POST['user_display_name']) && !empty($_POST['user_display_name'])) {
-    $user_display_name = mysqli_real_escape_string($conn, trim($_POST['user_display_name']));
+    $user_display_name = trim($_POST['user_display_name']);
     if (strlen($user_display_name) === 0) {
         $errors[] = "Display name is required.";
     }
@@ -31,7 +31,7 @@ if (isset($_POST['user_display_name']) && !empty($_POST['user_display_name'])) {
 
 
 if (isset($_POST['bio']) && !empty($_POST['bio'])) {
-    $bio = mysqli_real_escape_string($conn, trim($_POST['bio']));
+    $bio = trim($_POST['bio']);
     if (strlen($bio) > 150) {
         $errors[] = "Bio must not exceed 150 characters.";
     }

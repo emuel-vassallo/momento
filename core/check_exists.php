@@ -3,8 +3,8 @@ require_once("db_functions.php");
 $conn = connect_to_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $type = isset($_POST['type']) ? mysqli_real_escape_string($conn, trim($_POST['type'])) : '';
-    $value = isset($_POST['value']) ? mysqli_real_escape_string($conn, trim($_POST['value'])) : '';
+    $type = isset($_POST['type']) ? trim($_POST['type']) : '';
+    $value = isset($_POST['value']) ? trim($_POST['value']) : '';
 
     if (!empty($type) && !empty($value)) {
         $column = '';
