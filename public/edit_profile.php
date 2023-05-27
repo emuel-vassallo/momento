@@ -26,9 +26,8 @@ if (!isset($_SESSION['user_id'])) {
 
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="scripts/validate-profile-setup.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
-    <script src="scripts/create-post-modal-handler.js" defer></script>
+    <script type="module" src="scripts/post-modal-handler.js" defer></script>
 </head>
 
 <body>

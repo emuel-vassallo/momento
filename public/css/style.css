@@ -224,18 +224,15 @@ main {
 }
 
 /* Create Post */
-.file {
-  visibility: hidden;
-  position: absolute;
-}
-
-.create-post-image-container {
-  width: 100%;
-  height: 300px;
+.post-modal-image-container {
+  height: 300px !important;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#create-post-image {
+#post-modal-image {
   background-image: url("../images/image-add.png");
   background-size: 30%;
   background-position: center;

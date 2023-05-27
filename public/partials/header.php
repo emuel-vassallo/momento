@@ -20,7 +20,7 @@
 
         <button type="button"
             class="btn btn-primary d-flex align-items-center justify-content-center text-nowrap fw-semibold"
-            data-toggle="modal" data-target="#create-post-modal" id="create-post-modal-trigger">
+            data-toggle="modal" data-target="#post-modal" id="post-modal-trigger">
             <i class="bi bi-plus fs-4 d-flex me-1"></i>
             Create Post
         </button>

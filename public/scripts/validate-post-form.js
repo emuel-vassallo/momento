@@ -1,15 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("create-post-form");
-  new window.JustValidate("#create-post-form")
+let validator;
+
+const setupValidation = (mode) => {
+  const form = document.getElementById("post-modal-form");
+
+  if (validator) {
+    validator.destroy();
+  }
+
+  validator = new window.JustValidate("#post-modal-form")
     .addField(
-      "#post-image",
+      "#post-modal-image-picker",
       [
         {
           rule: "required",
         },
         {
           rule: "minFilesCount",
-          value: 1,
+          value: mode === "edit" ? 0 : 1,
           errorMessage: "Please select an image",
         },
         {
@@ -26,10 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       ],
       {
-        errorsContainer: "#errors-container_custom-create-post-picture",
+        errorsContainer: "#errors-container_custom-post-modal-picture",
       }
     )
-    .addField("#post-caption", [
+    .addField("#post-modal-caption", [
       {
         rule: "maxLength",
         value: 2200,
@@ -38,5 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .onSuccess((event) => {
       event.preventDefault();
       HTMLFormElement.prototype.submit.call(form);
+      console.log("success");
     });
-});
+};
+
+export { setupValidation };

@@ -45,8 +45,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
-    <script src="scripts/create-post-modal-handler.js" defer></script>
-    <script src="scripts/validate-post-form.js" defer></script>
+    <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
     <script src="scripts/handle-scroll-to.js" defer></script>
     <script type="module" src="scripts/post-more-options-handler.js"></script>
