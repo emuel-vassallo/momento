@@ -167,6 +167,10 @@ main {
   cursor: pointer;
 }
 
+.post {
+  height: fit-content;
+}
+
 /* Search Bar */
 .has-search .form-control {
   padding-left: 38px;
