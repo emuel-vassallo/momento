@@ -16,4 +16,6 @@ unset($_SESSION['hashed_password']);
 unset($_SESSION['current_user_username']);
 session_destroy();
 header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+exit;
 ?>
+
