@@ -39,7 +39,7 @@ function display_posts($posts)
                                 <img class='feed-card-profile-picture me-2 flex-shrink-0' src='{$poster_profile_picture}' alt='{$poster_display_name}'s profile picture'>
                                 <div class='ps-1 d-flex flex-column'>
                                     <p class='m-0 fw-semibold text-body'>{$poster_display_name}</p>
-                                    <p class='m-0 text-secondary'><small>@{$$poster_username}</small></p>
+                                    <p class='m-0 text-secondary'><small>@{$poster_username}</small></p>
                                 </div>
                             </div>
                         </a>
