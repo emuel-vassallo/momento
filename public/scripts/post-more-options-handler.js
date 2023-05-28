@@ -26,10 +26,15 @@ const handleDeletePosts = () => {
       document.body.classList.add("modal-open");
 
       confirmDeleteButton.addEventListener("click", () => {
-        deletePost(postId);
-        const scrollPosition = window.scrollY;
-        window.location.reload();
-        window.scrollTo(0, scrollPosition);
+        deletePost(postId)
+          .then(() => {
+            const scrollPosition = window.scrollY;
+            window.location.reload();
+            window.scrollTo(0, scrollPosition);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       });
     });
   });

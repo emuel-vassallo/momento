@@ -97,10 +97,6 @@ body.modal-open {
   max-height: calc(100vh - (88px + 76px));
 }
 
-main {
-  margin-left: 400px !important;
-}
-
 .footer {
   margin-left: 400px !important;
 }
@@ -264,7 +260,6 @@ main {
 }
 
 /*  Post Page */
-
 .post-page-image {
   border-radius: 22px;
   max-height: 66vh;
@@ -282,4 +277,10 @@ main {
   cursor: pointer;
   transition: opacity 0.7s ease 0s;
   box-shadow: none;
+}
+
+
+/* Main */
+main {
+  margin-left: 400px !important;
 }
