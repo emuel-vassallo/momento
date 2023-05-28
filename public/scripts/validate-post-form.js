@@ -27,9 +27,14 @@ const setupValidation = (mode) => {
           rule: "files",
           value: {
             files: {
+              extensions: ["jpeg", "jpg", "png", "bmp"],
+              maxSize: 5000000,
+              minSize: 10000,
               types: ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
             },
           },
+          errorMessage:
+            "Invalid image: Max file size 5MB (JPEG, JPG, PNG, BMP).",
         },
       ],
       {
