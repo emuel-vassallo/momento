@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const password = document.getElementById("password").value;
 
       validateCredentials(username, password)
-        .then((response) => {
-          if (!response) {
+        .then((valid) => {
+          if (!valid) {
             if (loginError.classList.contains("visible")) {
               return;
             }

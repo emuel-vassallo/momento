@@ -27,36 +27,36 @@ function display_posts($posts)
                             </svg>
                             <div class='caption-text'>
                             <p class='post-caption mb-1 fw-medium'>
-                                $caption
+                                {$caption}
                              </p>
                             </div>";
 
-            echo "<div class='post d-flex w-100 mb-5 bg-white p-4 border' data-post-id='$post_id' data-poster-id='$poster_id'>
+            echo "<div class='post d-flex w-100 mb-5 bg-white p-4 border' data-post-id='{$post_id}' data-poster-id='{$poster_id}'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
-                        <a href='$user_profile_link' class='text-decoration-none'>
+                        <a href='{$user_profile_link}' class='text-decoration-none'>
                             <div class='post-user-info d-flex align-items-center justify-content-center'>
-                                <img class='feed-card-profile-picture me-2 flex-shrink-0' src='$poster_profile_picture' alt='$poster_display_name's profile picture'>
+                                <img class='feed-card-profile-picture me-2 flex-shrink-0' src='{$poster_profile_picture}' alt='{$poster_display_name}'s profile picture'>
                                 <div class='ps-1 d-flex flex-column'>
-                                    <p class='m-0 fw-semibold text-body'>$poster_display_name</p>
-                                    <p class='m-0 text-secondary'><small>@$poster_username</small></p>
+                                    <p class='m-0 fw-semibold text-body'>{$poster_display_name}</p>
+                                    <p class='m-0 text-secondary'><small>@{$$poster_username}</small></p>
                                 </div>
                             </div>
                         </a>
                         <div class='dropdown'>
                             <i class='bi bi-three-dots w-100 h-100 text-secondary post-more-options-menu-button fs-5' data-bs-toggle='dropdown' aria-expanded='false'></i>
                             <ul class='dropdown-menu p-1'> 
-                                $dropdown_menu_items
+                                {$dropdown_menu_items}
                             </ul>
                         </div>
                     </div>
 
-                    <img class='feed-post-image' src='$post_image_path' alt='Post Image'>
+                    <img class='feed-post-image' src='{$post_image_path}' alt='Post Image'>
 
                     <div class='d-flex post-caption-container'>
-                      $caption_html
+                      {$caption_html}
                     </div>
-                    <p class='post-creation-date text-secondary flex-shrink-0 m-0'><small>$time_ago</small></p>
+                    <p class='post-creation-date text-secondary flex-shrink-0 m-0'><small>{$time_ago}</small></p>
                 </div>
               </div>";
     }
