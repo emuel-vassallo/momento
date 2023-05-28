@@ -1,19 +1,22 @@
 <?php
 session_start();
-unset($_SESSION['user_id']);
-unset($_SESSION['user_username']);
-unset($_SESSION['user_full_name']);
-unset($_SESSION['user_email']);
-unset($_SESSION['user_phone_number']);
-unset($_SESSION['user_profile_picture_path']);
-unset($_SESSION['user_display_name']);
-unset($_SESSION['user_bio']);
-unset($_SESSION['email']);
-unset($_SESSION['phone_number']);
-unset($_SESSION['full_name']);
-unset($_SESSION['username']);
-unset($_SESSION['hashed_password']);
-unset($_SESSION['current_user_username']);
+unset(
+    $_SESSION['user_id'],
+    $_SESSION['user_username'],
+    $_SESSION['user_full_name'],
+    $_SESSION['user_email'],
+    $_SESSION['user_phone_number'],
+    $_SESSION['user_profile_picture_path'],
+    $_SESSION['user_display_name'],
+    $_SESSION['user_bio'],
+    $_SESSION['email'],
+    $_SESSION['phone_number'],
+    $_SESSION['full_name'],
+    $_SESSION['username'],
+    $_SESSION['hashed_password'],
+    $_SESSION['current_user_username']
+);
+
 session_destroy();
 header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
 exit;
