@@ -5,14 +5,102 @@ error_reporting(E_ALL);
 
 function connect_to_db()
 {
-    return mysqli_connect('localhost', 'root', '', 'InstaCloneDB');
+    $host = 'localhost';
+    $db = 'InstaCloneDB';
+    $user = 'root';
+    $pass = '';
+    $charset = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci'",
+    ];
+    try {
+        return new PDO($dsn, $user, $pass, $options);
+    } catch (\PDOException $e) {
+        throw new \PDOException($e->getMessage(), (int) $e->getCode());
+    }
 }
 
-function does_value_exist($conn, $table, $column, $value)
+function does_value_exist($pdo, $table, $column, $value)
 {
-    $query = "SELECT * FROM `$table` WHERE `$column` = '$value'";
-    $result = mysqli_query($conn, $query);
-    return mysqli_num_rows($result) > 0;
+    $sql = "SELECT * FROM $table WHERE $column = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$value]);
+    $result = $stmt->fetchAll();
+    return count($result) > 0;
+}
+
+function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
+{
+    $pfp_file = $_FILES['profile_picture_picker'];
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+    $directory_name = 'profile-pictures';
+
+    $query_callback = function ($profile_picture_path) use ($pdo, $username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
+        $username = strtolower($username);
+        $query = "INSERT INTO users_table 
+                  (username, full_name, email, phone_number, password, profile_picture_path, display_name, bio) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$username, $full_name, $email, $phone_number, $hashed_password, $profile_picture_path, $display_name, $bio]);
+
+        return $stmt->rowCount() > 0;
+    };
+
+    return process_file_and_execute_query($pdo, $pfp_file, $target_dir, $directory_name, $query_callback);
+}
+
+function get_user_by_credentials($pdo, $username, $password)
+{
+    $query = "SELECT * 
+              FROM users_table 
+              WHERE username = ?
+                OR email = ?
+                OR phone_number = ?";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([
+        $username,
+        $username,
+        $username
+    ]);
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+        return false;
+    }
+
+    $hashed_password = $row['password'];
+
+    if (password_verify($password, $hashed_password) || $password === $hashed_password) {
+        return $row;
+    }
+
+    return false;
+}
+
+function add_post($pdo, $user_id, $caption)
+{
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
+    $directory_name = 'posts';
+
+    $query_callback = function ($pdo, $new_post_modal_image_picker_path) use ($user_id, $caption) {
+        $query = "INSERT INTO posts_table (user_id, image_dir, caption, created_at) 
+                  VALUES (?, ?, ?, NOW())";
+
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$user_id, $new_post_modal_image_picker_path, $caption]);
+
+        return $stmt->rowCount() > 0;
+    };
+
+    return process_file_and_execute_query($pdo, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $query_callback);
 }
 
 function upload_image_file_to_dir($file, $target_dir, $directory_name)
@@ -36,110 +124,70 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
     return false;
 }
 
-function create_user($conn, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
-{
-    $pfp_file = $_FILES['profile_picture_picker'];
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
-    $directory_name = 'profile-pictures';
-
-    $query_callback = function ($profile_picture_path) use ($conn, $username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
-        $username = mysqli_real_escape_string($conn, strtolower($username));
-        $profile_picture_path = mysqli_real_escape_string($conn, $profile_picture_path);
-        $display_name = mysqli_real_escape_string($conn, $display_name);
-        $bio = mysqli_real_escape_string($conn, $bio);
-
-        $query = "INSERT INTO `users_table` 
-             (`username`, `full_name`, `email`, `phone_number`, `password`, `profile_picture_path`, `display_name`, `bio`) 
-             VALUES ('$username', '$full_name', '$email', '$phone_number', '$hashed_password', '$profile_picture_path', '$display_name', '$bio');";
-
-        return mysqli_query($conn, $query);
-    };
-
-    return process_file_and_execute_query($conn, $pfp_file, $target_dir, $directory_name, $query_callback);
-}
-
-function get_user_by_credentials($conn, $username, $password)
-{
-    $query = "SELECT * 
-              FROM `users_table` 
-              WHERE `username` = '$username' 
-                OR `email` = '$username' 
-                OR `phone_number` = '$username'";
-
-    $result = mysqli_query($conn, $query);
-
-    if (!$result || mysqli_num_rows($result) === 0) {
-        return false;
-    }
-
-    $row = mysqli_fetch_assoc($result);
-    $hashed_password = $row['password'];
-
-    if (password_verify($password, $hashed_password) || $password === $hashed_password) {
-        return $row;
-    }
-
-    return false;
-}
-
-function update_user_profile($conn, $user_id, $display_name, $profile_picture_path, $bio)
-{
-    $display_name = mysqli_real_escape_string($conn, $display_name);
-    $bio = mysqli_real_escape_string($conn, $bio);
-
-    $query = "UPDATE `users_table` SET 
-              `profile_picture_path` = '$profile_picture_path',
-              `display_name` = '$display_name',
-              `bio` = '$bio'
-              WHERE `id` = '$user_id'";
-
-    return mysqli_query($conn, $query);
-}
-
-function add_post($conn, $user_id, $caption)
-{
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
-    $directory_name = 'posts';
-
-    $query_callback = function ($new_post_modal_image_picker_path) use ($conn, $user_id, $caption) {
-        $user_id = mysqli_real_escape_string($conn, $user_id);
-        $caption = mysqli_real_escape_string($conn, $caption);
-
-        $query = "INSERT INTO `posts_table` (`user_id`, `image_dir`, `caption`, `created_at`) 
-                  VALUES ('$user_id', '$new_post_modal_image_picker_path', '$caption', NOW())";
-
-        return mysqli_query($conn, $query);
-    };
-
-    return process_file_and_execute_query($conn, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $query_callback);
-}
-
-function update_post($conn, $post_id, $new_caption)
+function update_post($pdo, $post_id, $new_caption)
 {
     $new_image_file = $_FILES['post_modal_image_picker'];
-    $new_caption = mysqli_real_escape_string($conn, $new_caption);
+
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
+    $new_image_path = '';
 
     if (!empty($new_image_file['name'])) {
-        $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
         $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'posts');
-
-        $query = "UPDATE `posts_table` SET 
-                  `image_dir` = '$new_image_path',
-                  `caption` = '$new_caption',
-                  `updated_at` = NOW()
-                  WHERE `id` = '$post_id'";
     } else {
-        $query = "UPDATE `posts_table` SET 
-                  `caption` = '$new_caption',
-                  `updated_at` = NOW()
-                  WHERE `id` = '$post_id'";
+        $query = "SELECT image_dir FROM posts_table WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$post_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $new_image_path = $row['image_dir'];
+        }
     }
 
-    return mysqli_query($conn, $query);
+    $query = "UPDATE posts_table SET 
+              image_dir = IFNULL(?, image_dir),
+              caption = ?,
+              updated_at = NOW()
+              WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$new_image_path, $new_caption, $post_id]);
+
+    return $stmt->rowCount() > 0;
 }
 
+function update_user_profile($pdo, $user_id, $display_name, $bio)
+{
+    $new_image_file = $_FILES['profile_picture_picker'];
 
-function process_file_and_execute_query($conn, $file, $target_dir, $directory_name, $query_callback)
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+    $new_image_path = '';
+
+    if (!empty($new_image_file['name'])) {
+        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'profile-pictures');
+    } else {
+        $query = "SELECT profile_picture_path FROM users_table WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $new_image_path = $row['profile_picture_path'];
+        }
+    }
+
+    $query = "UPDATE users_table SET 
+              profile_picture_path = ?,
+              display_name = ?,
+              bio = ?
+              WHERE id = ?";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
+
+    return $stmt->rowCount() > 0;
+}
+
+function process_file_and_execute_query($pdo, $file, $target_dir, $directory_name, $query_callback)
 {
     if (empty($file['name'])) {
         return false;
@@ -151,103 +199,98 @@ function process_file_and_execute_query($conn, $file, $target_dir, $directory_na
         return false;
     }
 
-    return $query_callback(mysqli_real_escape_string($conn, $new_image_path));
+    return $query_callback($pdo, $new_image_path);
 }
 
-function fetch_posts($conn, $query)
+function fetch_posts($pdo, $query)
 {
-    $result = mysqli_query($conn, $query);
-
-    $posts = array();
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $posts[] = $row;
-        }
-    }
-
+    $stmt = $pdo->query($query);
+    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
 
-function get_all_posts($conn)
+
+function get_all_posts($pdo)
 {
     $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
-              FROM `posts_table` AS p
-              JOIN `users_table` AS u ON p.user_id = u.id
+              FROM posts_table AS p
+              JOIN users_table AS u ON p.user_id = u.id
               ORDER BY p.created_at DESC;
               ";
 
-    return fetch_posts($conn, $query);
+    return fetch_posts($pdo, $query);
 }
 
-function get_user_posts($conn, $user_id)
+function get_user_posts($pdo, $user_id)
 {
     $query = "SELECT p.*, u.username, u.display_name, u.profile_picture_path
-              FROM `posts_table` AS p
-              JOIN `users_table` AS u ON p.user_id = u.id
+              FROM posts_table AS p
+              JOIN users_table AS u ON p.user_id = u.id
               WHERE u.id = $user_id
               ORDER BY p.created_at DESC;
               ";
 
-    return fetch_posts($conn, $query);
+    return fetch_posts($pdo, $query);
 }
 
-function get_user_post_count($conn, $user_id)
+function get_user_post_count($pdo, $user_id)
 {
-    $query = "SELECT COUNT(*) AS post_count FROM posts_table WHERE user_id = $user_id";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result)['post_count'];
+    $query = "SELECT COUNT(*) AS post_count FROM posts_table WHERE user_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user_id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC)['post_count'];
     return $row;
 }
 
-function get_all_users($conn)
+function get_all_users($pdo)
 {
     $query = "SELECT id, username, display_name, profile_picture_path FROM users_table";
-    $result = mysqli_query($conn, $query);
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
 
     $profiles = [];
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $profiles[] = $row;
     }
 
     return $profiles;
 }
 
-function get_row_by_id($conn, $table_name, $row_id)
+function get_row_by_id($pdo, $table_name, $row_id)
 {
     $query = "SELECT * 
-              FROM `$table_name`
-              WHERE `id` = '$row_id'
-              ";
+              FROM $table_name
+              WHERE id = ?";
 
-    $result = mysqli_query($conn, $query);
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$row_id]);
 
-    if (!$result || mysqli_num_rows($result) === 0) {
+    if (!$stmt || $stmt->rowCount() === 0) {
         return false;
     }
 
-    $row = mysqli_fetch_assoc($result);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $row;
 }
 
-function get_user_info($conn, $user_id)
+function get_user_info($pdo, $user_id)
 {
-    return get_row_by_id($conn, 'users_table', $user_id);
+    return get_row_by_id($pdo, 'users_table', $user_id);
 }
 
-function get_post($conn, $post_id)
+function get_post($pdo, $post_id)
 {
-    return get_row_by_id($conn, 'posts_table', $post_id);
+    return get_row_by_id($pdo, 'posts_table', $post_id);
 }
 
-function delete_post($conn, $post_id)
+function delete_post($pdo, $post_id)
 {
-    $post_id = mysqli_real_escape_string($conn, $post_id);
+    $sql = "DELETE FROM posts_table WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$post_id]);
 
-    $query = "DELETE FROM `posts_table` WHERE `id` = '$post_id'";
-
-    return mysqli_query($conn, $query);
+    return $stmt->rowCount() > 0;
 }
 ?>

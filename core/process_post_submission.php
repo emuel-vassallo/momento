@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 
 require_once("db_functions.php");
-$conn = connect_to_db();
+$pdo = connect_to_db();
 
 $errors = array();
 
@@ -29,7 +29,7 @@ if (isset($_POST['post_caption'])) {
 if (empty($errors)) {
     $user_id = $_SESSION['user_id'];
 
-    $result = add_post($conn, $user_id, $caption);
+    $result = add_post($pdo, $user_id, $caption);
 
     if ($result) {
             header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");

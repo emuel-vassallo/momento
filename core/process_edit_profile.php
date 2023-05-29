@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     require_once("db_functions.php");
 
-    $conn = connect_to_db();
+    $pdo = connect_to_db();
 
     $errors = array();
 
@@ -32,16 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
 
-        $new_pfp_file = $_FILES['profile_picture_picker'];
-
-        if (!empty($new_pfp_file['name'])) {
-            $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
-            $profile_picture_path = upload_image_file_to_dir($new_pfp_file, $target_dir, 'profile-pictures');
-        } else {
-            $profile_picture_path = $_SESSION['user_profile_picture_path'];
-        }
-
-        $result = update_user_profile($conn, $user_id, $user_display_name, $profile_picture_path, $bio);
+        $result = update_user_profile($pdo, $user_id, $user_display_name, $bio);
 
         if ($result) {
             $_SESSION['user_display_name'] = $user_display_name;

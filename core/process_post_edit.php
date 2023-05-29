@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     require_once("db_functions.php");
 
-    $conn = connect_to_db();
+    $pdo = connect_to_db();
 
     $errors = array();
 
@@ -23,10 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $post_id = $_POST['post_modal_post_id'];
 
 
-        $result = update_post($conn, $post_id, $caption);
+        $result = update_post($pdo, $post_id, $caption);
 
         if ($result) {
             header("Location: ".$_SERVER['PHP_SELF']);
+        }
+        else {
+            echo "Something went wrong while updating the post";
         }
     } else {
         foreach ($errors as $error) {

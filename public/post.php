@@ -52,9 +52,11 @@ if (isset($_GET['post_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
-    <script type="module" src="scripts/post-more-options-handler.js"></script>
+    <script type="module" src="scripts/post-modal-handler.js" defer></script>
+    <script type="module" src="scripts/post-more-options-handler.js" defer></script>    <script src="scripts/show-search-suggestions.js" defer></script>
+    <script type="module" src="scripts/post-modal-handler.js" defer></script>
+    <script type="module" src="scripts/post-more-options-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0">

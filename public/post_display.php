@@ -53,7 +53,7 @@ function display_posts($posts)
 
                     <img class='feed-post-image' src='{$post_image_path}' alt='Post Image'>
 
-                    <div class='d-flex post-caption-container'>
+                    <div class='d-flex post-caption-container align-items-start'>
                       {$caption_html}
                     </div>
                     <p class='post-creation-date text-secondary flex-shrink-0 m-0'><small>{$time_ago}</small></p>
