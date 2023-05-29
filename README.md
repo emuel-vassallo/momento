@@ -2,8 +2,6 @@
 
 This app was developed for a school project which required CRUD (Create, Read, Update, Delete) functionality. It serves as an example of implementing these essential operations in a web application using PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap.
 
-### [Live Demo](https://emuelv.000webhostapp.com)
-
 ## Features
 
 - User Registration and Login: Users can create an account and log in to access the application.
@@ -21,7 +19,7 @@ This app was developed for a school project which required CRUD (Create, Read, U
 
 ## Hosting
 
-This application is hosted on 000webhost. You can access the live version of the app with a redesigned UI at [https://emuelv.000webhostapp.com](https://emuelv.000webhostapp.com).
+This application is hosted on 000webhost. You can access the live version of the app with a redesigned UI
 
 ## Acknowledgements
 
