@@ -36,7 +36,7 @@ function display_posts($posts)
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='{$user_profile_link}' class='text-decoration-none'>
                             <div class='post-user-info d-flex align-items-center justify-content-center'>
-                                <img class='feed-card-profile-picture me-2 flex-shrink-0' src='{$poster_profile_picture}' alt='{$poster_display_name}'s profile picture'>
+                                <img class='lazy feed-card-profile-picture me-2 flex-shrink-0' data-src='{$poster_profile_picture}' alt='{$poster_display_name}'s profile picture'>
                                 <div class='ps-1 d-flex flex-column'>
                                     <p class='m-0 fw-semibold text-body'>{$poster_display_name}</p>
                                     <p class='m-0 text-secondary'><small>@{$poster_username}</small></p>
@@ -51,7 +51,7 @@ function display_posts($posts)
                         </div>
                     </div>
 
-                    <img class='feed-post-image' src='{$post_image_path}' alt='Post Image'>
+                    <img class='lazy feed-post-image' data-src='{$post_image_path}' alt='Post Image'>
 
                     <div class='d-flex post-caption-container align-items-start'>
                       {$caption_html}

@@ -47,6 +47,8 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <link rel="stylesheet" href="css/style.css">
     <script src="scripts/handle-scroll-to.js" defer></script>
     <script src="scripts/show-search-suggestions.js" defer></script>
+    <script src="scripts/lazy-load.js" defer></script>
+
     <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-more-options-handler.js" defer></script>
 </head>
