@@ -24,23 +24,12 @@ function connect_to_db()
         throw new \PDOException($e->getMessage(), (int) $e->getCode());
     }
 }
-
-function does_value_exist($pdo, $table, $column, $value)
-{
-    $sql = "SELECT * FROM $table WHERE $column = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$value]);
-    $result = $stmt->fetchAll();
-    return count($result) > 0;
-}
-
 function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
 {
-    $pfp_file = $_FILES['profile_picture_picker'];
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/uploads/profile-pictures/';
+    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
     $directory_name = 'profile-pictures';
 
-    $query_callback = function ($profile_picture_path) use ($pdo, $username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
+    $query_callback = function ($pdo, $profile_picture_path) use ($username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
         $username = strtolower($username);
         $query = "INSERT INTO users_table 
                   (username, full_name, email, phone_number, password, profile_picture_path, display_name, bio) 
@@ -52,37 +41,7 @@ function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed
         return $stmt->rowCount() > 0;
     };
 
-    return process_file_and_execute_query($pdo, $pfp_file, $target_dir, $directory_name, $query_callback);
-}
-
-function get_user_by_credentials($pdo, $username, $password)
-{
-    $query = "SELECT * 
-              FROM users_table 
-              WHERE username = ?
-                OR email = ?
-                OR phone_number = ?";
-
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([
-        $username,
-        $username,
-        $username
-    ]);
-
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$row) {
-        return false;
-    }
-
-    $hashed_password = $row['password'];
-
-    if (password_verify($password, $hashed_password) || $password === $hashed_password) {
-        return $row;
-    }
-
-    return false;
+    return process_file_and_execute_query($pdo, $_FILES['profile_picture_picker'], $target_dir, $directory_name, $query_callback);
 }
 
 function add_post($pdo, $user_id, $caption)
@@ -124,65 +83,34 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
     return false;
 }
 
-function update_post($pdo, $post_id, $new_caption)
+function get_user_by_credentials($pdo, $username, $password)
 {
-    $new_image_file = $_FILES['post_modal_image_picker'];
-    $target_dir = dirname(__DIR__) . '/uploads/posts/';
-    $new_image_path = '';
-
-    if (!empty($new_image_file['name'])) {
-        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'posts');
-    } else {
-        $query = "SELECT image_dir FROM posts_table WHERE id = ?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$post_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            $new_image_path = $row['image_dir'];
-        }
-    }
-
-    $query = "UPDATE posts_table SET 
-              image_dir = IFNULL(?, image_dir),
-              caption = ?,
-              updated_at = NOW()
-              WHERE id = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$new_image_path, $new_caption, $post_id]);
-
-    return $stmt->rowCount() > 0;
-}
-
-function update_user_profile($pdo, $user_id, $display_name, $bio)
-{
-    $new_image_file = $_FILES['profile_picture_picker'];
-    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
-    $new_image_path = '';
-
-    if (!empty($new_image_file['name'])) {
-        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'profile-pictures');
-    } else {
-        $query = "SELECT profile_picture_path FROM users_table WHERE id = ?";
-        $stmt = $pdo->prepare($query);
-        $stmt->execute([$user_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            $new_image_path = $row['profile_picture_path'];
-        }
-    }
-
-    $query = "UPDATE users_table SET 
-              profile_picture_path = ?,
-              display_name = ?,
-              bio = ?
-              WHERE id = ?";
+    $query = "SELECT * 
+              FROM users_table 
+              WHERE username = ?
+                OR email = ?
+                OR phone_number = ?";
 
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
+    $stmt->execute([
+        $username,
+        $username,
+        $username
+    ]);
 
-    return $stmt->rowCount() > 0;
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+        return false;
+    }
+
+    $hashed_password = $row['password'];
+
+    if (password_verify($password, $hashed_password) || $password === $hashed_password) {
+        return $row;
+    }
+
+    return false;
 }
 
 function process_file_and_execute_query($pdo, $file, $target_dir, $directory_name, $query_callback)
@@ -283,6 +211,67 @@ function get_post($pdo, $post_id)
     return get_row_by_id($pdo, 'posts_table', $post_id);
 }
 
+function update_post($pdo, $post_id, $new_caption)
+{
+    $new_image_file = $_FILES['post_modal_image_picker'];
+    $target_dir = dirname(__DIR__) . '/uploads/posts/';
+    $new_image_path = '';
+
+    if (!empty($new_image_file['name'])) {
+        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'posts');
+    } else {
+        $query = "SELECT image_dir FROM posts_table WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$post_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $new_image_path = $row['image_dir'];
+        }
+    }
+
+    $query = "UPDATE posts_table SET 
+              image_dir = IFNULL(?, image_dir),
+              caption = ?,
+              updated_at = NOW()
+              WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$new_image_path, $new_caption, $post_id]);
+
+    return $stmt->rowCount() > 0;
+}
+
+function update_user_profile($pdo, $user_id, $display_name, $bio)
+{
+    $new_image_file = $_FILES['profile_picture_picker'];
+    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
+    $new_image_path = '';
+
+    if (!empty($new_image_file['name'])) {
+        $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'profile-pictures');
+    } else {
+        $query = "SELECT profile_picture_path FROM users_table WHERE id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $new_image_path = $row['profile_picture_path'];
+        }
+    }
+
+    $query = "UPDATE users_table SET 
+              profile_picture_path = ?,
+              display_name = ?,
+              bio = ?
+              WHERE id = ?";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
+
+    return $stmt->rowCount() > 0;
+}
+
 function delete_post($pdo, $post_id)
 {
     $sql = "DELETE FROM posts_table WHERE id = ?";
@@ -290,5 +279,13 @@ function delete_post($pdo, $post_id)
     $stmt->execute([$post_id]);
 
     return $stmt->rowCount() > 0;
+}
+function does_value_exist($pdo, $table, $column, $value)
+{
+    $sql = "SELECT * FROM $table WHERE $column = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$value]);
+    $result = $stmt->fetchAll();
+    return count($result) > 0;
 }
 ?>
