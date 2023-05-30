@@ -11,7 +11,7 @@ function display_posts($posts)
 
         $post_id = $post['id'];
         $post_image_path = '/Emuel_Vassallo_4.2D/instagram-clone' . $post['image_dir'];
-        $caption = nl2br($post['caption']);
+        $caption = $post['caption'] ? nl2br($post['caption']) : '';
         $created_at = $post['created_at'];
 
         $time_ago = get_formatted_time_ago($created_at);
