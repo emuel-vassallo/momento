@@ -70,14 +70,14 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
     $new_image_filename = uniqid() . '_' . $image_name;
     $image_upload_path = $target_dir . $new_image_filename;
 
-    $relative_image_path = '/uploads/' . $directory_name . '/' . $new_image_filename;
+    $relative_image_path = $directory_name . '/' . $new_image_filename;
 
     if ($directory_name === 'profile-pictures') {
-        $_SESSION['user_profile_picture_path'] = $relative_image_path;
+        $_SESSION['user_profile_picture_path'] = '/Emuel_Vassallo_4.2D/instagram-clone/uploads/' . $relative_image_path;
     }
 
     if (move_uploaded_file($image_tmp_name, $image_upload_path)) {
-        return $relative_image_path;
+        return '/uploads/' . $relative_image_path;
     }
 
     return false;
@@ -231,14 +231,12 @@ function update_post($pdo, $post_id, $new_caption)
     }
 
     $query = "UPDATE posts_table SET 
-              image_dir = IFNULL(?, image_dir),
+              image_dir = ?,
               caption = ?,
               updated_at = NOW()
               WHERE id = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$new_image_path, $new_caption, $post_id]);
-
-    return $stmt->rowCount() > 0;
+    return $stmt->execute([$new_image_path, $new_caption, $post_id]);
 }
 
 function update_user_profile($pdo, $user_id, $display_name, $bio)
@@ -265,11 +263,8 @@ function update_user_profile($pdo, $user_id, $display_name, $bio)
               display_name = ?,
               bio = ?
               WHERE id = ?";
-
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
-
-    return $stmt->rowCount() > 0;
+    return $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
 }
 
 function delete_post($pdo, $post_id)
