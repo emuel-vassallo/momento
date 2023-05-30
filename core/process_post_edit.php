@@ -22,13 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $post_id = $_POST['post_modal_post_id'];
 
-
         $result = update_post($pdo, $post_id, $caption);
 
         if ($result) {
-            header("Location: ".$_SERVER['PHP_SELF']);
-        }
-        else {
+            header("Location: " . $_SERVER['PHP_SELF']);
+        } else {
             echo "Something went wrong while updating the post";
         }
     } else {

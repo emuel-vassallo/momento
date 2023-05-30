@@ -23,7 +23,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
                     class="text-decoration-none">
                     <img class="home-navbar-user-profile-picture mb-2"
-                        src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
+                        src="<?php echo '/Emuel_Vassallo_4.2D/instagram-clone/' . $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
                     <div class="home-navbar-user-profile-info-container d-flex flex-column justify-content-center">
                         <p class="user-profile-name fs-5 fw-bold p-0 m-0 text-nowrap text-body">
                             <?php echo $_SESSION['user_display_name']; ?>

@@ -16,6 +16,7 @@ if (isset($_GET['post_id'])) {
     $conn = connect_to_db();
     $post_id = $_GET['post_id'];
     $post_info = get_post($conn, $post_id);
+    $post_image_dir = '/Emuel_Vassallo_4.2D/instagram-clone' . $post_info['image_dir'];
 
     if (!$post_info) {
         header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
@@ -23,6 +24,7 @@ if (isset($_GET['post_id'])) {
     }
 
     $user_info = get_user_info($conn, $post_info['user_id']);
+    $user_profile_picture_path = '/Emuel_Vassallo_4.2D/instagram-clone' . $user_info['profile_picture_path'];
 
     $time_ago = get_formatted_time_ago($post_info['created_at']);
 
@@ -54,8 +56,6 @@ if (isset($_GET['post_id'])) {
     <link rel="stylesheet" href="css/style.css">
     <script src="scripts/show-search-suggestions.js" defer></script>
     <script type="module" src="scripts/post-modal-handler.js" defer></script>
-    <script type="module" src="scripts/post-more-options-handler.js" defer></script>    <script src="scripts/show-search-suggestions.js" defer></script>
-    <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-more-options-handler.js" defer></script>
 </head>
 
@@ -68,7 +68,7 @@ if (isset($_GET['post_id'])) {
         <?php include('partials/sidebar.php'); ?>
         <main class="page-post d-flex flex-column h-100 bg-light p-5 align-items-center justify-content-center">
             <div class="post row w-100 h-100 bg-white py-4 px-4 border" data-post-id="<?php echo $post_id ?>">
-                <img class="post-page-image col-8 p-0" src="<?php echo $post_info['image_dir']; ?>" alt="Post Image">
+                <img class="post-page-image col-8 p-0" src="<?php echo $post_image_dir; ?>" alt="Post Image">
 
                 <div class="post-sidebar col-4 d-flex flex-column gap-4 px-5 py-3">
                     <div class="pt-0 d-flex align-items-center justify-content-between">
@@ -76,7 +76,7 @@ if (isset($_GET['post_id'])) {
                             class="text-decoration-none">
                             <div class="post-user-info d-flex align-items-center justify-content-center">
                                 <img class="page-post-profile-picture me-3 flex-shrink-0"
-                                    src="<?php echo $user_info['profile_picture_path']; ?>" alt="Sophia Adams" s=""
+                                    src="<?php echo $user_profile_picture_path; ?>" alt="Sophia Adams" s=""
                                     profile="" picture'="">
                                 <div class="ps-1 d-flex flex-column">
                                     <p class="m-0 fw-semibold text-body fs-5">

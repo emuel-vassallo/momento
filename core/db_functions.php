@@ -37,7 +37,7 @@ function does_value_exist($pdo, $table, $column, $value)
 function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
 {
     $pfp_file = $_FILES['profile_picture_picker'];
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+    $target_dir = dirname(dirname(dirname(__DIR__))) . '/uploads/profile-pictures/';
     $directory_name = 'profile-pictures';
 
     $query_callback = function ($profile_picture_path) use ($pdo, $username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
@@ -87,7 +87,7 @@ function get_user_by_credentials($pdo, $username, $password)
 
 function add_post($pdo, $user_id, $caption)
 {
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
+    $target_dir = dirname(__DIR__) . '/uploads/posts/';
     $directory_name = 'posts';
 
     $query_callback = function ($pdo, $new_post_modal_image_picker_path) use ($user_id, $caption) {
@@ -111,7 +111,7 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
     $new_image_filename = uniqid() . '_' . $image_name;
     $image_upload_path = $target_dir . $new_image_filename;
 
-    $relative_image_path = '/Emuel_Vassallo_4.2D/instagram-clone/uploads/' . $directory_name . '/' . $new_image_filename;
+    $relative_image_path = '/uploads/' . $directory_name . '/' . $new_image_filename;
 
     if ($directory_name === 'profile-pictures') {
         $_SESSION['user_profile_picture_path'] = $relative_image_path;
@@ -127,8 +127,7 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
 function update_post($pdo, $post_id, $new_caption)
 {
     $new_image_file = $_FILES['post_modal_image_picker'];
-
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/posts/';
+    $target_dir = dirname(__DIR__) . '/uploads/posts/';
     $new_image_path = '';
 
     if (!empty($new_image_file['name'])) {
@@ -158,8 +157,7 @@ function update_post($pdo, $post_id, $new_caption)
 function update_user_profile($pdo, $user_id, $display_name, $bio)
 {
     $new_image_file = $_FILES['profile_picture_picker'];
-
-    $target_dir = dirname(dirname(dirname(__DIR__))) . '/Emuel_Vassallo_4.2D/instagram-clone/uploads/profile-pictures/';
+    $target_dir = dirname(__DIR__) . '/uploads/profile-pictures/';
     $new_image_path = '';
 
     if (!empty($new_image_file['name'])) {

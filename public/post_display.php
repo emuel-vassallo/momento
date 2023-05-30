@@ -5,12 +5,12 @@ function display_posts($posts)
 {
     foreach ($posts as $post) {
         $poster_id = $post['user_id'];
-        $poster_profile_picture = $post['profile_picture_path'];
+        $poster_profile_picture = '/Emuel_Vassallo_4.2D/instagram-clone' . $post['profile_picture_path'];
         $poster_display_name = $post['display_name'];
         $poster_username = $post['username'];
 
         $post_id = $post['id'];
-        $post_image_path = $post['image_dir'];
+        $post_image_path = '/Emuel_Vassallo_4.2D/instagram-clone' . $post['image_dir'];
         $caption = nl2br($post['caption']);
         $created_at = $post['created_at'];
 

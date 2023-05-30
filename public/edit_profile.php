@@ -36,7 +36,7 @@ if (!isset($_SESSION['user_id'])) {
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/sidebar.php'); ?>
         <?php include('partials/header.php'); ?>
-        <main class="page-settings d-flex flex-column align-items-center justify-content-between bg-light">
+        <main class="page-settings d-flex flex-column align-items-center justify-content-center bg-light">
             <form class="p-5 h-100 w-100" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
                 <div class="card edit-profile-card">
@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
                             <label for="display-name" class="form-label">Profile Picture</label>
                             <div class="d-flex align-items-center">
                                 <div class="me-3">
-                                    <img src="<?php echo $_SESSION['user_profile_picture_path'] ?>"
+                                    <img src="<?php echo '/Emuel_Vassallo_4.2D/instagram-clone/' . $_SESSION['user_profile_picture_path'] ?>"
                                         class="profile-picture-picker-image img-fluid rounded-circle"
                                         id="profile-picture-picker-image" alt="profile picture" />
                                 </div>
