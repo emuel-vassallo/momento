@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+$email = $_SESSION['email'] ?? '';
+$phone_number = $_SESSION['phone_number'] ?? '';
+$full_name = $_SESSION['full_name'] ?? '';
+$username = $_SESSION['username'] ?? '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +47,7 @@ session_start();
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control bg-light" id="email" name="email" placeholder="Email"
-                            autocomplete="off" type="email" value="<?php echo $_SESSION['email'] ?>" />
+                            autocomplete="off" type="email" value="<?php echo $email ?>" />
                         <label class="w-100 px-0">
                             <p class="bg-light m-0 ms-1 ps-2 w-100">Email</p>
                         </label>
@@ -50,21 +55,21 @@ session_start();
                     <div class="form-floating mb-3">
                         <input class="form-control bg-light" id="phone-number" name="phone_number"
                             placeholder="Phone Number" autocomplete="off" autocomplete="off" type="text"
-                            value="<?php echo $_SESSION['phone_number'] ?>" />
+                            value="<?php echo $phone_number ?>" />
                         <label class="w-100 px-0">
                             <p class="bg-light m-0 ms-1 ps-2 w-100">Phone Number</p>
                         </label>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control bg-light" id="full-name" name="full_name" placeholder="Full Name"
-                            autocomplete="off" type="text" value="<?php echo $_SESSION['full_name'] ?>" />
+                            autocomplete="off" type="text" value="<?php echo $full_name ?>" />
                         <label class="w-100 px-0">
                             <p class="bg-light m-0 ms-1 ps-2 w-100">Full Name</p>
                         </label>
                     </div>
                     <div class="form-floating mb-3">
                         <input class="form-control bg-light" id="username" name="username" placeholder="Username"
-                            autocomplete="off" type="text" value="<?php echo $_SESSION['username'] ?>" />
+                            autocomplete="off" type="text" value="<?php echo $username ?>" />
                         <label class="w-100 px-0">
                             <p class="bg-light m-0 ms-1 ps-2 w-100">Username</p>
                         </label>
