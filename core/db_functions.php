@@ -35,13 +35,13 @@ function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed
                   (username, full_name, email, phone_number, password, profile_picture_path, display_name, bio) 
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $stmt = $pdo->prepare($query);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$username, $full_name, $email, $phone_number, $hashed_password, $profile_picture_path, $display_name, $bio]);
 
         return $stmt->rowCount() > 0;
     };
 
-    return process_file_and_execute_query($pdo, $_FILES['profile_picture_picker'], $target_dir, $directory_name, $query_callback);
+    return process_file_and_execute_query($pdo, $_FILES['profile_picture_picker'], $target_dir, $directory_name, $sql);
 }
 
 function add_post($pdo, $user_id, $caption)
@@ -53,13 +53,13 @@ function add_post($pdo, $user_id, $caption)
         $sql = "INSERT INTO posts_table (user_id, image_dir, caption, created_at) 
                   VALUES (?, ?, ?, NOW())";
 
-        $stmt = $pdo->prepare($query);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$user_id, $new_post_modal_image_picker_path, $caption]);
 
         return $stmt->rowCount() > 0;
     };
 
-    return process_file_and_execute_query($pdo, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $query_callback);
+    return process_file_and_execute_query($pdo, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $sql);
 }
 
 function upload_image_file_to_dir($file, $target_dir, $directory_name)
@@ -91,7 +91,7 @@ function get_user_by_credentials($pdo, $username, $password)
                 OR email = ?
                 OR phone_number = ?";
 
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([
         $username,
         $username,
@@ -128,9 +128,9 @@ function process_file_and_execute_query($pdo, $file, $target_dir, $directory_nam
     return $query_callback($pdo, $new_image_path);
 }
 
-function fetch_posts($pdo, $query)
+function fetch_posts($pdo, $sql)
 {
-    $stmt = $pdo->query($query);
+    $stmt = $pdo->query($sql);
     $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
@@ -144,7 +144,7 @@ function get_all_posts($pdo)
               ORDER BY p.created_at DESC;
               ";
 
-    return fetch_posts($pdo, $query);
+    return fetch_posts($pdo, $sql);
 }
 
 function get_user_posts($pdo, $user_id)
@@ -156,13 +156,13 @@ function get_user_posts($pdo, $user_id)
               ORDER BY p.created_at DESC;
               ";
 
-    return fetch_posts($pdo, $query);
+    return fetch_posts($pdo, $sql);
 }
 
 function get_user_post_count($pdo, $user_id)
 {
     $sql = "SELECT COUNT(*) AS post_count FROM posts_table WHERE user_id = ?";
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([$user_id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC)['post_count'];
     return $row;
@@ -171,7 +171,7 @@ function get_user_post_count($pdo, $user_id)
 function get_all_users($pdo)
 {
     $sql = "SELECT id, username, display_name, profile_picture_path FROM users_table";
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute();
 
     $profiles = [];
@@ -189,7 +189,7 @@ function get_row_by_id($pdo, $table_name, $row_id)
               FROM $table_name
               WHERE id = ?";
 
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([$row_id]);
 
     if (!$stmt || $stmt->rowCount() === 0) {
@@ -221,7 +221,7 @@ function update_post($pdo, $post_id, $new_caption)
         $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'posts');
     } else {
         $sql = "SELECT image_dir FROM posts_table WHERE id = ?";
-        $stmt = $pdo->prepare($query);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$post_id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -235,7 +235,7 @@ function update_post($pdo, $post_id, $new_caption)
               caption = ?,
               updated_at = NOW()
               WHERE id = ?";
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     return $stmt->execute([$new_image_path, $new_caption, $post_id]);
 }
 
@@ -249,7 +249,7 @@ function update_user_profile($pdo, $user_id, $display_name, $bio)
         $new_image_path = upload_image_file_to_dir($new_image_file, $target_dir, 'profile-pictures');
     } else {
         $sql = "SELECT profile_picture_path FROM users_table WHERE id = ?";
-        $stmt = $pdo->prepare($query);
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$user_id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -263,7 +263,7 @@ function update_user_profile($pdo, $user_id, $display_name, $bio)
               display_name = ?,
               bio = ?
               WHERE id = ?";
-    $stmt = $pdo->prepare($query);
+    $stmt = $pdo->prepare($sql);
     return $stmt->execute([$new_image_path, $display_name, $bio, $user_id]);
 }
 
