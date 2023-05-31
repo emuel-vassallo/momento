@@ -18,6 +18,8 @@ require_once('post_display.php');
 if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     $user_id = $_GET['user_id'];
     $user_info = get_user_info($conn, $user_id);
+    $user_bio = nl2br($user_info['bio']);
+
 
     $user_posts_amount = get_user_post_count($conn, $user_id);
 } else {
@@ -85,7 +87,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                     <div class="user-profile-bio-container">
                         <p class="fw-semibold m-0 fs-6">Bio</p>
                         <p class="user-profile-bio m-0">
-                            <?php echo $user_info['bio'] ?>
+                            <?php echo $user_bio ?>
                         </p>
                     </div>
                 </div>
