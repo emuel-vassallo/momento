@@ -7,7 +7,7 @@
 
         <div class="form-group has-search d-flex align-items-center flex-column">
             <form id="search-bar-form" autocomplete="off">
-                <div class="autocomplete" style="width:300px;">
+                <div class="autocomplete d-flex align-items-center" style="width:300px;">
                     <span class="bi bi-search form-control-feedback"></span>
                     <input id="search-bar" type="search" class="form-control mr-sm-2 bg-light" placeholder="Search"
                         aria-label="Search">
