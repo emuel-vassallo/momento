@@ -41,7 +41,7 @@ function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed
         return $stmt->rowCount() > 0;
     };
 
-    return process_file_and_execute_query($pdo, $_FILES['profile_picture_picker'], $target_dir, $directory_name, $sql);
+    return process_file_and_execute_query($pdo, $_FILES['profile_picture_picker'], $target_dir, $directory_name, $query_callback);
 }
 
 function add_post($pdo, $user_id, $caption)
@@ -59,7 +59,7 @@ function add_post($pdo, $user_id, $caption)
         return $stmt->rowCount() > 0;
     };
 
-    return process_file_and_execute_query($pdo, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $sql);
+    return process_file_and_execute_query($pdo, $_FILES['post_modal_image_picker'], $target_dir, $directory_name, $query_callback);
 }
 
 function upload_image_file_to_dir($file, $target_dir, $directory_name)
