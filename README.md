@@ -77,5 +77,6 @@ An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. 
 
 ## Acknowledgements
 
+- [JustValidate](https://just-validate.dev/): Enables smooth form validation and accurate user input in forms.
 - [Unsplash](https://unsplash.com/): Used for providing dummy profile pictures and posts.
 
