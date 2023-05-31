@@ -58,22 +58,24 @@ An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. 
 
 ### High Priority
 
-- [ ] Implement post liking functionality
-- [ ] Enable user following feature
-- [ ] Add dark theme toggle
+- [ ] Post liking
+- [ ] Follow users
+- [ ] Commenting system
+- [ ] Dark theme toggle
+- [ ] Notifications
 
 ### Additional Features
 
-- [ ] Google sign-in for seamless authentication
-- [ ] Multiple feed view modes
-- [ ] Regram functionality to allow post sharing within the platform
-- [ ] Mass delete
-- [ ] Post download
-- [ ] Schedule posts
-- [ ] Pin posts on profile
-- [ ] Add "See First" feature to prioritize specific accounts in the feed
+- [ ] "See First" feature to prioritize specific accounts in the feed
 - [ ] Choose interests on account creation
+- [ ] Google sign-in
+- [ ] Mass delete
+- [ ] Multiple feed view modes
+- [ ] Pin posts on profile
+- [ ] Post download
+- [ ] Regram functionality to allow post sharing within the platform
 - [ ] Reorder posts
+- [ ] Schedule posts
 
 ## Acknowledgements
 
