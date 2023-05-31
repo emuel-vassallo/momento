@@ -1,27 +1,81 @@
-# Instagram Clone App
+# Instagram Clone
 
-This app was developed for a school project which required CRUD (Create, Read, Update, Delete) functionality. It serves as an example of implementing these essential operations in a web application using PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap.
+An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. This project serves as an example of implementing the fundamental operations in a social media platform, featuring a redesigned user interface.
 
-## Features
+### [Live Demo](https://emuel-ig-clone.000webhostapp.com)
 
-- User Registration and Login: Users can create an account and log in to access the application.
-- Profile Management: Users can edit their profile information, including display name, bio, and profile picture.
-- Photo Upload: Users can upload photos with captions to share with others.
-- Search: Users can search for other users on usernames and display names.
+## Showcase
 
-## Usage
+### Home
 
-1. Register a new account or log in with existing credentials.
-2. Customize your profile by editing your display name, bio, and profile picture.
-3. Upload photos to share with your followers.
-4. Search for specific users or posts using the search feature powered by MiniSearch.
-5. View posts from other users in the home page.
+![home page](screenshots/home.png)
 
-## Hosting
+### Profile
 
-This application is hosted on 000webhost. You can access the live version of the app with a redesigned UI
+![profile page](screenshots/profile.png)
+
+### Edit Profile
+
+![settings page](screenshots/settings.png)
+
+### Add Post
+
+![home page](screenshots/add-post.png)
+
+### Post Page
+
+![post page](screenshots/post.png)
+
+## Technologies
+
+- PHP
+- MySQL
+- HTML
+- JavaScript
+- CSS
+- Bootstrap
+
+## Key Features
+
+### Profile Customisation
+
+- Ability for users to customise their profiles, including profile pictures, display names, and bios.
+
+### Post Editing
+
+- Allow users to modify and update their published posts.
+
+### Search Functionality
+
+- Instantly find users based on their usernames and display names with live search results.
+- Powered by [MiniSearch](https://lucaong.github.io/minisearch/), enabling efficient and accurate search functionality within the app.
+
+### Copy Post Link
+
+- Enable users to easily share the link of a post with others.
+
+## TODO
+
+### High Priority
+
+- [ ] Implement post liking functionality
+- [ ] Enable user following feature
+- [ ] Add dark theme toggle
+
+### Additional Features
+
+- [ ] Google sign-in for seamless authentication
+- [ ] Multiple feed view modes
+- [ ] Regram functionality to allow post sharing within the platform
+- [ ] Mass delete
+- [ ] Post download
+- [ ] Schedule posts
+- [ ] Pin posts on profile
+- [ ] Add "See First" feature to prioritize specific accounts in the feed
+- [ ] Choose interests on account creation
+- [ ] Reorder posts
 
 ## Acknowledgements
 
-- MiniSearch: Used for efficient search functionality in the application. [MiniSearch](https://lucaong.github.io/minisearch/)
-- Unsplash: Used for providing dummy profile pictures and posts. [Unsplash](https://unsplash.com/)
+- [Unsplash](https://unsplash.com/): Used for providing dummy profile pictures and posts.
+
