@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+    header('Location: http://localhost/instagram-clone/public/login.php');
 }
 
 if (isset($_GET['post_id'])) {
@@ -16,22 +16,22 @@ if (isset($_GET['post_id'])) {
     $conn = connect_to_db();
     $post_id = $_GET['post_id'];
     $post_info = get_post($conn, $post_id);
-    $post_image_dir = '/Emuel_Vassallo_4.2D/instagram-clone' . $post_info['image_dir'];
+    $post_image_dir = '/instagram-clone' . $post_info['image_dir'];
 
     if (!$post_info) {
-        header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+        header('Location: http://localhost/instagram-clone/public/index.php');
         exit();
     }
 
     $user_info = get_user_info($conn, $post_info['user_id']);
-    $user_profile_picture_path = '/Emuel_Vassallo_4.2D/instagram-clone' . $user_info['profile_picture_path'];
+    $user_profile_picture_path = '/instagram-clone' . $user_info['profile_picture_path'];
 
     $time_ago = get_formatted_time_ago($post_info['created_at']);
 
     $is_current_user = $_SESSION['user_id'] === $user_info['id'];
     $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, true);
 } else {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+    header('Location: http://localhost/instagram-clone/public/index.php');
     exit();
 }
 ?>
@@ -72,7 +72,7 @@ if (isset($_GET['post_id'])) {
 
                 <div class="post-sidebar col-4 d-flex flex-column gap-4 px-5 py-3">
                     <div class="pt-0 d-flex align-items-center justify-content-between">
-                        <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $user_info['id'] ?>"
+                        <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $user_info['id'] ?>"
                             class="text-decoration-none">
                             <div class="post-user-info d-flex align-items-center justify-content-center">
                                 <img class="page-post-profile-picture me-3 flex-shrink-0"

@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .onSuccess((event) => {
       const hasProfilePicture =
         profilePictureImage.src !=
-        "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/images/default-pfp.jpg";
+        "http://localhost/instagram-clone/public/images/default-pfp.jpg";
 
       if (hasProfilePicture) {
         HTMLFormElement.prototype.submit.call(form);

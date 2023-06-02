@@ -32,7 +32,7 @@ if (empty($errors)) {
     $result = add_post($pdo, $user_id, $caption);
 
     if ($result) {
-            header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
+            header("Location: http://localhost/instagram-clone/public/index.php");
         }
 } else {
     foreach ($errors as $error) {

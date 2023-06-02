@@ -72,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['registration_complete'] = true;
 
-        header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/profile_setup.php');
+        header('Location: http://localhost/instagram-clone/public/profile_setup.php');
         echo "valid";
     }
 } else {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+    header('Location: http://localhost/instagram-clone/public/index.php');
 }
 ?>

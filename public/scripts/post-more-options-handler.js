@@ -48,7 +48,7 @@ const handleCopyLinks = () => {
     button.addEventListener("click", () => {
       const post = button.closest(".post");
       const postId = post.dataset.postId;
-      const postLink = `http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/post.php?post_id=${postId}`;
+      const postLink = `http://localhost/instagram-clone/public/post.php?post_id=${postId}`;
 
       copyToClipboard(postLink);
       const toastBootstrap =

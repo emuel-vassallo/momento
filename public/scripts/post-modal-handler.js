@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((postData) => {
           document.getElementById("post-modal-caption").textContent =
             postData.caption;
-          imagePreview.setAttribute("src", `/Emuel_Vassallo_4.2D/instagram-clone${postData.image_dir}`);
+          imagePreview.setAttribute("src", `/instagram-clone${postData.image_dir}`);
         })
         .catch((error) => {
           console.error(error);

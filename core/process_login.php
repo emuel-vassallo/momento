@@ -17,9 +17,9 @@ $_SESSION['user_username'] = $result['username'];
 $_SESSION['user_full_name'] = $result['full_name'];
 $_SESSION['user_email'] = $result['email'];
 $_SESSION['user_phone_number'] = $result['phone_number'];
-$_SESSION['user_profile_picture_path'] = '/Emuel_Vassallo_4.2D/instagram-clone' . $result['profile_picture_path'];
+$_SESSION['user_profile_picture_path'] = '/instagram-clone' . $result['profile_picture_path'];
 $_SESSION['user_display_name'] = $result['display_name'];
 $_SESSION['user_bio'] = nl2br(stripslashes($result['bio']));
 
-header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
+header("Location: http://localhost/instagram-clone/public/index.php");
 ?>

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result) {
             $_SESSION['user_display_name'] = $user_display_name;
             $_SESSION['user_bio'] = nl2br($bio);
-            header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/edit_profile.php");
+            header("Location: http://localhost/instagram-clone/public/edit_profile.php");
         }
         else {
             echo "Something went wrong while updating the user profile";
@@ -48,6 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } else {
-    header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
+    header("Location: http://localhost/instagram-clone/public/index.php");
 }
 ?>

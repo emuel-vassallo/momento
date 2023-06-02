@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_complete'] !== true) {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/register.php');
+    header('Location: http://localhost/instagram-clone/public/register.php');
     exit();
 }
 ?>

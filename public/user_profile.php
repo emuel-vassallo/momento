@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+    header('Location: http://localhost/instagram-clone/public/login.php');
 }
 
 require_once('../core/db_functions.php');
@@ -23,7 +23,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
 
     $user_posts_amount = get_user_post_count($conn, $user_id);
 } else {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php');
+    header('Location: http://localhost/instagram-clone/public/index.php');
     exit();
 }
 
@@ -65,7 +65,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
         <main class="page-user-profile d-flex flex-column h-100 bg-light">
             <div class="profile-info d-flex p-5 pb-0 gap-3 w-100 align-items-center mb-4">
                 <img class="user-profile-profile-picture flex-shrink-0"
-                    src="<?php echo '/Emuel_Vassallo_4.2D/instagram-clone' . $user_info['profile_picture_path'] ?>" alt="">
+                    src="<?php echo '/instagram-clone' . $user_info['profile_picture_path'] ?>" alt="">
                 <div class="user-profile-text-info d-flex flex-column p-3 gap-3 w-50">
                     <div>
                         <p class="user-profile-display-name fs-5 fw-bold text-body m-0">

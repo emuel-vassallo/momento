@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unset($_SESSION['hashed_password']);
                 unset($_SESSION['current_user_username']);
 
-                header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
+                header("Location: http://localhost/instagram-clone/public/index.php");
             }
 
         }
@@ -82,6 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } else {
-    header("Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/index.php");
+    header("Location: http://localhost/instagram-clone/public/index.php");
 }
 ?>

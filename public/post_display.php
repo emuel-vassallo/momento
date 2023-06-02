@@ -5,18 +5,18 @@ function display_posts($posts)
 {
     foreach ($posts as $post) {
         $poster_id = $post['user_id'];
-        $poster_profile_picture = '/Emuel_Vassallo_4.2D/instagram-clone' . $post['profile_picture_path'];
+        $poster_profile_picture = '/instagram-clone' . $post['profile_picture_path'];
         $poster_display_name = $post['display_name'];
         $poster_username = $post['username'];
 
         $post_id = $post['id'];
-        $post_image_path = '/Emuel_Vassallo_4.2D/instagram-clone' . $post['image_dir'];
+        $post_image_path = '/instagram-clone' . $post['image_dir'];
         $caption = $post['caption'] ? nl2br($post['caption']) : '';
         $created_at = $post['created_at'];
 
         $time_ago = get_formatted_time_ago($created_at);
 
-        $user_profile_link = "http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
+        $user_profile_link = "http://localhost/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
         $is_current_user = $_SESSION['user_id'] === $poster_id;
 

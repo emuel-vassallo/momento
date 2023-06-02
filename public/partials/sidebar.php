@@ -20,7 +20,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
             <!-- User Profile -->
             <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4 pb-3">
-                <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
                     class="text-decoration-none">
                     <img class="home-navbar-user-profile-picture mb-2"
                         src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
@@ -37,7 +37,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
             <!-- User Profile Posts Information -->
             <div class="navbar-user-posts-info mb-4 pb-3">
-                <a href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
                     class="text-decoration-none">
                     <div class="navbar-user-posts d-flex flex-column align-items-center">
                         <p class="fw-bold mb-1 text-body">

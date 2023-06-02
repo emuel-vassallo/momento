@@ -44,7 +44,7 @@ function get_dropdown_menu_item($icon_class, $text, $post_id)
 
     if ($text === 'Go to post') {
         $custom_class_name = 'go-to-post-button';
-        $link_href = 'href="http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/post.php?post_id=' . $post_id . '"';
+        $link_href = 'href="http://localhost/instagram-clone/public/post.php?post_id=' . $post_id . '"';
     }
 
     return "

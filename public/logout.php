@@ -18,7 +18,7 @@ unset(
 );
 
 session_destroy();
-header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+header('Location: http://localhost/instagram-clone/public/login.php');
 exit;
 ?>
 

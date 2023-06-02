@@ -73,7 +73,7 @@ function upload_image_file_to_dir($file, $target_dir, $directory_name)
     $relative_image_path = $directory_name . '/' . $new_image_filename;
 
     if ($directory_name === 'profile-pictures') {
-        $_SESSION['user_profile_picture_path'] = '/Emuel_Vassallo_4.2D/instagram-clone/uploads/' . $relative_image_path;
+        $_SESSION['user_profile_picture_path'] = '/instagram-clone/uploads/' . $relative_image_path;
     }
 
     if (move_uploaded_file($image_tmp_name, $image_upload_path)) {

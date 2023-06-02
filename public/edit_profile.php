@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: http://localhost/Emuel_Vassallo_4.2D/instagram-clone/public/login.php');
+    header('Location: http://localhost/instagram-clone/public/login.php');
     exit();
 }
 ?>
