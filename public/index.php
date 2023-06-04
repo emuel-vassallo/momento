@@ -12,7 +12,7 @@ require_once('post_display.php');
 <html>
 
 <head>
-    <title>Instagram Clone</title>
+    <title>Momento</title>
     <meta charset="UTF-8">
 
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">

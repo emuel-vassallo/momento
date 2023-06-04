@@ -1,8 +1,8 @@
 <nav class="header navbar navbar-light fixed-top bg-white w-100 border-bottom-1 m-0 p-0 border-bottom flex-nowrap">
     <div class="container-fluid d-flex justify-content-between w-100 pt-4 pe-5 pb-4 ps-5">
-        <a class="navbar-brand d-flex align-items-center justify-content-center align-self-start" href="index.php">
-            <img src="images/instagram-logo.png" width="30" height="30" class="d-inline-block align-top me-3" alt="">
-            <p class="h4 m-0 p-0">Instagram</p>
+        <a class="navbar-brand d-flex align-items-center justify-content-center align-self-start gap-2" href="index.php">
+            <img src="images/logo-icon.svg" width="28" height="28" class="d-inline-block align-top" alt="">
+            <p class="h4 m-0 p-0">Momento</p>
         </a>
 
         <div class="form-group has-search d-flex align-items-center flex-column">

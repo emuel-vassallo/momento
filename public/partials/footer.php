@@ -3,9 +3,9 @@
         class="d-flex flex-wrap justify-content-between align-items-center justify-content-center px-5 py-3 border-top">
         <p class="col-md-4 mb-0 text-body-secondary">© 2023 Emuel Vassallo</p>
 
-        <a class="h-100 navbar-brand d-flex align-items-center justify-content-center" href="index.php">
-            <img src="images/instagram-logo.png" width="30" height="30" class="d-inline-block align-top me-3" alt="">
-            <p class="h5 m-0 p-0">Instagram</p>
+        <a class="h-100 navbar-brand d-flex align-items-center justify-content-center gap-2" href="index.php">
+            <img src="images/logo-icon.svg" width="24" height="24" class="d-inline-block align-top" alt="">
+            <p class="h5 m-0 p-0">Momento</p>
         </a>
 
         <ul class="nav col-md-4 justify-content-end">
