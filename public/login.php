@@ -30,7 +30,7 @@ session_start();
     <div>
         <?php include('partials/header.php'); ?>
         <main class="bg-light page-login d-flex flex-column w-100 align-items-center justify-content-center">
-            <div class="container login-container">
+            <div class="container p-0 m-0">
                 <div class="card login-card">
                     <div class="login-card-img-container row no-gutters">
                         <div class="col-md-6 p-0">
@@ -77,7 +77,7 @@ session_start();
                                         was
                                         incorrect. Please double-check your password.
                                     </div>
-                                    <div class="bg-white rounded">
+                                    <div class="bg-white">
                                         <p class="m-0">
                                             <span class="text-muted">Don't have an account?</span>
                                             <a href="register.php"

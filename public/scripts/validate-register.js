@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#register-form");
   new window.JustValidate("#register-form", {
     validateBeforeSubmitting: true,
+    tooltip: {
+      position: "top",
+    },
   })
     .addField("#email", [
       {
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         validator: (value) => () =>
           checkExists("email", value).then((exists) => exists),
-        errorMessage: "Another account is using the same email address",
+        errorMessage: "Email address unavailable",
       },
     ])
     .addField("#phone-number", [
@@ -27,10 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         rule: "minLength",
         value: 3,
+        errorMessage: "Minimum 3 characters required",
       },
       {
         rule: "maxLength",
         value: 15,
+          errorMessage: "Maximum 15 characters allowed",
       },
       {
         rule: "number",
@@ -38,60 +43,90 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         validator: (value) => () =>
           checkExists("phone_number", value).then((exists) => exists),
-        errorMessage: "Another account is using the same phone number",
+        errorMessage: "Phone number unavailable",
       },
     ])
-    .addField("#full-name", [
+    .addField(
+      "#full-name",
+      [
+        {
+          rule: "required",
+          errorMessage: "Full name is required",
+        },
+        {
+          rule: "minLength",
+          value: 3,
+          errorMessage: "Minimum 3 characters required",
+        },
+        {
+          rule: "maxLength",
+          value: 15,
+          errorMessage: "Maximum 15 characters allowed",
+        },
+      ],
       {
-        rule: "required",
-        errorMessage: "Full name is required",
-      },
+        tooltip: {
+          position: "right",
+        },
+      }
+    )
+    .addField(
+      "#username",
+      [
+        // TODO: fix error message for regex;
+        {
+          rule: "required",
+          errorMessage: "Username is required",
+        },
+        {
+          rule: "customRegexp",
+          value: /^[a-zA-Z0-9._]+$/,
+        },
+        {
+          rule: "minLength",
+          value: 1,
+          errorMessage: "Minimum 1 character required",
+        },
+        {
+          rule: "maxLength",
+          value: 15,
+          errorMessage: "Maximum 15 characters allowed",
+        },
+        {
+          validator: (value) => () =>
+            checkExists("username", value).then((exists) => exists),
+          errorMessage: "Username unavailable. Try another.",
+        },
+      ],
       {
-        rule: "minLength",
-        value: 3,
-      },
+        tooltip: {
+          position: "right",
+        },
+      }
+    )
+    .addField(
+      "#password",
+      [
+        {
+          rule: "required",
+          errorMessage: "Password is required",
+        },
+        {
+          rule: "minLength",
+          value: 3,
+          errorMessage: "Minimum 3 characters required",
+        },
+        {
+          rule: "password",
+          errorMessage: "Minimum 8 characters, 1 letter, 1 number"
+        },
+      ],
       {
-        rule: "maxLength",
-        value: 15,
-      },
-    ])
-    .addField("#username", [
-      // TODO: fix error message for regex;
-      {
-        rule: "required",
-        errorMessage: "Username is required",
-      },
-      {
-        rule: "customRegexp",
-        value: /^[a-zA-Z0-9._]+$/,
-      },
-      {
-        rule: "minLength",
-        value: 1,
-      },
-      {
-        rule: "maxLength",
-        value: 15,
-      },
-      {
-        validator: (value) => () =>
-          checkExists("username", value).then((exists) => exists),
-        errorMessage: "This username isn't available. Please try another",
-      },
-    ])
-    .addField("#password", [
-      {
-        rule: "required",
-        errorMessage: "Password is required",
-      },
-      {
-        rule: "minLength",
-        value: 3,
-      },
-      {
-        rule: "password",
-      },
-    ])
+        tooltip: {
+          position: "right",
+        },
+      }
+    )
     .onSuccess((event) => {
       event.preventDefault();
       HTMLFormElement.prototype.submit.call(form);
