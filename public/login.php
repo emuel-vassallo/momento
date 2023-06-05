@@ -29,42 +29,65 @@ session_start();
 <body>
     <div>
         <?php include('partials/header.php'); ?>
-        <main class="page-login d-flex flex-column w-100 h-100 align-items-center justify-content-center">
-            <div class="login-form-container d-flex flex-column w-100 h-100">
-                <form id="login-form" autocomplete="off" novalidate="novalidate"
-                    class="bg-white border py-4 px-5 rounded" method="POST" action="../core/process_login.php">
-                    <div class=" text-center mb-1 pb-1">
-                        <svg fill="#595C5F" width="52" height="52" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3,9A1,1,0,0,0,4,8V5A1,1,0,0,1,5,4H8A1,1,0,0,0,8,2H5A3,3,0,0,0,2,5V8A1,1,0,0,0,3,9ZM8,20H5a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H8a1,1,0,0,0,0-2ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14ZM19,2H16a1,1,0,0,0,0,2h3a1,1,0,0,1,1,1V8a1,1,0,0,0,2,0V5A3,3,0,0,0,19,2Zm2,13a1,1,0,0,0-1,1v3a1,1,0,0,1-1,1H16a1,1,0,0,0,0,2h3a3,3,0,0,0,3-3V16A1,1,0,0,0,21,15Z"/></svg>
-                        <p class="text-muted fw-bold mt-3 fs-5">
-                            Log in
-                        </p>
+        <main class="bg-light page-login d-flex flex-column w-100 align-items-center justify-content-center">
+            <div class="container login-container">
+                <div class="card login-card">
+                    <div class="login-card-img-container row no-gutters">
+                        <div class="col-md-6 p-0">
+                            <img class="login-card-img" src="images/brooke-cagle-6zW91JT0IZc-unsplash.jpg" alt="">
+                        </div>
+                        <div class="col-md-6 p-0">
+                            <div class="card-body h-100 d-flex flex-column justify-content-center p-0">
+                                <form id="login-form" autocomplete="off" novalidate="novalidate"
+                                    class="d-flex flex-column w-100 p-5 gap-4" method="POST"
+                                    action="../core/process_login.php">
+                                    <div>
+                                        <p class="fw-bold fs-1 m-0 p-0">
+                                            Hi there!<br>
+                                        </p>
+                                        <p class="fs-5 m-0 p-0">
+                                            Please enter your details to log in.<br>
+                                        </p>
+                                    </div>
+                                    <div class="inputs-container d-flex flex-column gap-4 my-3">
+                                        <div class="form-floating">
+                                            <input class="form-control" id="username" name="username" type="name"
+                                                autocomplete="off"
+                                                placeholder="Phone number, username or email address" />
+                                            <label class="w-100 px-0">
+                                                <p class="m-0 ms-1 ps-2 w-100">Phone number, username or email address
+                                                </p>
+                                            </label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input class="form-control" id="password" name="password"
+                                                placeholder="Password" autocomplete="off" type="password" />
+                                            <label class="w-100 px-0">
+                                                <p class="m-0 ms-1 ps-2 w-100 bg-white">Password</p>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-primary fw-bold w-100" name="submit-button"
+                                                type="submit">Log
+                                                in</button>
+                                        </div>
+                                    </div>
+                                    <div id="login-error" class='alert alert-danger mb-0' role='alert'>Sorry, your
+                                        password
+                                        was
+                                        incorrect. Please double-check your password.
+                                    </div>
+                                    <div class="bg-white rounded">
+                                        <p class="m-0">
+                                            <span class="text-muted">Don't have an account?</span>
+                                            <a href="register.php"
+                                                class="link-underline link-underline-opacity-0 fw-semibold">Sign up</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3 row">
-                        <input class="form-control bg-light" id="username" name="username" type="name"
-                            autocomplete="off" placeholder="Phone number, username or email address" />
-                        <label class="w-100 px-0">
-                            <p class="bg-light m-0 ms-1 ps-2 w-100">Phone number, username or email address</p>
-                        </label>
-                    </div>
-                    <div class=" form-floating mb-3 row">
-                        <input class="form-control bg-light" id="password" name="password" placeholder="Password"
-                            autocomplete="off" type="password" />
-                        <label class="w-100 px-0">
-                            <p class="bg-light m-0 ms-1 ps-2 w-100">Password</p>
-                        </label>
-                    </div>
-                    <div class="mb-4 row">
-                        <button class="btn btn-primary fw-bold w-100" name="submit-button" type="submit">Log
-                            in</button>
-                    </div>
-                    <div id="login-error" class='alert alert-danger mb-0 row' role='alert'>Sorry, your password was
-                        incorrect. Please double-check your password.</div>
-                </form>
-                <div class="bg-white py-4 px-5 text-center border mt-4 rounded">
-                    <p class="m-0">
-                        Don't have an account? <a href="register.php"
-                            class="link-underline link-underline-opacity-0 fw-semibold">Sign up</a>
-                    </p>
                 </div>
             </div>
         </main>

@@ -28,10 +28,10 @@ if (!isset($_SESSION['registration_complete']) || $_SESSION['registration_comple
         <?php include('partials/header.php'); ?>
         <main class="page-login d-flex flex-column w-100 h-100 align-items-center justify-content-center">
             <div class="edit-profile">
-                <form id="setup-profile-form" autocomplete="off" novalidate="novalidate" class="bg-white border"
+                <form id="setup-profile-form" autocomplete="off" novalidate="novalidate" class="bg-white"
                     method="POST" enctype="multipart/form-data" action="../core/process_profile_setup.php">
-                    <div class="card edit-profile-card">
-                        <div class=" card-header fw-bold d-flex align-items-center">
+                    <div class="card edit-profile-card w-100">
+                        <div class="card-header fw-bold d-flex align-items-center">
                             <div class="d-flex align-items-center w-100">
                                 <h5 class="text-center m-0 p-0 text-nowrap">Finish Profile Setup</h5>
                             </div>
