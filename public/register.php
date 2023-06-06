@@ -32,7 +32,7 @@ $username = $_SESSION['username'] ?? '';
         <?php include('partials/header.php'); ?>
         <main class="bg-light page-register d-flex flex-column w-100 align-items-center justify-content-center">
             <div class="container p-0 m-0">
-                <div class="card register-card">
+                <div class="card register-card border">
                     <div class="register-card-img-container row no-gutters">
                         <div class="col-md-6 p-0">
                             <img class="register-card-img h-100 w-100" src="images/toa-heftiba-l_ExpFwwOEg-unsplash.jpg" alt="">
