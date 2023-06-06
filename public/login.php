@@ -71,11 +71,11 @@ session_start();
                                                 type="submit">Log
                                                 in</button>
                                         </div>
-                                    </div>
-                                    <div id="login-error" class='alert alert-danger mb-0' role='alert'>Sorry, your
-                                        password
-                                        was
-                                        incorrect. Please double-check your password.
+                                        <div id="login-error" class='alert alert-danger mb-0' role='alert'>Sorry, your
+                                            password
+                                            was
+                                            incorrect. Please double-check your password.
+                                        </div>
                                     </div>
                                     <div class="bg-white">
                                         <p class="m-0">

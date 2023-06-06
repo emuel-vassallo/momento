@@ -4,7 +4,7 @@
 
 An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. This project serves as an example of implementing the fundamental operations in a social media platform, featuring a redesigned user interface.
 
-### [Live Demo](https://emuel-ig-clone.000webhostapp.com)
+### [Live Demo](https://momento.emuel.me)
 
 ## Showcase
 

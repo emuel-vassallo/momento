@@ -37,6 +37,12 @@ body.modal-open {
   pointer-events: all !important;
 }
 
+/* Errors */
+.just-validate-error-label {
+  margin: 3px 0 0 0;
+  font-size: 0.95rem;
+}
+
 /* Login */
 .container {
   max-width: 1140px;
