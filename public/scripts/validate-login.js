@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     .addField("#username", [
       {
         rule: "required",
+        errorMessage: "Please enter your phone number, username or email address",
       },
     ])
     .addField("#password", [
       {
         rule: "required",
+        errorMessage: "Please enter your password",
       },
     ])
     .onSuccess((event) => {
