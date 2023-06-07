@@ -55,7 +55,7 @@ session_start();
                                                 autocomplete="off"
                                                 placeholder="Phone number, username or email address" />
                                             <label class="w-100 px-0">
-                                                <p class="m-0 ms-1 ps-2 w-100 bg-light">Phone number, username or email address
+                                                <p class="m-0 ms-1 ps-2 w-100 bg-light text-truncate">Phone number, username or email address
                                                 </p>
                                             </label>
                                         </div>
@@ -63,7 +63,7 @@ session_start();
                                             <input class="form-control bg-light" id="password" name="password"
                                                 placeholder="Password" autocomplete="off" type="password" />
                                             <label class="w-100 px-0">
-                                                <p class="m-0 ms-1 ps-2 w-100 bg-light">Password</p>
+                                                <p class="m-0 ms-1 ps-2 w-100 bg-light text-truncate">Password</p>
                                             </label>
                                         </div>
                                         <div>
