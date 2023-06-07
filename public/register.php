@@ -53,7 +53,7 @@ $username = $_SESSION['username'] ?? '';
                                     <div class="inputs-container d-flex flex-column gap-4">
                                         <div class="d-flex gap-4">
                                             <div class="form-floating">
-                                                <input class="form-control bg-light" id="email" name="email"
+                                                <input class="form-control bg-light px-3" id="email" name="email"
                                                     placeholder="Email" autocomplete="off" type="email"
                                                     value="<?php echo $email ?>" />
                                                 <label class="w-100 px-0">
@@ -61,7 +61,7 @@ $username = $_SESSION['username'] ?? '';
                                                 </label>
                                             </div>
                                             <div class="form-floating">
-                                                <input class="form-control bg-light" id="phone-number"
+                                                <input class="form-control bg-light px-3" id="phone-number"
                                                     name="phone_number" placeholder="Phone Number" autocomplete="off"
                                                     autocomplete="off" type="text"
                                                     value="<?php echo $phone_number ?>" />
@@ -71,7 +71,7 @@ $username = $_SESSION['username'] ?? '';
                                             </div>
                                         </div>
                                         <div class="form-floating">
-                                            <input class="form-control bg-light" id="full-name" name="full_name"
+                                            <input class="form-control bg-light px-3" id="full-name" name="full_name"
                                                 placeholder="Full Name" autocomplete="off" type="text"
                                                 value="<?php echo $full_name ?>" />
                                             <label class="w-100 px-0">
@@ -79,7 +79,7 @@ $username = $_SESSION['username'] ?? '';
                                             </label>
                                         </div>
                                         <div class="form-floating">
-                                            <input class="form-control bg-light" id="username" name="username"
+                                            <input class="form-control bg-light px-3" id="username" name="username"
                                                 placeholder="Username" autocomplete="off" type="text"
                                                 value="<?php echo $username ?>" />
                                             <label class="w-100 px-0">
@@ -87,7 +87,7 @@ $username = $_SESSION['username'] ?? '';
                                             </label>
                                         </div>
                                         <div class="form-floating">
-                                            <input class="form-control bg-light" id="password" name="password"
+                                            <input class="form-control bg-light px-3" id="password" name="password"
                                                 placeholder="Password" autocomplete="off" type="password" />
                                             <label class="w-100 px-0">
                                                 <p class="bg-light px-3 w-100 text-truncate">Password</p>
