@@ -1,34 +1,34 @@
-# Instagram Clone
+# Momento
 
-## Introduction
-
-An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. This project serves as an example of implementing the fundamental operations in a social media platform, featuring a redesigned user interface.
+Simple photo-sharing social media platform
 
 ### [Live Demo](https://momento.emuel.me)
 
-## Showcase
+---
 
-### Home
+## 📚 About
 
-![home page](screenshots/home-rounded.png)  
+__Momento__ is a simple full-stack social media platform built with PHP, MySQL, and Bootstrap, serving as an example of implementing the core functionalities within a social media platform.
 
-### Profile
+## 📷️ Showcase
 
-![profile page](screenshots/profile-rounded.png)
+### Home Page
+
+![home page](screenshots/mocks/home.png)  
+
+### Profile Page
+
+![profile page](screenshots/mocks/user-profile.png)
 
 ### Edit Profile
 
-![settings page](screenshots/settings-rounded.png)
+![settings page](screenshots/mocks/settings.png)
 
-### Add Post
+### Create Post
 
-![home page](screenshots/add-post-rounded.png)
+![settings page](screenshots/mocks/add-post.png)
 
-### Post Page
-
-![post page](screenshots/post-rounded.png)
-
-## Technologies
+## 🛠️ Technologies
 
 - PHP
 - MySQL
@@ -37,7 +37,7 @@ An Instagram clone built with PHP, MySQL, HTML, JavaScript, CSS, and Bootstrap. 
 - CSS
 - Bootstrap
 
-## Installation and Setup
+## ⚙️ Installation and Setup
 
 To install and set up the project, follow the instructions below:
 
@@ -60,7 +60,7 @@ To install and set up the project, follow the instructions below:
 9. Once the database import is complete, navigate to http://localhost/instagram-clone in your web browser to run the project on your localhost.
 
 
-## Key Features
+## 🌟 Key Features
 
 ### Profile Customisation
 
@@ -73,13 +73,13 @@ To install and set up the project, follow the instructions below:
 ### Search Functionality
 
 - Instantly find users based on their usernames and display names with live search results.
-- Powered by [MiniSearch](https://lucaong.github.io/minisearch/), enabling efficient and accurate search functionality within the app.
+- Powered by [MiniSearch](https://lucaong.github.io/minisearch/), enabling efficient and accurate search functionality within th🙏e app.
 
 ### Copy Post Link
 
 - Enable users to easily share the link of a post with others.
 
-## TODO
+## ✅ TODO
 
 ### High Priority
 
@@ -103,7 +103,7 @@ To install and set up the project, follow the instructions below:
 - [ ] Reorder posts
 - [ ] Schedule posts
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 - [JustValidate](https://just-validate.dev/): Enables smooth form validation and accurate user input in forms.
-- [Unsplash](https://unsplash.com/): Used for providing dummy profile pictures and posts.
+- [Unsplash](https://unsplash.com/): Used for providing high quality and royalty-free images.
