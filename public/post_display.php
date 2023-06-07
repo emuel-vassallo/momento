@@ -31,7 +31,7 @@ function display_posts($posts)
                              </p>
                             </div>";
 
-            echo "<div class='post d-flex w-100 mb-5 bg-white p-4 border' data-post-id='{$post_id}' data-poster-id='{$poster_id}'>
+            echo "<div class='post d-flex w-100 bg-white p-4 border' data-post-id='{$post_id}' data-poster-id='{$poster_id}'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='{$user_profile_link}' class='text-decoration-none'>

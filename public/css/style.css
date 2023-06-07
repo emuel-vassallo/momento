@@ -45,7 +45,7 @@ body.modal-open {
 
 /* Login */
 .container {
-  max-width: 1140px;
+  max-width: 65%;
 }
 
 #login-error {
@@ -93,7 +93,7 @@ body.modal-open {
 }
 
 .nav-item.active:after {
-  content: "";
+  content: '';
   width: 3px;
   height: 24px;
   background-color: var(--bs-gray-600) !important;
@@ -115,10 +115,11 @@ body.modal-open {
 }
 
 /* Home */
-.page-home,
-.page-user-profile {
-  padding-left: 16vw !important;
-  padding-right: 16vw !important;
+
+.feed-container,
+.profile-info {
+  max-width: 640px;
+  width: 100%;
 }
 
 .page-register,
@@ -156,8 +157,7 @@ body.modal-open {
   margin-top: 88px !important;
 }
 
-.home-navbar-user-profile-picture,
-.user-profile-profile-picture {
+.home-navbar-user-profile-picture {
   width: 90px;
   height: 90px;
   opacity: 1;
@@ -271,7 +271,7 @@ body.modal-open {
 }
 
 #post-modal-image {
-  background-image: url("../images/image-add.png");
+  background-image: url('../images/image-add.png');
   background-size: 30%;
   background-position: center;
   background-repeat: no-repeat;

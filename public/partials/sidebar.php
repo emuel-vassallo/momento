@@ -43,7 +43,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                         <p class="fw-bold mb-1 text-body">
                             <?php echo $user_post_count ?>
                         </p>
-                        <p class="m-0 text-secondary">Posts</p>
+                        <p class="m-0 text-secondary"><?php echo $user_post_count === 1 ? 'Post' : 'Posts' ?></p>
                     </div>
                 </a>
             </div>

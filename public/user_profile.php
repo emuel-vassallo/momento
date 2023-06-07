@@ -62,11 +62,12 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/header.php'); ?>
         <?php include('partials/sidebar.php'); ?>
-        <main class="page-user-profile d-flex flex-column h-100 bg-light">
-            <div class="profile-info d-flex p-5 pb-0 gap-3 w-100 align-items-center mb-4">
+        <main class="page-user-profile bg-light">
+          <div class="py-5 d-flex flex-column h-100 align-items-center gap-5">
+            <div class="profile-info d-flex pb-0 gap-4 align-items-center justify-content-start mb-3">
                 <img class="user-profile-profile-picture flex-shrink-0"
                     src="<?php echo '/instagram-clone' . $user_info['profile_picture_path'] ?>" alt="">
-                <div class="user-profile-text-info d-flex flex-column p-3 gap-3 w-50">
+                <div class="user-profile-text-info d-flex flex-column gap-3 w-100 p-1">
                     <div>
                         <p class="user-profile-display-name fs-5 fw-bold text-body m-0">
                             <?php echo $user_info['display_name'] ?>
@@ -81,7 +82,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                             <p class="user-profile-posts-amount fw-bold m-0 fs-6">
                                 <?php echo $user_posts_amount ?>
                             </p>
-                            <p class="m-0 fs-6">Posts</p>
+                            <p class="m-0 fs-6"><?php echo $user_posts_amount === 1 ? 'Post' : 'Posts' ?></p>
                         </a>
                     </div>
                     <div class="user-profile-bio-container">
@@ -93,14 +94,15 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                 </div>
             </div>
             <div
-                class="d-flex feed-container flex-column p-5 align-items-start align-items-center justify-content-center">
+                class="d-flex feed-container flex-column align-items-start align-items-center justify-content-center">
                 <div class="feed-top w-100 mb-4">
                     <h4 id="user-profile-posts" class="fw-semibold">Posts</h4>
                 </div>
-                <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center w-100">
+                <div class="feed-posts-container p-0 d-flex flex-column align-items-center justify-content-center w-100 gap-4">
                     <?php display_user_posts($user_id) ?>
                 </div>
             </div>
+          </div>
         </main>
         <?php include('partials/footer.php'); ?>
     </div>

@@ -43,13 +43,13 @@ require_once('post_display.php');
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/header.php'); ?>
         <?php include('partials/sidebar.php'); ?>
-        <main class="page-home d-flex flex-column h-100 bg-light">
+        <main class="page-home d-flex flex-column h-100 bg-light align-items-center justify-content-start">
             <div
                 class="d-flex feed-container flex-column pt-5 pb-5 align-items-start align-items-center justify-content-center">
                 <div class="feed-top w-100 mb-4">
                     <p class="h3 fw-semibold">Feed</p>
                 </div>
-                <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center">
+                <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center gap-4">
                     <?php display_all_posts($conn) ?>
                 </div>
             </div>
