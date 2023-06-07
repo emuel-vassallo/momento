@@ -51,11 +51,12 @@ session_start();
                                     </div>
                                     <div class="inputs-container d-flex flex-column gap-4 my-3">
                                         <div class="form-floating">
-                                            <input class="form-control bg-light" id="username" name="username" type="name"
-                                                autocomplete="off"
+                                            <input class="form-control bg-light" id="username" name="username"
+                                                type="name" autocomplete="off"
                                                 placeholder="Phone number, username or email address" />
                                             <label class="w-100 px-0">
-                                                <p class="m-0 ms-1 ps-2 w-100 bg-light text-truncate">Phone number, username or email address
+                                                <p class="m-0 px-3 w-100 bg-light text-truncate">Phone number,
+                                                    username or email address
                                                 </p>
                                             </label>
                                         </div>
@@ -63,7 +64,7 @@ session_start();
                                             <input class="form-control bg-light" id="password" name="password"
                                                 placeholder="Password" autocomplete="off" type="password" />
                                             <label class="w-100 px-0">
-                                                <p class="m-0 ms-1 ps-2 w-100 bg-light text-truncate">Password</p>
+                                                <p class="m-0 px-3 w-100 bg-light text-truncate">Password</p>
                                             </label>
                                         </div>
                                         <div>

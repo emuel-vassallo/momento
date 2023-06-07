@@ -131,10 +131,6 @@ body.modal-open {
   min-height: calc(100vh - (88px + 76px));
 }
 
-.page-login {
-  max-height: calc(100vh - (88px + 76px));
-}
-
 .footer {
   margin-left: 400px !important;
 }
