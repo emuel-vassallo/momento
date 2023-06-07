@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_full_name'] = $user_info['full_name'];
                 $_SESSION['user_email'] = $user_info['email'];
                 $_SESSION['user_phone_number'] = $user_info['phone_number'];
-                $_SESSION['user_profile_picture_path'] = $user_info['profile_picture_path'];
+                $_SESSION['user_profile_picture_path'] = "/instagram-clone" . $user_info['profile_picture_path'];
 
                 unset($_SESSION['email']);
                 unset($_SESSION['phone_number']);
