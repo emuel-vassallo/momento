@@ -37,7 +37,7 @@ if (!isset($_SESSION['user_id'])) {
         <?php include('partials/sidebar.php'); ?>
         <?php include('partials/header.php'); ?>
         <main class="page-settings d-flex flex-column align-items-center justify-content-center bg-light">
-            <form class="p-5 h-100 w-100" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
+            <form class="h-100 w-100" id="edit-profile-form" autocomplete="off" novalidate="novalidate" method="POST"
                 enctype="multipart/form-data" action="../core/process_edit_profile.php">
                 <div class="card edit-profile-card">
                     <div class="card-header fw-bold d-flex align-items-center bg-white">
@@ -79,7 +79,7 @@ if (!isset($_SESSION['user_id'])) {
                                 placeholder="<?php echo strip_tags($_SESSION['user_bio']); ?>"><?php echo strip_tags($_SESSION['user_bio']); ?></textarea>
                             <div id="errors-container_custom-bio"></div>
                         </div>
-                        <div class="mb-3 text-end">
+                        <div class="text-end">
                             <button type="submit" class="btn btn-primary fw-bold text-nowrap">Save</button>
                         </div>
                     </div>

@@ -13,12 +13,9 @@ body.modal-open {
 }
 
 /* Profile Setup */
-.edit-profile {
-  width: 500px;
-}
-
-#edit-profile-form {
-  max-width: 600px !important;
+#edit-profile-form,
+#setup-profile-form {
+  max-width: 470px !important;
 }
 
 .edit-profile-card {
@@ -93,7 +90,7 @@ body.modal-open {
 }
 
 .nav-item.active:after {
-  content: '';
+  content: "";
   width: 3px;
   height: 24px;
   background-color: var(--bs-gray-600) !important;
@@ -267,7 +264,7 @@ body.modal-open {
 }
 
 #post-modal-image {
-  background-image: url('../images/image-add.png');
+  background-image: url("../images/image-add.png");
   background-size: 30%;
   background-position: center;
   background-repeat: no-repeat;
