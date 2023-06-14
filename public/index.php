@@ -50,7 +50,8 @@ require_once('post_display.php');
                 <div class="feed-top w-100 mb-4">
                     <p class="h3 fw-semibold">Feed</p>
                 </div>
-                <div class="stop-animation-on-load feed-posts-container d-flex flex-column align-items-center justify-content-center gap-4">
+                <div
+                    class="stop-animation-on-load feed-posts-container d-flex flex-column align-items-center justify-content-center gap-4">
                     <?php display_all_posts($conn) ?>
                 </div>
             </div>

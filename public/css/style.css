@@ -212,8 +212,8 @@ body.preload * {
 .con-like {
   --red: rgb(255, 50, 100);
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .con-like .like {
