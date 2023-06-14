@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     imagePreview.classList.add("d-none");
     uploadContainer.classList.remove("d-none");
     uploadContainer.classList.add("d-flex");
+    postImageInput.value = "";
   });
 
   postImageInput.addEventListener("change", (event) => {
