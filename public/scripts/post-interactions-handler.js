@@ -4,6 +4,19 @@ setTimeout(() => {
   document.body.className = "";
 }, 100);
 
+const updateLikesText = (post, addOrSubtract) => {
+  const likesText = post.querySelector(".like-text");
+  const currentLikes = parseInt(likesText.textContent);
+
+  if (addOrSubtract === "add") {
+    const newLikes = currentLikes + 1;
+    likesText.textContent = `${newLikes} like${newLikes !== 1 ? "s" : ""}`;
+  } else if (addOrSubtract === "subtract") {
+    const newLikes = Math.max(currentLikes - 1, 0);
+    likesText.textContent = `${newLikes} like${newLikes !== 1 ? "s" : ""}`;
+  }
+};
+
 const getUserId = async () => {
   try {
     const response = await fetch("../core/get_user_id.php");
@@ -26,6 +39,7 @@ const handleDoubleClickLike = async (post, likeButton) => {
     const userId = await getUserId();
     const postId = post.dataset.postId;
     addLike(userId, postId);
+    updateLikesText(post, "add");
   } catch (error) {
     console.error("Error adding like:", error);
   }
@@ -42,10 +56,12 @@ const handleLikeButtonClick = async (post, likeButton) => {
 
     if (isUnliked) {
       removeLike(userId, postId);
+      updateLikesText(post, "subtract");
       return;
     }
 
     addLike(userId, postId);
+    updateLikesText(post, "add");
   } catch (error) {
     console.error("Error adding like:", error);
   }

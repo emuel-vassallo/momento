@@ -180,7 +180,7 @@ body.preload * {
   max-height: 60vh;
   object-fit: cover;
   object-position: center;
-  border-radius: 22px;
+  border-radius: 16px;
 }
 
 .feed-card-profile-picture {
@@ -242,6 +242,7 @@ body.preload * {
   animation: none;
   animation-fill-mode: forwards;
   display: none;
+  cursor: default;
 }
 
 .con-like .poly {
