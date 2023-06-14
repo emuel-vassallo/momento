@@ -49,4 +49,12 @@ const deletePost = (postId) => {
   return sendFetchRequest(url, data);
 };
 
-export { checkExists, validateCredentials, deletePost };
+const addLike = (userId, postId) => {
+  const url = "../core/add_like.php";
+  const data = `user_id=${encodeURIComponent(
+    userId
+  )}&post_id=${encodeURIComponent(postId)}`;
+  return sendFetchRequest(url, data);
+};
+
+export { checkExists, validateCredentials, deletePost, addLike };

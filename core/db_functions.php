@@ -283,4 +283,13 @@ function does_value_exist($pdo, $table, $column, $value)
     $result = $stmt->fetchAll();
     return count($result) > 0;
 }
+
+function add_like($pdo, $liker_id, $post_id)
+{
+    $sql = "INSERT INTO likes_table (liker_id, post_id) VALUES (?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$liker_id, $post_id]);
+
+    return $stmt->rowCount() > 0;
+}
 ?>
