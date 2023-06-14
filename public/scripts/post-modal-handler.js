@@ -51,11 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const headerPostModalTrigger = document.getElementById("post-modal-trigger");
   const postImageInput = document.getElementById("post-modal-image-picker");
   const imagePreview = document.getElementById("post-modal-image");
+  const uploadContainer = document.querySelector(".upload-container");
   const editPostButtons = document.querySelectorAll(".post-edit-button");
 
   headerPostModalTrigger.addEventListener("click", () => {
     showModal("create");
     document.body.classList.add("modal-open");
+    imagePreview.classList.add("d-none");
+    uploadContainer.classList.remove("d-none");
+    uploadContainer.classList.add("d-flex");
   });
 
   postImageInput.addEventListener("change", (event) => {
@@ -65,11 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         imagePreview.src = e.target.result;
+        uploadContainer.classList.add("d-none");
+        imagePreview.classList.remove("d-none");
       };
       reader.readAsDataURL(input.files[0]);
       return;
     }
     imagePreview.src = "";
+    uploadContainer.classList.add("d-flex");
   });
 
   for (let i = 0; i < editPostButtons.length; i++) {
@@ -88,7 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((postData) => {
           document.getElementById("post-modal-caption").textContent =
             postData.caption;
-          imagePreview.setAttribute("src", `/instagram-clone${postData.image_dir}`);
+          imagePreview.setAttribute(
+            "src",
+            `/instagram-clone${postData.image_dir}`
+          );
         })
         .catch((error) => {
           console.error(error);

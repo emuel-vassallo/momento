@@ -256,18 +256,23 @@ body.modal-open {
 
 /* Create Post */
 .post-modal-image-container {
-  height: 300px !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.post-modal-image-container::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
 }
 
 #post-modal-image {
-  background-image: url("../images/image-add.png");
-  background-size: 30%;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
   object-fit: cover;
   object-position: center;
 }
