@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer w-100 px-5 py-4">
                     <div class="d-flex gap-3 w-100 m-0 p-0">
-                        <button type="button" id="delete-post-modal-cancel" class="btn btn-outline-secondary w-100"
+                        <button type="button" class="btn btn-outline-secondary w-100"
                             data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary w-100" id="post-modal-submit-button">Share</button>
                     </div>
