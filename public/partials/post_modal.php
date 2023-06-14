@@ -27,21 +27,18 @@
                     </label>
 
                     <input type="hidden" id="post-modal-post-id" name="post_modal_post_id" value="">
+                    <div id="errors-container_custom-post-modal-picture"></div>
 
-
-                    <div id="errors-container_custom-post-modal-picture" class="pt-1 mb-4"></div>
-
-                    <div class="form-group w-100">
+                    <div class="form-group w-100 mt-3">
                         <textarea class="form-control" id="post-modal-caption" name="post_caption" rows="3"
                             placeholder="Write a caption..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer w-100 px-5 py-4">
                     <div class="d-flex gap-3 w-100 m-0 p-0">
-                        <button type="button" id="delete-post-modal-cancel"
-                            class="btn btn-outline-secondary w-100 fw-semibold" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary w-100 fw-semibold"
-                            id="post-modal-submit-button">Share</button>
+                        <button type="button" id="delete-post-modal-cancel" class="btn btn-outline-secondary w-100"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary w-100" id="post-modal-submit-button">Share</button>
                     </div>
                 </div>
             </form>

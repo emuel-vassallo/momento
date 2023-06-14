@@ -17,7 +17,7 @@ const setupValidation = (mode) => {
         {
           rule: "minFilesCount",
           value: mode === "edit" ? 0 : 1,
-          errorMessage: "Please select an image",
+          errorMessage: "Please select an image.",
         },
         {
           rule: "maxFilesCount",
