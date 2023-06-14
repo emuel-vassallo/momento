@@ -22,16 +22,21 @@ function display_posts($posts)
 
         $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, false);
 
-        $caption_html = $caption === '' ? '' : "<svg class='bi bi-quote flex-shrink-0 mt-1' xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'>
-                                <path d='M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z'/>
-                            </svg>
-                            <div class='caption-text'>
-                            <p class='post-caption m-0 fw-medium'>
-                                {$caption}
-                             </p>
-                            </div>";
+        $caption_html = $caption === '' ? '' :
+            "
+            <div class='d-flex post-caption-container align-items-start gap-1'>
+                <svg class='bi bi-quote flex-shrink-0 mt-1' xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'>
+                    <path d='M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z'/>
+                </svg>
+                <div class='caption-text'>
+                    <p class='post-caption m-0 fw-medium'>
+                        {$caption}
+                    </p>
+                </div>
+            </div>
+            ";
 
-            echo "<div class='post d-flex w-100 bg-white p-4 border' data-post-id='{$post_id}' data-poster-id='{$poster_id}'>
+        echo "<div class='post d-flex w-100 bg-white p-4 border' data-post-id='{$post_id}' data-poster-id='{$poster_id}'>
                 <div class='w-100 d-flex flex-column align-items-start gap-3'>
                     <div class='post-top d-flex align-items-center w-100 justify-content-between'>
                         <a href='{$user_profile_link}' class='text-decoration-none'>
@@ -44,7 +49,7 @@ function display_posts($posts)
                             </div>
                         </a>
                         <div class='dropdown'>
-                            <i class='bi bi-three-dots w-100 h-100 text-secondary post-more-options-menu-button fs-5' data-bs-toggle='dropdown' aria-expanded='false'></i>
+                            <i class='bi bi-three-dots w-100 h-100 text-body-tertiary post-more-options-menu-button fs-4' data-bs-toggle='dropdown' aria-expanded='false'></i>
                             <ul class='dropdown-menu p-1'> 
                                 {$dropdown_menu_items}
                             </ul>
@@ -52,10 +57,9 @@ function display_posts($posts)
                     </div>
 
                     <img class='lazy feed-post-image' data-src='{$post_image_path}' alt='Post Image'>
+                      
+                    {$caption_html}
 
-                    <div class='d-flex post-caption-container align-items-start gap-1'>
-                      {$caption_html}
-                    </div>
                     <p class='post-creation-date text-secondary flex-shrink-0 m-0'><small>{$time_ago}</small></p>
                 </div>
               </div>";
