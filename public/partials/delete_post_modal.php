@@ -2,14 +2,14 @@
     aria-labelledby="deletePostModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Delete post?</h4>
+            <div class="d-flex modal-header">
+                <p class="modal-title h5" id="post-modal-label">Delete post?</p>
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete this post?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="delete-post-modal-cancel" class="btn btn-secondary"
+                <button type="button" id="delete-post-modal-cancel" class="btn btn-outline-secondary"
                     data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" id="confirm-delete-post">Delete</button>
             </div>
