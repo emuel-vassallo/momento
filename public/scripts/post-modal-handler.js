@@ -9,6 +9,7 @@ const showModal = (mode, postId = null) => {
   ).innerHTML = "";
 
   setupValidation(mode);
+
   if (mode === "edit") {
     document.getElementById("post-modal-post-id").value = postId;
     document.getElementById("post-modal-form").action =
@@ -18,6 +19,7 @@ const showModal = (mode, postId = null) => {
     document.getElementById("post-modal-image").src = "";
     return;
   }
+
   document.getElementById("post-modal-form").action =
     "../core/process_post_submission.php";
   document.getElementById("post-modal-submit-button").textContent = "Share";
@@ -91,6 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const postId = post.dataset.postId;
 
       showModal("edit", postId);
+
+      uploadContainer.classList.add("d-none");
+      imagePreview.classList.remove("d-none");
 
       getPost(postId)
         .then((postData) => {
