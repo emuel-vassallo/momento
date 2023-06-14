@@ -284,6 +284,15 @@ function does_value_exist($pdo, $table, $column, $value)
     return count($result) > 0;
 }
 
+function does_row_exist($pdo, $table, $column1, $value1, $column2, $value2)
+{
+    $sql = "SELECT * FROM $table WHERE $column1 = ? AND $column2 = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$value1, $value2]);
+    $result = $stmt->fetchAll();
+    return count($result) > 0;
+}
+
 function add_like($pdo, $liker_id, $post_id)
 {
     $sql = "INSERT INTO likes_table (liker_id, post_id) VALUES (?, ?)";

@@ -1,8 +1,11 @@
 <?php
 require_once("../core/db_functions.php");
 require_once("partials/post_functions.php");
-function display_posts($posts)
+
+function display_posts($conn, $posts)
 {
+    $user_id = $_SESSION['user_id'];
+
     foreach ($posts as $post) {
         $poster_id = $post['user_id'];
         $poster_profile_picture = '/instagram-clone' . $post['profile_picture_path'];
@@ -18,7 +21,11 @@ function display_posts($posts)
 
         $user_profile_link = "http://localhost/instagram-clone/public/user_profile.php?user_id=" . $poster_id;
 
-        $is_current_user = $_SESSION['user_id'] === $poster_id;
+        $is_current_user = $user_id === $poster_id;
+
+        $is_post_liked = does_row_exist($conn, 'likes_table', 'liker_id', $user_id, 'post_id', $post_id);
+
+        $like_checked_attribute = $is_post_liked ? 'checked' : '';
 
         $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, false);
 
@@ -62,7 +69,7 @@ function display_posts($posts)
                         <div class='px-2 d-flex justify-content-between'>
                             <div class='d-flex gap-3 align-items-center'>
                                 <div class='con-like cursor-pointer'>
-                                    <input title='like' type='checkbox' class='like cursor-pointer'>
+                                    <input title='like' type='checkbox' class='like cursor-pointer' {$like_checked_attribute}>
                                     <div class='checkmark'>
                                         <svg xmlns='http://www.w3.org/2000/svg' class='bi bi-heart outline' fill='currentColor' width='24' height='24' viewBox='0 0 16 16'>
                                             <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z'/>
@@ -110,14 +117,14 @@ function display_all_posts()
 {
     $conn = connect_to_db();
     $posts = get_all_posts($conn);
-    display_posts($posts);
+    display_posts($conn, $posts);
 }
 
 function display_user_posts($user_id)
 {
     $conn = connect_to_db();
     $posts = get_user_posts($conn, $user_id);
-    display_posts($posts);
+    display_posts($conn, $posts);
 }
 
 ?>
