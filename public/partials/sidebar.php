@@ -14,7 +14,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
 ?>
 
-<nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end">
+<nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end p-0">
     <div class="d-flex flex-column position-sticky h-100 w-100">
         <div class="sidebar-container d-flex flex-column h-100 pt-5 pb-4">
 

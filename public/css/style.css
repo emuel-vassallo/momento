@@ -86,7 +86,7 @@ body.modal-open {
 .sidebar {
   margin-top: 89px !important;
   width: 400px !important;
-  max-height: calc(100vh - 88px) !important;
+  max-height: calc(100vh - 86px) !important;
 }
 
 .nav-item.active:after {
