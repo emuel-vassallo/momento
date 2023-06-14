@@ -377,7 +377,7 @@ main {
 }
 
 
-/* Keyframes */
+/* Animations */
 @keyframes kfr-filled {
   0% {
     opacity: 0;
