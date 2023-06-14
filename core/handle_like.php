@@ -6,8 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$conn = connect_to_db();
+$pdo = connect_to_db();
 
+$like_action = isset($_POST['like_action']) ? trim($_POST['like_action']) : '';
 $user_id = isset($_POST['user_id']) ? trim($_POST['user_id']) : '';
 $post_id = isset($_POST['post_id']) ? trim($_POST['post_id']) : '';
 
@@ -16,7 +17,7 @@ if (empty($user_id) || empty($post_id)) {
     exit;
 }
 
-$success = add_like($conn, $user_id, $post_id);
+$success = $like_action === 'add' ? add_like($pdo, $user_id, $post_id) : remove_like($pdo, $user_id, $post_id);
 
 if ($success) {
     sendSuccessResponse();

@@ -1,4 +1,4 @@
-import { addLike } from "./request-utils.js";
+import { addLike, removeLike } from "./request-utils.js";
 
 const getUserId = async () => {
   try {
@@ -37,9 +37,7 @@ const handleLikeButtonClick = async (post, likeButton) => {
     const postId = post.dataset.postId;
 
     if (isUnliked) {
-      console.log(
-        `remove like row from likes_table where userId = ${userId} postId = ${postId}`
-      );
+      removeLike(userId, postId);
       return;
     }
 

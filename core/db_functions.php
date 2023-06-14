@@ -292,4 +292,13 @@ function add_like($pdo, $liker_id, $post_id)
 
     return $stmt->rowCount() > 0;
 }
+
+function remove_like($pdo, $liker_id, $post_id)
+{
+    $sql = "DELETE FROM likes_table WHERE liker_id = ? AND post_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$liker_id, $post_id]);
+
+    return $stmt->rowCount() > 0;
+}
 ?>
