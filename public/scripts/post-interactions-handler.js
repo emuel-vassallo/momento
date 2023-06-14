@@ -1,5 +1,9 @@
 import { addLike, removeLike } from "./request-utils.js";
 
+setTimeout(() => {
+  document.body.className = "";
+}, 100);
+
 const getUserId = async () => {
   try {
     const response = await fetch("../core/get_user_id.php");

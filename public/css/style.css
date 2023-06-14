@@ -12,6 +12,13 @@ body.modal-open {
   overflow: hidden !important;
 }
 
+body.preload * {
+  animation-duration: 0s !important;
+  -webkit-animation-duration: 0s !important;
+  transition: background-color 0s, opacity 0s, color 0s, width 0s, height 0s,
+    padding 0s, margin 0s !important;
+}
+
 /* Profile Setup */
 #edit-profile-form,
 #setup-profile-form {
@@ -227,16 +234,12 @@ body.modal-open {
 
 .con-like .filled {
   position: absolute;
-}
-
-.con-like .filled {
-  animation: kfr-filled 0.5s;
   display: none;
 }
 
 .con-like .celebrate {
   position: absolute;
-  animation: kfr-celebrate 0.5s;
+  animation: none;
   animation-fill-mode: forwards;
   display: none;
 }
@@ -247,10 +250,13 @@ body.modal-open {
 }
 
 .con-like .like:checked ~ .checkmark .filled {
+  animation: kfr-filled 0.5s;
   display: block;
 }
 
 .con-like .like:checked ~ .checkmark .celebrate {
+  animation: kfr-celebrate 0.5s;
+  animation-fill-mode: forwards;
   display: block;
 }
 
@@ -375,7 +381,6 @@ body.modal-open {
 main {
   margin-left: 400px !important;
 }
-
 
 /* Animations */
 @keyframes kfr-filled {

@@ -56,7 +56,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <script type="module" src="scripts/post-interactions-handler.js" defer></script>
 </head>
 
-<body class="h-100 w-100 m-0 p-0">
+<body class="h-100 w-100 m-0 p-0 preload">
     <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
     <?php include('partials/post_link_copied_toast.php'); ?>

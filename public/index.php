@@ -37,7 +37,7 @@ require_once('post_display.php');
     <script type="module" src="scripts/post-interactions-handler.js" defer></script>
 </head>
 
-<body class="h-100 w-100 m-0 p-0">
+<body class="h-100 w-100 m-0 p-0 preload">
     <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
     <?php include('partials/post_link_copied_toast.php'); ?>
@@ -50,7 +50,7 @@ require_once('post_display.php');
                 <div class="feed-top w-100 mb-4">
                     <p class="h3 fw-semibold">Feed</p>
                 </div>
-                <div class="feed-posts-container d-flex flex-column align-items-center justify-content-center gap-4">
+                <div class="stop-animation-on-load feed-posts-container d-flex flex-column align-items-center justify-content-center gap-4">
                     <?php display_all_posts($conn) ?>
                 </div>
             </div>
