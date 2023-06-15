@@ -208,6 +208,14 @@ body.preload * {
   cursor: pointer !important;
 }
 
+.post-chat-icon {
+  z-index: 100;
+}
+
+.likes-text-container {
+  z-index: 101;
+}
+
 /* Post Like Button */
 .con-like {
   --red: rgb(255, 50, 100);

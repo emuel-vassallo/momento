@@ -313,17 +313,20 @@ function remove_like($pdo, $liker_id, $post_id)
 
 function get_post_likes($pdo, $post_id)
 {
-    $sql = "SELECT COUNT(*) AS like_count
-            FROM likes_table
-            WHERE post_id = ?";
+    $sql = "SELECT u.*
+            FROM users_table AS u
+            JOIN likes_table AS l ON u.id = l.liker_id
+            WHERE l.post_id = ?";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$post_id]);
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $profiles = [];
 
-    return $result['like_count'];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $profiles[] = $row;
+    }
+
+    return $profiles;
 }
-
-
 ?>

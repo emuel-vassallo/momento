@@ -53,12 +53,14 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
 
     <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-more-options-handler.js" defer></script>
+    <script type="module" src="scripts/post-likes-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-interactions-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0 preload">
     <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
+    <?php include('partials/post_likes_modal.php') ?>
     <?php include('partials/post_link_copied_toast.php'); ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/header.php'); ?>

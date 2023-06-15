@@ -71,4 +71,4 @@ const removeLike = (userId, postId) => {
   return makeRequest(url, params);
 };
 
-export { checkExists, validateCredentials, deletePost, addLike, removeLike };
+export { checkExists, validateCredentials, deletePost, addLike, removeLike};
