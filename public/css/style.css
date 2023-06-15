@@ -386,6 +386,16 @@ body.preload * {
   box-shadow: none;
 }
 
+/* Post Likes Modal */
+
+.post-likes-modal-profile-picture {
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 50px;
+  height: 50px;
+}
+
 /* Main */
 main {
   margin-left: 400px !important;
