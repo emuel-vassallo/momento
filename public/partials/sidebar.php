@@ -1,14 +1,19 @@
 <?php
 require_once('../core/db_functions.php');
 $conn = connect_to_db();
-$user_post_count = get_user_post_count($conn, $_SESSION['user_id']);
+$user_id = $_SESSION['user_id'];
+$user_post_count = get_user_post_count($conn, $user_id);
+$user_followers= get_followers($conn, $user_id);
+$user_followers_count = count($user_followers);
+$user_following = get_followed_users($conn, $user_id);
+$user_following_count = count($user_following);
 
 $active_page = '';
 if (basename($_SERVER['PHP_SELF']) === 'index.php') {
     $active_page = 'feed';
 } elseif (basename($_SERVER['PHP_SELF']) === 'edit_profile.php') {
     $active_page = 'settings';
-} elseif (basename($_SERVER['PHP_SELF']) === 'user_profile.php' && isset($_GET['user_id']) && $_GET['user_id'] == $_SESSION['user_id']) {
+} elseif (basename($_SERVER['PHP_SELF']) === 'user_profile.php' && isset($_GET['user_id']) && $_GET['user_id'] == $user_id) {
     $active_page = 'profile';
 }
 
@@ -20,7 +25,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
             <!-- User Profile -->
             <div class="home-navbar-profile-container d-flex flex-column align-items-center text-center mb-4 pb-3">
-                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $user_id; ?>"
                     class="text-decoration-none">
                     <img class="home-navbar-user-profile-picture mb-2"
                         src="<?php echo $_SESSION['user_profile_picture_path']; ?>" alt="User profile picture">
@@ -35,21 +40,41 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 </a>
             </div>
 
-            <!-- User Profile Posts Information -->
-            <div class="navbar-user-posts-info mb-4 pb-3">
-                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>"
+            <!-- User Profile Information -->
+            <div class="d-flex align-items-center justify-content-between navbar-user-info mx-5 px-2 mb-4 pb-3">
+                <a href="http://localhost/instagram-clone/public/user_profile.php?user_id=<?php echo $user_id; ?>"
                     class="text-decoration-none">
-                    <div class="navbar-user-posts d-flex flex-column align-items-center">
+                    <div class="d-flex flex-column align-items-center">
                         <p class="fw-bold mb-1 text-body">
                             <?php echo $user_post_count ?>
                         </p>
-                        <p class="m-0 text-secondary"><?php echo $user_post_count === 1 ? 'Post' : 'Posts' ?></p>
+                        <p class="m-0 text-secondary">
+                            <?php echo strval($user_post_count) === '1' ? 'Post' : 'Posts' ?>
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <div class="d-flex flex-column align-items-center">
+                        <p class="fw-bold mb-1 text-body">
+                            <?php echo $user_followers_count ?>
+                        </p>
+                        <p class="m-0 text-secondary">
+                            <?php echo strval($user_followers_count) === '1' ? 'Follower' : 'Followers' ?>
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <div class="d-flex flex-column align-items-center">
+                        <p class="fw-bold mb-1 text-body">
+                            <?php echo $user_following_count ?>
+                        </p>
+                        <p class="m-0 text-secondary">Following</p>
                     </div>
                 </a>
             </div>
 
             <!-- User Bio -->
-            <div class="mb-5 pb-1 ps-5 pe-5 d-flex flex-column align-items-start">
+            <div class="mb-5 pb-1 mx-5 px-2 d-flex flex-column align-items-start">
                 <p class="user-profile-name fs-6 fw-bold p-0 m-0 mb-2 text-nowrap">
                     <?php echo $_SESSION['user_display_name']; ?>
                 </p>
@@ -62,7 +87,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
             <ul class="navbar-menu-links-container d-flex flex-column navbar-nav w-100 ps-0 mb-5">
                 <li
                     class="nav-item d-flex mb-2 align-items-center <?php echo ($active_page === 'feed') ? 'fw-semibold active' : ''; ?>">
-                    <a class="nav-link d-flex ps-5 w-100" href="index.php">
+                    <a class="nav-link d-flex px-2 ms-5 w-100" href="index.php">
                         <i
                             class="nav-link-icon bi <?php echo ($active_page === 'feed') ? 'bi-house-door-fill' : 'bi-house-door'; ?> me-4 d-flex align-items-center justify-content-center"></i>
                         Home
@@ -70,8 +95,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 </li>
                 <li
                     class="nav-item d-flex align-items-center <?php echo ($active_page === 'profile') ? 'fw-semibold active' : ''; ?>">
-                    <a class="nav-link d-flex ps-5 w-100"
-                        href="user_profile.php?user_id=<?php echo $_SESSION['user_id']; ?>">
+                    <a class="nav-link d-flex px-2 ms-5 w-100" href="user_profile.php?user_id=<?php echo $user_id; ?>">
                         <i
                             class="nav-link-icon bi <?php echo ($active_page === 'profile') ? 'bi-person-fill' : 'bi-person'; ?> me-4 d-flex align-items-center justify-content-center"></i>
                         Profile
@@ -79,7 +103,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 </li>
                 <li
                     class="nav-item d-flex align-items-center <?php echo ($active_page === 'settings') ? 'fw-semibold active' : ''; ?>">
-                    <a class="nav-link d-flex ps-5 w-100" href="edit_profile.php">
+                    <a class="nav-link d-flex px-2 ms-5 w-100" href="edit_profile.php">
                         <i
                             class="nav-link-icon bi <?php echo ($active_page === 'settings') ? 'bi-gear-fill' : 'bi-gear'; ?> me-4 d-flex align-items-center justify-content-center"></i>
                         Settings
@@ -89,7 +113,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
 
             <!-- Logout Link -->
             <div class="w-100 navbar-nav mt-auto">
-                <a class="nav-link d-flex ps-5 w-100" href="logout.php">
+                <a class="nav-link d-flex px-2 ms-5 w-100" href="logout.php">
                     <i
                         class="nav-link-icon bi bi-box-arrow-right me-4 d-flex align-items-center justify-content-center"></i>
                     Logout
