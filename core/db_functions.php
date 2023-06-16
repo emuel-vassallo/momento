@@ -329,4 +329,33 @@ function get_post_likes($pdo, $post_id)
 
     return $profiles;
 }
+
+function get_followers(PDO $pdo, $user_id)
+{
+    $sql = "SELECT u.* 
+              FROM users_table u 
+              INNER JOIN followers_table f ON u.id = f.follower_id
+              WHERE f.followed_id = :user_id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_followed_users(PDO $pdo, $user_id)
+{
+    $sql = "SELECT u.* 
+              FROM users_table u 
+              INNER JOIN followers_table f ON u.id = f.followed_id
+              WHERE f.follower_id = :user_id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
