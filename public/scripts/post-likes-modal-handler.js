@@ -37,9 +37,9 @@ const showModal = (postId = null) => {
 
         html += `
           <li class="search-result-item w-100">
-            <div class="p-2 d-flex align-items-center w-100 justify-content-between">
-              <a href="${userLink}" class="text-decoration-none">
-                <div class="post-user-info d-flex align-items-center justify-content-center">
+            <div class="p-2 d-flex  w-100">
+              <a href="${userLink}" class="text-decoration-none w-100">
+                <div class="post-user-info d-flex align-items-center">
                   <img class="post-likes-modal-profile-picture me-2 flex-shrink-0" src="${profilePicture}" alt="${displayName}'s profile picture">
                   <div class="ps-1 d-flex flex-column">
                     <p class="m-0 fw-semibold text-body">${displayName}</p>
