@@ -53,6 +53,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                         </p>
                     </div>
                 </a>
+                <p class="p-0 m-0"><small>.</small></p>
                 <a href="#" class="text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
                         <p class="fw-bold mb-1 text-body">
@@ -63,6 +64,7 @@ if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                         </p>
                     </div>
                 </a>
+                <p class="p-0 m-0"><small>.</small></p>
                 <a href="#" class="text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
                         <p class="fw-bold mb-1 text-body">
