@@ -16,9 +16,9 @@ define('DB_CONFIG', [
 
 Configuration::instance([
     'cloud' => [
-        'cloud_name' => "dp4vwqhol",
-        'api_key' => "566176181427548",
-        'api_secret' => "23y5SZK4E0cmjQjORSwQPVevDTI",
+        'cloud_name' => $_SERVER['CLOUDINARY_CLOUD_NAME'],
+        'api_key' => $_SERVER['CLOUDINARY_API_KEY'],
+        'api_secret' => $_SERVER['CLOUDINARY_API_SECRET'],
     ],
     'url' => [
         'secure' => true
