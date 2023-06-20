@@ -1,12 +1,14 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user_id'])) {
+function execute()
+{
   $userId = $_SESSION['user_id'];
-  $response = ['userId' => $userId];
-} else {
-  $response = ['userId' => null];
-}
 
-header('Content-Type: application/json');
-echo json_encode($response);
+  if (!$userId) {
+    return null;
+  }
+
+  return $userId;
+}
+?>

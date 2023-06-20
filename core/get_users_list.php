@@ -1,15 +1,10 @@
 <?php
 require_once("db_functions.php");
-$conn = connect_to_db();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $profiles = get_all_users($conn);
+function execute()
+{
+    $pdo = connect_to_db();
 
-    header('Content-Type: application/json');
-    echo json_encode($profiles);
-    exit;
+    return get_all_users($pdo);
 }
-
-header('Content-Type: application/json');
-echo json_encode(['success' => false, 'message' => 'Failed to retrieve post data']);
 ?>

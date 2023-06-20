@@ -1,39 +1,22 @@
 <?php
 require_once("db_functions.php");
-$conn = connect_to_db();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $type = isset($_POST['type']) ? trim($_POST['type']) : '';
-    $value = isset($_POST['value']) ? trim($_POST['value']) : '';
+function execute($params)
+{
+    $pdo = connect_to_db();
 
-    if (!empty($type) && !empty($value)) {
-        $column = '';
-        switch ($type) {
-            case 'email':
-                $column = 'email';
-                break;
-            case 'phone_number':
-                $column = 'phone_number';
-                break;
-            case 'username':
-                $column = 'username';
-                break;
-        }
+    $params = json_decode($params, true);
 
-        if (!empty($column)) {
-            if (does_value_exist($conn, 'users_table', $column, $value)) {
-                $response = ['success' => false];
-            } else {
-                $response = ['success' => true];
-            }
-        } else {
-            $response = ['success' => false];
-        }
-    } else {
-        $response = ['success' => false];
+    $type = $params['type'];
+    $value = $params['value'];
+
+    if (empty($type)) {
+        return false;
     }
 
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    if (does_value_exist($pdo, 'users_table', $type, $value)) {
+        return true;
+    }
+    return false;
 }
 ?>
