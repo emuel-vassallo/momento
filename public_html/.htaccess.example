@@ -1,5 +1,5 @@
 php_value display_errors 1
 
-SetEnv CLOUDINARY_CLOUD_NAME ""
-SetEnv CLOUDINARY_API_KEY ""
-SetEnv CLOUDINARY_API_SECRET ""
+SetEnv CLOUDINARY_CLOUD_NAME "your_cloud_name"
+SetEnv CLOUDINARY_API_KEY "your_api_key"
+SetEnv CLOUDINARY_API_SECRET "your_api_secret"
