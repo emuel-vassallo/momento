@@ -1,5 +1,5 @@
 const makeRequest = (file, params) => {
-  const apiUrl = `api_endpoint.php?file=${file}&params=${encodeURIComponent(
+  const apiUrl = `backend_handler.php?file=${file}&params=${encodeURIComponent(
     JSON.stringify(params)
   )}`;
 
