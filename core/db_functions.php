@@ -3,8 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-use Cloudinary\Api\Upload\UploadApi;
-
 function connect_to_db()
 {
     require_once 'config.php';
@@ -26,14 +24,15 @@ function connect_to_db()
 
 function upload_image_to_cloudinary($file, $target_dir)
 {
-    $result = (new UploadApi())->upload($file['tmp_name'], [
+    require_once '../vendor/autoload.php';
+
+    $result = (new Cloudinary\Api\Upload\UploadApi())->upload($file['tmp_name'], [
         'folder' => $target_dir,
-        'public_id' => uniqid(), 
         'overwrite' => true,
         'resource_type' => 'image',
     ]);
 
-    return $result['secure_url'];
+    return $result;
 }
 
 function process_file_and_execute_query($pdo, $file, $target_dir, $query_callback)
@@ -42,13 +41,15 @@ function process_file_and_execute_query($pdo, $file, $target_dir, $query_callbac
         return false;
     }
 
-    $new_image_path = upload_image_to_cloudinary($file, $target_dir);
+    $new_image_result = upload_image_to_cloudinary($file, $target_dir);
+    $new_image_path = $new_image_result['secure_url'];
+    $new_image_public_id = $new_image_result['public_id'];
 
-    if (!$new_image_path) {
+    if (!$new_image_path || !$new_image_public_id) {
         return false;
     }
 
-    return $query_callback($pdo, $new_image_path);
+    return $query_callback($pdo, $new_image_path, $new_image_public_id);
 }
 
 function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed_password, $display_name, $bio)
@@ -74,12 +75,12 @@ function add_post($pdo, $user_id, $caption)
 {
     $target_dir = 'momento/posts';
 
-    $query_callback = function ($pdo, $new_post_modal_image_picker_path) use ($user_id, $caption) {
-        $sql = "INSERT INTO posts_table (user_id, image_dir, caption, created_at) 
-                  VALUES (?, ?, ?, NOW())";
+    $query_callback = function ($pdo, $new_post_modal_image_picker_path, $new_post_image_cloudinary_public_id) use ($user_id, $caption) {
+        $sql = "INSERT INTO posts_table (user_id, image_dir, cloudinary_public_id, caption, created_at) 
+                  VALUES (?, ?, ?, ?, NOW())";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id, $new_post_modal_image_picker_path, $caption]);
+        $stmt->execute([$user_id, $new_post_modal_image_picker_path, $new_post_image_cloudinary_public_id, $caption]);
 
         return $stmt->rowCount() > 0;
     };
@@ -270,6 +271,43 @@ function update_user_profile($pdo, $user_id, $display_name, $bio)
     return $stmt->execute([$new_image_url, $display_name, $bio, $user_id]);
 }
 
+function get_post_image_public_id($pdo, $post_id)
+{
+    $sql = "SELECT cloudinary_public_id
+            FROM posts_table 
+            WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($post_id);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function delete_image_from_cloudinary($public_id)
+{
+    require_once '../vendor/autoload.php';
+
+    try {
+        $result = (new Cloudinary\Api\Upload\UploadApi())->destroy($public_id);
+        return !empty($result) && $result['result'] == 'ok';
+    } catch (\Exception $e) {
+        return false;
+    }
+}
+
+function get_image_public_id_from_post($pdo, $post_id)
+{
+    $sql = "SELECT cloudinary_public_id FROM posts_table WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$post_id]);
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result && isset($result['cloudinary_public_id'])) {
+        return $result['cloudinary_public_id'];
+    } else {
+        return null;
+    }
+}
+
 function delete_post($pdo, $post_id)
 {
     $sql = "DELETE FROM posts_table WHERE id = ?";
@@ -278,6 +316,26 @@ function delete_post($pdo, $post_id)
 
     return $stmt->rowCount() > 0;
 }
+
+function delete_post_with_image($pdo, $post_id)
+{
+    $image_public_id = get_image_public_id_from_post($pdo, $post_id);
+
+    $image_deleted = delete_image_from_cloudinary($image_public_id);
+
+    if (!$image_deleted) {
+        return false;
+    }
+
+    $post_deleted = delete_post($pdo, $post_id);
+
+    if (!$post_deleted) {
+        return false;
+    }
+
+    return true;
+}
+
 function does_value_exist($pdo, $table, $column, $value)
 {
     $sql = "SELECT * FROM $table WHERE $column = ?";

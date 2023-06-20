@@ -13,7 +13,7 @@ function execute($params)
         return ['success' => false, 'error' => 'Invalid parameters'];
     }
 
-    $result = delete_post($pdo, $post_id);
+    $result = delete_post_with_image($pdo, $post_id);
 
     if ($result) {
         return ['success' => true];
