@@ -43,7 +43,11 @@ __Momento__ is a simple full-stack social media platform built with PHP, MySQL, 
 To install and set up the project, follow the instructions below:
 
 ### Prerequisites
-- XAMPP installed on your machine. You can download XAMPP from the official website: https://www.apachefriends.org/
+Before you proceed with the installation, make sure you have the following prerequisites:
+
+- PHP version 8.1 or greater.
+- Composer. 
+- XAMPP, which can be downloaded from official website: https://www.apachefriends.org/
 - Cloudinary account with API access keys. You can create a new account here: https://cloudinary.com/
 
 ### Before Running the Project
@@ -77,7 +81,13 @@ SetEnv CLOUDINARY_API_SECRET "your_api_secret"
 
 Make sure to replace `"your_cloud_name"`, `"your_api_key"`, and `"your_api_secret"` with your actual Cloudinary API credentials.
 
-11. Finally, navigate to [http://localhost/momento](http://localhost/momento) in your web browser to run the Momento project on your localhost.
+11. Run the following command in the project root directory to install the required dependencies using Composer:
+
+```
+composer install
+```
+
+12.  Finally, navigate to [http://localhost/momento](http://localhost/momento) in your web browser to run the Momento project on your localhost.
 
 By following these steps, you will be able to run the Momento project on your local machine.
 
