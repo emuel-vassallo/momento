@@ -1,11 +1,4 @@
-/* Scrollbar */
-body::-webkit-scrollbar {
-  width: 0;
-  background-color: transparent;
-}
-
 body {
-  scrollbar-width: none;
   overflow: visible !important;
 }
 
