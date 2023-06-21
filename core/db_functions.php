@@ -62,14 +62,14 @@ function create_user($pdo, $email, $phone_number, $full_name, $username, $hashed
 {
     $target_dir = 'momento/profile-pictures/';
 
-    $query_callback = function ($pdo, $profile_picture_path) use ($username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
+    $query_callback = function ($pdo, $profile_picture_path, $new_image_public_id) use ($username, $full_name, $email, $phone_number, $hashed_password, $display_name, $bio) {
         $username = strtolower($username);
         $sql = "INSERT INTO users_table 
-                  (username, full_name, email, phone_number, password, profile_picture_path, display_name, bio) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                  (username, full_name, email, phone_number, password, profile_picture_path, image_public_id, display_name, bio) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$username, $full_name, $email, $phone_number, $hashed_password, $profile_picture_path, $display_name, $bio]);
+        $stmt->execute([$username, $full_name, $email, $phone_number, $hashed_password, $profile_picture_path, $new_image_public_id, $display_name, $bio]);
 
         return $stmt->rowCount() > 0;
     };
@@ -81,12 +81,12 @@ function add_post($pdo, $user_id, $caption)
 {
     $target_dir = 'momento/posts';
 
-    $query_callback = function ($pdo, $new_post_modal_image_picker_path, $new_post_image_cloudinary_public_id) use ($user_id, $caption) {
-        $sql = "INSERT INTO posts_table (user_id, image_dir, cloudinary_public_id, caption, created_at) 
+    $query_callback = function ($pdo, $new_post_modal_image_picker_path, $new_post_image_public_id) use ($user_id, $caption) {
+        $sql = "INSERT INTO posts_table (user_id, image_dir, image_public_id, caption, created_at) 
                   VALUES (?, ?, ?, ?, NOW())";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id, $new_post_modal_image_picker_path, $new_post_image_cloudinary_public_id, $caption]);
+        $stmt->execute([$user_id, $new_post_modal_image_picker_path, $new_post_image_public_id, $caption]);
 
         return $stmt->rowCount() > 0;
     };
@@ -267,33 +267,63 @@ function update_post($pdo, $post_id, $new_caption)
 }
 
 
-function update_user_profile($pdo, $user_id, $display_name, $bio)
+function update_user_profile($pdo, $user_id, $new_display_name, $new_bio)
 {
     $new_image_file = $_FILES['profile_picture_picker'];
-    $target_dir = 'momento/profile-pictures';
     $new_image_url = '';
+    $is_image_updated = !empty($new_image_file['name']);
+    $is_display_name_updated = isset($new_display_name);
+    $is_bio_updated = isset($new_caption);
+    $is_profile_updated = $is_display_name_updated || $is_image_updated || $is_bio_updated;
 
-    if (!empty($new_image_file['name'])) {
-        $new_image_url = upload_image_to_cloudinary($new_image_file, $target_dir);
-        $_SESSION['user_profile_picture_path'] = $new_image_url;
-    } else {
-        $sql = "SELECT profile_picture_path FROM users_table WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($is_profile_updated) {
+        if ($is_display_name_updated && $is_bio_updated && $is_profile_updated) {
+            $target_dir = 'momento/profile-pictures';
+            $image_public_id = get_image_public_id_from_user($pdo, $user_id);
+            $new_image_url = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
 
-        if ($row) {
-            $new_image_url = $row['profile_picture_path'];
-        }
-    }
+            $_SESSION['user_profile_picture_path'] = $new_image_url;
 
-    $sql = "UPDATE users_table SET 
+            $sql = "UPDATE users_table SET 
               profile_picture_path = ?,
               display_name = ?,
               bio = ?
               WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    return $stmt->execute([$new_image_url, $display_name, $bio, $user_id]);
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_image_url, $new_display_name, $new_bio, $user_id]);
+        }
+        if ($is_image_updated) {
+            $target_dir = 'momento/profile-pictures';
+            $image_public_id = get_image_public_id_from_user($pdo, $user_id);
+            $new_image_url = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
+
+            $_SESSION['user_profile_picture_path'] = $new_image_url;
+
+            $sql = "UPDATE users_table SET 
+              profile_picture_path = ?
+              WHERE id = ?";
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_image_url, $user_id]);
+        }
+        if ($is_display_name_updated) {
+            $sql = "UPDATE users_table SET 
+              display_name = ?
+              WHERE id = ?";
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_display_name, $user_id]);
+        }
+        if ($is_bio_updated) {
+            $sql = "UPDATE posts_table SET 
+              bio = ?
+              WHERE id = ?";
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_bio, $user_id]);
+        }
+    }
 }
 
 function delete_image_from_cloudinary($public_id)
@@ -308,16 +338,31 @@ function delete_image_from_cloudinary($public_id)
     }
 }
 
+function get_image_public_id_from_user($pdo, $user_id)
+{
+    $sql = "SELECT image_public_id FROM users_table WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$user_id]);
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result && isset($result['image_public_id'])) {
+        return $result['image_public_id'];
+    } else {
+        return null;
+    }
+}
+
 function get_image_public_id_from_post($pdo, $post_id)
 {
-    $sql = "SELECT cloudinary_public_id FROM posts_table WHERE id = ?";
+    $sql = "SELECT image_public_id FROM posts_table WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$post_id]);
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result && isset($result['cloudinary_public_id'])) {
-        return $result['cloudinary_public_id'];
+    if ($result && isset($result['image_public_id'])) {
+        return $result['image_public_id'];
     } else {
         return null;
     }
