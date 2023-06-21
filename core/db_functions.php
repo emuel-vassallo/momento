@@ -22,18 +22,24 @@ function connect_to_db()
     }
 }
 
-function upload_image_to_cloudinary($file, $target_dir)
+function upload_image_to_cloudinary($file, $target_dir, $public_id = null)
 {
     require_once '../vendor/autoload.php';
 
-    $result = (new Cloudinary\Api\Upload\UploadApi())->upload($file['tmp_name'], [
+    if (!empty($public_id)) {
+        return (new Cloudinary\Api\Upload\UploadApi())->upload($file['tmp_name'], [
+            'public_id' => $public_id,
+            'resource_type' => 'image',
+        ]);
+
+    }
+
+    return (new Cloudinary\Api\Upload\UploadApi())->upload($file['tmp_name'], [
         'folder' => $target_dir,
-        'overwrite' => true,
         'resource_type' => 'image',
     ]);
-
-    return $result;
 }
+
 
 function process_file_and_execute_query($pdo, $file, $target_dir, $query_callback)
 {
@@ -214,36 +220,55 @@ function get_post($pdo, $post_id)
 function update_post($pdo, $post_id, $new_caption)
 {
     $new_image_file = $_FILES['post_modal_image_picker'];
-    $target_dir = 'momento/posts';
-    $new_image_path = '';
+    $new_image_path = null;
+    $is_image_updated = !empty($new_image_file['name']);
+    $is_caption_updated = isset($new_caption);
+    $is_post_updated = $is_caption_updated || $is_image_updated;
 
-    if (!empty($new_image_file['name'])) {
-        $new_image_path = upload_image_to_cloudinary($new_image_file, $target_dir);
-    } else {
-        $sql = "SELECT image_dir FROM posts_table WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$post_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($is_post_updated) {
+        if ($is_caption_updated && $is_image_updated) {
+            $target_dir = 'momento/posts';
+            $image_public_id = get_image_public_id_from_post($pdo, $post_id);
+            $new_image_path = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
 
-        if ($row) {
-            $new_image_path = $row['image_dir'];
-        }
-    }
-
-    $sql = "UPDATE posts_table SET 
+            $sql = "UPDATE posts_table SET 
               image_dir = ?,
               caption = ?,
               updated_at = NOW()
               WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    return $stmt->execute([$new_image_path, $new_caption, $post_id]);
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_image_path, $new_caption, $post_id]);
+        }
+        if ($is_caption_updated) {
+            $sql = "UPDATE posts_table SET 
+              caption = ?,
+              updated_at = NOW()
+              WHERE id = ?";
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_caption, $post_id]);
+        }
+        if ($is_image_updated) {
+            $target_dir = 'momento/posts';
+            $image_public_id = get_image_public_id_from_post($pdo, $post_id);
+            $new_image_path = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
+
+            $sql = "UPDATE posts_table SET 
+              image_dir = ?,
+              updated_at = NOW()
+              WHERE id = ?";
+
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([$new_image_path, $post_id]);
+        }
+    }
+    return true;
 }
 
 
 function update_user_profile($pdo, $user_id, $display_name, $bio)
 {
-    require_once '../vendor/autoload.php';
-
     $new_image_file = $_FILES['profile_picture_picker'];
     $target_dir = 'momento/profile-pictures';
     $new_image_url = '';
@@ -269,16 +294,6 @@ function update_user_profile($pdo, $user_id, $display_name, $bio)
               WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([$new_image_url, $display_name, $bio, $user_id]);
-}
-
-function get_post_image_public_id($pdo, $post_id)
-{
-    $sql = "SELECT cloudinary_public_id
-            FROM posts_table 
-            WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($post_id);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function delete_image_from_cloudinary($public_id)
