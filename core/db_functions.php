@@ -454,9 +454,9 @@ function get_post_likes($pdo, $post_id)
 function get_user_followers(PDO $pdo, $user_id)
 {
     $sql = "SELECT u.* 
-              FROM users_table u 
-              INNER JOIN followers_table f ON u.id = f.follower_id
-              WHERE f.followed_id = :user_id";
+            FROM users_table u 
+            INNER JOIN followers_table f ON u.id = f.follower_id
+            WHERE f.followed_id = :user_id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -468,9 +468,9 @@ function get_user_followers(PDO $pdo, $user_id)
 function get_followed_users_by_user(PDO $pdo, $user_id)
 {
     $sql = "SELECT u.* 
-              FROM users_table u 
-              INNER JOIN followers_table f ON u.id = f.followed_id
-              WHERE f.follower_id = :user_id";
+            FROM users_table u 
+            INNER JOIN followers_table f ON u.id = f.followed_id
+            WHERE f.follower_id = :user_id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -479,4 +479,23 @@ function get_followed_users_by_user(PDO $pdo, $user_id)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function follow_user(PDO $pdo, $follower_id, $followed_id)
+{
+    $sql = "INSERT INTO followers_table (follower_id, followed_id) VALUES (:follower_id, :followed_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':follower_id', $follower_id, PDO::PARAM_INT);
+    $stmt->bindParam(':followed_id', $followed_id, PDO::PARAM_INT);
+    $success = $stmt->execute();
+    return $success;
+}
+
+function unfollow_user(PDO $pdo, $follower_id, $followed_id)
+{
+    $sql = "DELETE FROM followers_table WHERE follower_id = :follower_id AND followed_id = :followed_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':follower_id', $follower_id, PDO::PARAM_INT);
+    $stmt->bindParam(':followed_id', $followed_id, PDO::PARAM_INT);
+    $success = $stmt->execute();
+    return $success;
+}
 ?>

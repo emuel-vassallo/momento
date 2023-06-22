@@ -64,3 +64,16 @@ export const getPostLikes = (postId) => {
   const params = { post_id: postId };
   return makeRequest(file, params);
 };
+
+
+export const followUser = (followerId, followedId) => {
+  const file = "follow_user.php";
+  const params = { follower_id: followerId, followed_id: followedId };
+  return makeRequest(file, params);
+};
+
+export const unfollowUser = (followerId, followedId) => {
+  const file = "unfollow_user.php";
+  const params = { follower_id: followerId, followed_id: followedId };
+  return makeRequest(file, params);
+};

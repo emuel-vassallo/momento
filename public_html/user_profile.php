@@ -59,6 +59,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <script type="module" src="scripts/post-more-options-handler.js" defer></script>
     <script type="module" src="scripts/post-likes-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-interactions-handler.js" defer></script>
+    <script type="module" src="scripts/follow-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0 preload">
@@ -88,23 +89,39 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                                 <?php echo $is_logged_in_user_profile ? '
                                 <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
                             ' : '
-                                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btn-check-2-outlined">
-                                    <span class="follow-text">Follow</span>
+                                <input type="checkbox" class="btn-check" id="user-profile-follow-button" checked autocomplete="off">
+                                <label class="btn btn-outline-primary" for="user-profile-follow-button">
+                                    <span class="follow-text fw-medium">Follow</span>
                                     <span class="unfollow-text">Unfollow</span>
                                 </label>
                             '; ?>
                             </div>
                         </div>
-                        <div>
+                        <div class="d-flex gap-3">
                             <a id="user-profile-posts-amount"
-                                class='d-flex user-profile-posts-amount-container align-items-center gap-1 text-decoration-none text-body'>
-                                <p class="user-profile-posts-amount fw-bold m-0 fs-6">
+                                class='d-flex user-profile-posts-amount-container align-items-center gap-1 text-decoration-none text-body fw-semibold'>
+                                <p class="user-profile-posts-amount m-0 fs-6">
                                     <?php echo $user_posts_amount ?>
                                 </p>
                                 <p class="m-0 fs-6">
                                     <?php echo $user_posts_amount === 1 ? 'Post' : 'Posts' ?>
                                 </p>
+                            </a>
+                            <a id="user-profile-followers-amount"
+                                class='d-flex user-profile-followers-amount-container align-items-center gap-1 text-decoration-none text-body fw-semibold'>
+                                <p class="user-profile-followers-amount m-0 fs-6">
+                                    <?php echo $user_followers_amount ?>
+                                </p>
+                                <p class="m-0 fs-6">
+                                    <?php echo $user_followers_amount === 1 ? 'Follower' : 'Followers' ?>
+                                </p>
+                            </a>
+                            <a id="user-profile-following-amount"
+                                class='d-flex user-profile-following-amount-container align-items-center gap-1 text-decoration-none text-body fw-semibold'>
+                                <p class="user-profile-following-amount m-0 fs-6">
+                                    <?php echo $user_following_amount ?>
+                                </p>
+                                <p class="m-0 fs-6">Following</p>
                             </a>
                         </div>
                         <div class="user-profile-bio-container">
