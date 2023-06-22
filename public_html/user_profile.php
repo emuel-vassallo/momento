@@ -16,6 +16,7 @@ $conn = connect_to_db();
 redirect_if_not_logged_in();
 if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     $current_user_id = $_GET['user_id'];
+    $is_logged_in_user_profile = intval($current_user_id) === intval($_SESSION['user_id']);
     $user_info = get_user_info($conn, $current_user_id);
     $user_bio = nl2br($user_info['bio']);
 
@@ -74,13 +75,20 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                     <img class="user-profile-profile-picture flex-shrink-0"
                         src="<?php echo $poster_profile_pic_transformed_url; ?>" alt="">
                     <div class="user-profile-text-info d-flex flex-column gap-3 w-100 p-1">
-                        <div>
-                            <p class="user-profile-display-name fs-5 fw-bold text-body m-0">
-                                <?php echo $user_info['display_name'] ?>
-                            </p>
-                            <p class="user-profile-username text-secondary fs-6 m-0">
-                                <?php echo '@' . $user_info['username'] ?>
-                            </p>
+                        <div class="d-flex gap-4 align-items-center">
+                            <div>
+                                <p class="user-profile-display-name fs-5 fw-bold text-body m-0">
+                                    <?php echo $user_info['display_name'] ?>
+                                </p>
+                                <p class="user-profile-username text-secondary fs-6 m-0">
+                                    <?php echo '@' . $user_info['username'] ?>
+                                </p>
+                            </div>
+                            <?php echo $is_logged_in_user_profile ? '
+                            <div>
+                                <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
+                            </div>
+                            ' : ''; ?>
                         </div>
                         <div>
                             <a id="user-profile-posts-amount"

@@ -5,9 +5,9 @@ require_once('../core/utility_functions.php');
 $conn = connect_to_db();
 $user_id = $_SESSION['user_id'];
 $user_post_count = get_user_post_count($conn, $user_id);
-$user_followers = get_followers($conn, $user_id);
+$user_followers = get_user_followers($conn, $user_id);
 $user_followers_count = count($user_followers);
-$user_following = get_followed_users($conn, $user_id);
+$user_following = get_followed_users_by_user($conn, $user_id);
 $user_following_count = count($user_following);
 
 $active_page = get_active_page();
@@ -17,7 +17,6 @@ $profile_pic_compression_settings = "w_500/f_auto,q_auto:eco";
 $profile_pic_transformed_url = add_transformation_parameters($poster_profile_picture, $profile_pic_compression_settings);
 
 $user_profile_link = 'user_profile.php?user_id=' . $user_id . '"';
-
 ?>
 
 <nav class="fixed-top sidebar navbar navbar-light bg-white h-100 border-end p-0">

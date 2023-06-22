@@ -451,7 +451,7 @@ function get_post_likes($pdo, $post_id)
     return $profiles;
 }
 
-function get_followers(PDO $pdo, $user_id)
+function get_user_followers(PDO $pdo, $user_id)
 {
     $sql = "SELECT u.* 
               FROM users_table u 
@@ -465,7 +465,7 @@ function get_followers(PDO $pdo, $user_id)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_followed_users(PDO $pdo, $user_id)
+function get_followed_users_by_user(PDO $pdo, $user_id)
 {
     $sql = "SELECT u.* 
               FROM users_table u 
