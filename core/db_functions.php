@@ -266,63 +266,41 @@ function update_post($pdo, $post_id, $new_caption)
     return true;
 }
 
-
 function update_user_profile($pdo, $user_id, $new_display_name, $new_bio)
 {
     $new_image_file = $_FILES['profile_picture_picker'];
-    $new_image_url = '';
     $is_image_updated = !empty($new_image_file['name']);
     $is_display_name_updated = isset($new_display_name);
-    $is_bio_updated = isset($new_caption);
+    $is_bio_updated = isset($new_bio);
     $is_profile_updated = $is_display_name_updated || $is_image_updated || $is_bio_updated;
 
+    $new_image_url = '';
+
     if ($is_profile_updated) {
-        if ($is_display_name_updated && $is_bio_updated && $is_profile_updated) {
-            $target_dir = 'momento/profile-pictures';
-            $image_public_id = get_image_public_id_from_user($pdo, $user_id);
-            $new_image_url = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
+        $target_dir = 'momento/profile-pictures';
+        $image_public_id = get_image_public_id_from_user($pdo, $user_id);
 
-            $_SESSION['user_profile_picture_path'] = $new_image_url;
-
-            $sql = "UPDATE users_table SET 
-              profile_picture_path = ?,
-              display_name = ?,
-              bio = ?
-              WHERE id = ?";
-
-            $stmt = $pdo->prepare($sql);
-            return $stmt->execute([$new_image_url, $new_display_name, $new_bio, $user_id]);
-        }
         if ($is_image_updated) {
-            $target_dir = 'momento/profile-pictures';
-            $image_public_id = get_image_public_id_from_user($pdo, $user_id);
             $new_image_url = upload_image_to_cloudinary($new_image_file, $target_dir, $image_public_id)['secure_url'];
-
             $_SESSION['user_profile_picture_path'] = $new_image_url;
-
-            $sql = "UPDATE users_table SET 
-              profile_picture_path = ?
-              WHERE id = ?";
-
-            $stmt = $pdo->prepare($sql);
-            return $stmt->execute([$new_image_url, $user_id]);
         }
-        if ($is_display_name_updated) {
-            $sql = "UPDATE users_table SET 
-              display_name = ?
-              WHERE id = ?";
 
-            $stmt = $pdo->prepare($sql);
-            return $stmt->execute([$new_display_name, $user_id]);
-        }
-        if ($is_bio_updated) {
-            $sql = "UPDATE posts_table SET 
-              bio = ?
-              WHERE id = ?";
+        $sql = "UPDATE users_table SET 
+            profile_picture_path = IF(:is_image_updated, :new_image_url, profile_picture_path),
+            display_name = IF(:is_display_name_updated, :new_display_name, display_name),
+            bio = IF(:is_bio_updated, :new_bio, bio)
+            WHERE id = :user_id";
 
-            $stmt = $pdo->prepare($sql);
-            return $stmt->execute([$new_bio, $user_id]);
-        }
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':is_image_updated', $is_image_updated, PDO::PARAM_BOOL);
+        $stmt->bindParam(':new_image_url', $new_image_url);
+        $stmt->bindParam(':is_display_name_updated', $is_display_name_updated, PDO::PARAM_BOOL);
+        $stmt->bindParam(':new_display_name', $new_display_name);
+        $stmt->bindParam(':is_bio_updated', $is_bio_updated, PDO::PARAM_BOOL);
+        $stmt->bindParam(':new_bio', $new_bio);
+        $stmt->bindParam(':user_id', $user_id);
+
+        return $stmt->execute();
     }
 }
 

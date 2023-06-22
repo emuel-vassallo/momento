@@ -27,8 +27,8 @@ const handleDoubleClickLike = async (post, likeButton) => {
   getUserId()
     .then((userId) => {
       const postId = post.dataset.postId;
-      addLike(userId, postId);
       updateLikesText(post, "add");
+      addLike(userId, postId);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -45,13 +45,13 @@ const handleLikeButtonClick = async (post, likeButton) => {
       const postId = post.dataset.postId;
 
       if (isUnliked) {
-        removeLike(userId, postId);
         updateLikesText(post, "subtract");
+        removeLike(userId, postId);
         return;
       }
 
-      addLike(userId, postId);
       updateLikesText(post, "add");
+      addLike(userId, postId);
     })
     .catch((error) => {
       console.error("Error:", error);

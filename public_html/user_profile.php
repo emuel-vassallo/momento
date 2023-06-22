@@ -92,14 +92,14 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                             </div>
                             <div>
                                 <?php echo $is_logged_in_user_profile ? '
-    <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
-    ' : '
-    <input type="checkbox" class="btn-check" id="user-profile-follow-button" autocomplete="off" ' . $follow_button_checked_attribute . '>
-    <label class="btn btn-outline-primary" for="user-profile-follow-button">
-        <span class="follow-text fw-medium">Follow</span>
-        <span class="unfollow-text">Unfollow</span>
-    </label>
-    '; ?>
+                                    <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
+                                    ' : '
+                                    <input type="checkbox" class="btn-check" id="user-profile-follow-button" autocomplete="off" ' . $follow_button_checked_attribute . '>
+                                    <label class="btn btn-outline-primary" for="user-profile-follow-button">
+                                        <span class="follow-text fw-medium">Follow</span>
+                                        <span class="unfollow-text">Unfollow</span>
+                                    </label>
+                                '; ?>
                             </div>
 
                         </div>
