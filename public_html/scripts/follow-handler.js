@@ -7,26 +7,29 @@ const getUserProfileId = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const followButton = document.getElementById("user-profile-follow-button");
+  const followButton =
+    document.getElementById("user-profile-follow-button") || null;
 
-  let userId = null;
+  if (followButton) {
+    let userId = null;
 
-  getUserId()
-    .then((fetchedUserId) => {
-      userId = fetchedUserId;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+    getUserId()
+      .then((fetchedUserId) => {
+        userId = fetchedUserId;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    followButton.addEventListener("change", async () => {
+      const isUnfollowing = followButton.checked;
+      const followedUserId = getUserProfileId();
+
+      if (isUnfollowing) {
+        await unfollowUser(userId, followedUserId);
+      } else {
+        await followUser(userId, followedUserId);
+      }
     });
-
-  followButton.addEventListener("change", async () => {
-    const isUnfollowing = followButton.checked;
-    const followedUserId = getUserProfileId();
-
-    if (isUnfollowing) {
-      await unfollowUser(userId, followedUserId);
-    } else {
-      await followUser(userId, followedUserId);
-    }
-  });
+  }
 });

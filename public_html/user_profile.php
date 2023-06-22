@@ -15,8 +15,10 @@ $conn = connect_to_db();
 
 redirect_if_not_logged_in();
 if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
+    $pdo = connect_to_db();
+    $user_id = $_SESSION['user_id'];
     $current_user_id = $_GET['user_id'];
-    $is_logged_in_user_profile = intval($current_user_id) === intval($_SESSION['user_id']);
+    $is_logged_in_user_profile = intval($current_user_id) === intval($user_id);
     $user_info = get_user_info($conn, $current_user_id);
     $user_bio = nl2br($user_info['bio']);
 
@@ -29,6 +31,9 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     $user_followers_amount = count($user_followers);
     $user_following = get_followed_users_by_user($conn, $current_user_id);
     $user_following_amount = count($user_following);
+
+    $is_followed_by_user = does_row_exist($pdo, 'followers_table', 'follower_id', $user_id, 'followed_id', $current_user_id);
+    $follow_button_checked_attribute = $is_followed_by_user ? '' : 'checked';
 }
 ?>
 
@@ -68,8 +73,8 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <?php include('partials/post_likes_modal.php') ?>
     <?php include('partials/post_link_copied_toast.php'); ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
-        <?php include('partials/header.php'); ?>
         <?php include('partials/sidebar.php'); ?>
+        <?php include('partials/header.php'); ?>
         <main class="page-user-profile bg-light">
             <div class="py-5 d-flex flex-column h-100 align-items-center gap-5">
                 <div class="profile-info d-flex pb-0 gap-4 align-items-center justify-content-start mb-3">
@@ -87,15 +92,16 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                             </div>
                             <div>
                                 <?php echo $is_logged_in_user_profile ? '
-                                <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
-                            ' : '
-                                <input type="checkbox" class="btn-check" id="user-profile-follow-button" checked autocomplete="off">
-                                <label class="btn btn-outline-primary" for="user-profile-follow-button">
-                                    <span class="follow-text fw-medium">Follow</span>
-                                    <span class="unfollow-text">Unfollow</span>
-                                </label>
-                            '; ?>
+    <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
+    ' : '
+    <input type="checkbox" class="btn-check" id="user-profile-follow-button" autocomplete="off" ' . $follow_button_checked_attribute . '>
+    <label class="btn btn-outline-primary" for="user-profile-follow-button">
+        <span class="follow-text fw-medium">Follow</span>
+        <span class="unfollow-text">Unfollow</span>
+    </label>
+    '; ?>
                             </div>
+
                         </div>
                         <div class="d-flex gap-3">
                             <a id="user-profile-posts-amount"
