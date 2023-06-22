@@ -54,7 +54,7 @@ $user_profile_link = 'user_profile.php?user_id=' . $user_id . '"';
                 <p class="p-0 m-0"><small>.</small></p>
                 <a href="#" class="text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
-                        <p class="fw-bold mb-1 text-body">
+                        <p class="fw-bold mb-1 text-body" id="sidebar-user-followers-count">
                             <?php echo $user_followers_count ?>
                         </p>
                         <p class="m-0 text-secondary">
@@ -65,7 +65,7 @@ $user_profile_link = 'user_profile.php?user_id=' . $user_id . '"';
                 <p class="p-0 m-0"><small>.</small></p>
                 <a href="#" class="text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
-                        <p class="fw-bold mb-1 text-body">
+                        <p class="fw-bold mb-1 text-body" id="sidebar-user-following-count">
                             <?php echo $user_following_count ?>
                         </p>
                         <p class="m-0 text-secondary">Following</p>
