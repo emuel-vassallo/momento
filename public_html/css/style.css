@@ -362,6 +362,22 @@ body.preload * {
   cursor: pointer;
 }
 
+input[type="checkbox"].btn-check:checked + label .unfollow-text {
+  display: none;
+}
+
+input[type="checkbox"].btn-check:checked + label .follow-text {
+  display: inline-block;
+}
+
+input[type="checkbox"].btn-check + label .unfollow-text {
+  display: inline-block;
+}
+
+input[type="checkbox"].btn-check + label .follow-text {
+  display: none;
+}
+
 /*  Post page */
 .post-page-image {
   border-radius: 22px;

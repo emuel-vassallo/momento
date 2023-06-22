@@ -84,11 +84,17 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
                                     <?php echo '@' . $user_info['username'] ?>
                                 </p>
                             </div>
-                            <?php echo $is_logged_in_user_profile ? '
                             <div>
+                                <?php echo $is_logged_in_user_profile ? '
                                 <a href="edit_profile.php" class="btn btn-outline-secondary" role="button">Edit Profile</a>
+                            ' : '
+                                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btn-check-2-outlined">
+                                    <span class="follow-text">Follow</span>
+                                    <span class="unfollow-text">Unfollow</span>
+                                </label>
+                            '; ?>
                             </div>
-                            ' : ''; ?>
                         </div>
                         <div>
                             <a id="user-profile-posts-amount"
