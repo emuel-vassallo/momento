@@ -25,10 +25,10 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     $poster_profile_pic_transformed_url = add_transformation_parameters($poster_profile_picture_url, $poster_profile_pic_compression_settings);
 
     $user_posts_amount = get_user_post_count($conn, $current_user_id);
-    // $user_followers_amount = get_user_followers_count($conn, $current_user_id);
-    $user_followers_amount = 0;
-    // $user_following_amount = get_user_following_count($conn, $current_user_id);
-    $user_following_amount = 0;
+    $user_followers = get_user_followers($conn, $current_user_id);
+    $user_followers_amount = count($user_followers);
+    $user_following = get_followed_users_by_user($conn, $current_user_id);
+    $user_following_amount = count($user_following);
 }
 ?>
 
