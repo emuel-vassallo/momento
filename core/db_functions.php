@@ -415,7 +415,9 @@ function get_post_likes($pdo, $post_id)
     $sql = "SELECT u.*
             FROM users_table AS u
             JOIN likes_table AS l ON u.id = l.liker_id
-            WHERE l.post_id = ?";
+            WHERE l.post_id = ?
+            ORDER BY liked_at;
+            ";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$post_id]);
