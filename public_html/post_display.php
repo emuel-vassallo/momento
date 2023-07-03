@@ -42,7 +42,9 @@ function display_posts($pdo, $posts)
 
         $like_checked_attribute = $is_post_liked ? 'checked' : '';
 
-        $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, false);
+        $is_user_following_poster = does_row_exist($pdo, 'followers_table', 'follower_id', $user_id, 'followed_id', $poster_id);
+
+        $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, false, $is_user_following_poster);
 
         $likes_text = get_likes_text($pdo, $post_id);
 

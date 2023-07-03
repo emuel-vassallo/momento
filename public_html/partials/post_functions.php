@@ -29,6 +29,10 @@ function get_dropdown_menu_item($icon_class, $text, $post_id)
     $delete_modal_attributes = '';
     $link_href = '';
 
+    if ($text === 'Follow' || $text === 'Unfollow') {
+        $custom_class_name = 'post-follow-button';
+    }
+
     if ($text === 'Delete') {
         $custom_class_name = 'delete-post-button';
         $delete_modal_attributes = "data-bs-toggle='modal' data-bs-target='#modal-confirm-delete-post'";
@@ -57,11 +61,17 @@ function get_dropdown_menu_item($icon_class, $text, $post_id)
     ";
 }
 
-function get_dropdown_menu_items($is_current_user, $post_id, $is_post_page)
+function get_dropdown_menu_items($is_current_user, $post_id, $is_post_page, $is_user_following_poster = false)
 {
     $delete_menu_item = get_dropdown_menu_item('bi bi-trash', 'Delete', $post_id);
     $edit_menu_item = get_dropdown_menu_item('bi bi-pencil-square', 'Edit', $post_id);
-    $follow_menu_item = get_dropdown_menu_item('bi bi-person-plus', 'Follow', $post_id);
+
+    if ($is_user_following_poster) {
+        $follow_menu_item = get_dropdown_menu_item('bi bi-person-dash', 'Unfollow', $post_id);
+    } else {
+        $follow_menu_item = get_dropdown_menu_item('bi bi-person-plus', 'Follow', $post_id);
+    }
+
     $go_to_post_menu_item = get_dropdown_menu_item('bi bi-box-arrow-up-right', 'Go to post', $post_id);
     $copy_link_menu_item = get_dropdown_menu_item('bi bi-link-45deg', 'Copy link', $post_id);
 

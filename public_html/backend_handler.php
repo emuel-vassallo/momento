@@ -13,8 +13,6 @@ if (function_exists('execute')) {
     } else {
         $result = execute();
     }
-} else {
-    $result = null;
 }
 
 $response = [
@@ -24,4 +22,3 @@ $response = [
 header('Content-Type: application/json');
 
 echo json_encode($response);
-?>
