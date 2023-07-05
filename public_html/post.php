@@ -13,9 +13,10 @@ if (isset($_GET['post_id'])) {
     require_once('../core/db_functions.php');
     require_once("partials/post_functions.php");
 
-    $conn = connect_to_db();
+    $pdo = connect_to_db();
     $post_id = $_GET['post_id'];
-    $post_info = get_post($conn, $post_id);
+    $post_info = get_post($pdo, $post_id);
+    $poster_id = $post_info['user_id'];
     $post_image_dir = $post_info['image_dir'];
 
     $post_img_compression_settings = "w_1000/f_auto,q_auto:eco";
@@ -26,7 +27,7 @@ if (isset($_GET['post_id'])) {
         exit();
     }
 
-    $user_info = get_user_info($conn, $post_info['user_id']);
+    $user_info = get_user_info($pdo, $post_info['user_id']);
     $poster_profile_picture_path = $user_info['profile_picture_path'];
     $poster_profile_pic_copmression_settings = "w_200/f_auto,q_auto:eco";
     $poster_profile_pic_transformed_url = add_transformation_parameters($poster_profile_picture_path, $poster_profile_pic_copmression_settings);
@@ -34,7 +35,9 @@ if (isset($_GET['post_id'])) {
     $time_ago = get_formatted_time_ago($post_info['created_at']);
 
     $is_current_user = $_SESSION['user_id'] === $user_info['id'];
-    $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, true);
+
+    $is_user_following_poster = does_row_exist($pdo, 'followers_table', 'follower_id', $_SESSION['user_id'], 'followed_id', $poster_id);
+    $dropdown_menu_items = get_dropdown_menu_items($is_current_user, $post_id, true, $is_user_following_poster);
 } else {
     header('Location: ' . $base_url . 'index.php');
     exit();
@@ -62,6 +65,7 @@ if (isset($_GET['post_id'])) {
     <script type="module" src="scripts/show-search-suggestions.js" defer></script>
     <script type="module" src="scripts/post-modal-handler.js" defer></script>
     <script type="module" src="scripts/post-more-options-handler.js" defer></script>
+    <script type="module" src="scripts/follow-handler.js" defer></script>
 </head>
 
 <body class="h-100 w-100 m-0 p-0">
@@ -82,7 +86,8 @@ if (isset($_GET['post_id'])) {
         <?php include('partials/header.php'); ?>
         <?php include('partials/sidebar.php'); ?>
         <main class="page-post d-flex flex-column h-100 bg-light p-5 align-items-center justify-content-center">
-            <div class="post row w-100 h-100 bg-white py-4 px-4 border" data-post-id="<?php echo $post_id ?>">
+            <div class="post row w-100 h-100 bg-white py-4 px-4 border" data-post-id="<?php echo $post_id ?>"
+                data-poster-id="<?php echo $poster_id ?>">
                 <img class="post-page-image col-8 p-0" src="<?php echo $post_img_transformed_url; ?>" alt="Post Image">
 
                 <div class="post-sidebar col-4 d-flex flex-column gap-4 px-5 py-3">
@@ -94,10 +99,10 @@ if (isset($_GET['post_id'])) {
                                     src="<?php echo $poster_profile_pic_transformed_url; ?>" alt="Sophia Adams" s=""
                                     profile="" picture'="">
                                 <div class="ps-1 d-flex flex-column">
-                                    <p class="m-0 fw-semibold text-body fs-5">
+                                    <p class="m-0 fw-semibold text-body fs-5 post-poster-display-name">
                                         <?php echo $user_info['display_name']; ?>
                                     </p>
-                                    <p class="m-0 text-secondary">
+                                    <p class="m-0 text-secondary post-poster-username">
                                         <?php echo '@' . $user_info['username']; ?>
                                     </p>
                                 </div>
