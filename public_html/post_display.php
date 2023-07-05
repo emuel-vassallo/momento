@@ -71,8 +71,8 @@ function display_posts($pdo, $posts)
                             <div class='post-user-info d-flex align-items-center justify-content-center'>
                                 <img class='lazy feed-card-profile-picture me-2 flex-shrink-0' data-src='{$profile_pic_transformed_url}' alt='{$poster_display_name}'s profile picture'>
                                 <div class='ps-1 d-flex flex-column'>
-                                    <p class='m-0 fw-semibold text-body'>{$poster_display_name}</p>
-                                    <p class='m-0 text-secondary'><small>@{$poster_username}</small></p>
+                                    <p class='m-0 fw-semibold text-body post-poster-display-name'>{$poster_display_name}</p>
+                                    <p class='m-0 text-secondary'><small class='post-poster-username'>@{$poster_username}</small></p>
                                 </div>
                             </div>
                         </a>

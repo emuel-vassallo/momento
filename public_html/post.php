@@ -67,7 +67,17 @@ if (isset($_GET['post_id'])) {
 <body class="h-100 w-100 m-0 p-0">
     <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
-    <?php include('partials/post_link_copied_toast.php'); ?>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="post-link-copied-toast" class="toast align-items-center" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Link copied to clipboard.
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/header.php'); ?>
         <?php include('partials/sidebar.php'); ?>
