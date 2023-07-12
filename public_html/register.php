@@ -55,7 +55,7 @@ $username = $_SESSION['username'] ?? '';
                                     </div>
                                     <div class="inputs-container d-flex flex-column gap-4">
                                         <div class="d-flex gap-4">
-                                            <div class="form-floating">
+                                            <div class="form-floating w-100">
                                                 <input class="form-control bg-light px-3" id="email" name="email"
                                                     placeholder="Email" autocomplete="off" type="email"
                                                     value="<?php echo $email ?>" />
@@ -63,7 +63,7 @@ $username = $_SESSION['username'] ?? '';
                                                     <p class="bg-light px-3 w-100 text-truncate">Email</p>
                                                 </label>
                                             </div>
-                                            <div class="form-floating">
+                                            <div class="form-floating w-100">
                                                 <input class="form-control bg-light px-3" id="phone-number"
                                                     name="phone_number" placeholder="Phone Number" autocomplete="off"
                                                     autocomplete="off" type="text"
