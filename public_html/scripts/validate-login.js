@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       validateCredentials(username, password)
         .then((valid) => {
-          if (!valid && !loginError.classList.contains("visible")) {
-            loginError.classList.add("visible");
-          } else {
+          if (valid) {
             HTMLFormElement.prototype.submit.call(form);
+          } else {
+            loginError.classList.add("visible");
           }
         })
         .catch((error) => {
