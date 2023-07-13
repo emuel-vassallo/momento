@@ -62,7 +62,9 @@ if ($result) {
     $_SESSION['registration_complete'] = false;
     $_SESSION['current_user_username'] = $username;
 
-    $user_info = get_user_by_credentials($pdo, $username, $hashed_password);
+    $user_info = get_user_info_from_username($pdo, $username);
+
+    echo $user_info;
 
     if ($user_info) {
         $_SESSION['user_id'] = $user_info['id'];
@@ -78,10 +80,10 @@ if ($result) {
         unset($_SESSION['username']);
         unset($_SESSION['hashed_password']);
         unset($_SESSION['current_user_username']);
-
-        header('Location: index.php');
-        exit;
     }
+
+    header('Location: index.php');
+    exit;
 } else {
     echo "Something went wrong while creating the user.";
 }

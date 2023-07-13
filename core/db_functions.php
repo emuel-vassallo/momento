@@ -96,11 +96,12 @@ function add_post($pdo, $user_id, $caption)
 
 function get_user_by_credentials($pdo, $username, $password)
 {
+
     $sql = "SELECT * 
               FROM users_table 
               WHERE username = ?
                 OR email = ?
-                OR phone_number = ?";
+                OR phone_number = ?;";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -122,6 +123,31 @@ function get_user_by_credentials($pdo, $username, $password)
     }
 
     return false;
+}
+
+function get_user_info_from_username($pdo, $username)
+{
+
+    $sql = "SELECT * 
+              FROM users_table 
+              WHERE username = ?
+                OR email = ?
+                OR phone_number = ?;";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        $username,
+        $username,
+        $username
+    ]);
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+        return false;
+    }
+
+    return $row;
 }
 
 function fetch_posts($pdo, $sql)
