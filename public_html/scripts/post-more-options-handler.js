@@ -43,7 +43,8 @@ const handleDeletePosts = () => {
 
 const handleCopyLinks = () => {
   const copyLinkButtons = document.querySelectorAll(".post-copy-link-button");
-  const linkCopiedToast = document.getElementById("post-link-copied-toast");
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
 
   copyLinkButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -51,10 +52,11 @@ const handleCopyLinks = () => {
       const post = button.closest(".post");
       const postId = post.dataset.postId;
       const postLink = `${baseUrl}/post.php?post_id=${postId}`;
-
       copyToClipboard(postLink);
-      const toastBootstrap =
-        bootstrap.Toast.getOrCreateInstance(linkCopiedToast);
+
+      toastMessage.textContent = 'Link copied to clipboard.';
+
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
       toastBootstrap.show();
     });
   });

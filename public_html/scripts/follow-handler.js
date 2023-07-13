@@ -15,43 +15,11 @@ const getUserProfileId = () => {
 };
 
 const showFollowToast = (followButton, isUnfollowing) => {
-  const toastContainer = document.createElement("div");
-  toastContainer.classList.add(
-    "toast-container",
-    "position-fixed",
-    "bottom-0",
-    "end-0",
-    "p-3"
-  );
+  const toast = document.getElementById("toast");
 
-  const toastElement = document.createElement("div");
-  toastElement.id = "post-follow-toast";
-  toastElement.classList.add("toast", "align-items-center");
-  toastElement.setAttribute("role", "alert");
-  toastElement.setAttribute("aria-live", "assertive");
-  toastElement.setAttribute("aria-atomic", "true");
+  const toastMessage = document.getElementById("toast-message");
 
-  const toastContent = document.createElement("div");
-  toastContent.classList.add("d-flex");
-
-  const toastBody = document.createElement("div");
-  toastBody.classList.add("toast-body");
-
-  const toastMessage = document.createElement("p");
-  toastMessage.id = "post-follow-toast-message";
-
-  const closeButton = document.createElement("button");
-  closeButton.type = "button";
-  closeButton.classList.add("btn-close", "me-2", "m-auto");
-  closeButton.setAttribute("data-bs-dismiss", "toast");
-  closeButton.setAttribute("aria-label", "Close");
-
-  toastBody.appendChild(toastMessage);
-  toastContent.appendChild(toastBody);
-  toastContent.appendChild(closeButton);
-  toastElement.appendChild(toastContent);
-  toastContainer.appendChild(toastElement);
-  document.body.appendChild(toastContainer);
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
 
   const post = followButton.closest(".post");
   const posterDisplayName = post.querySelector(
@@ -67,16 +35,7 @@ const showFollowToast = (followButton, isUnfollowing) => {
     toastMessage.textContent = `You are now following ${posterDisplayName} (${posterUsername})`;
   }
 
-  const toastBootstrap = new bootstrap.Toast(toastElement);
   toastBootstrap.show();
-
-  const visibleToasts = document.getElementsByClassName("toast");
-  if (visibleToasts.length > 1) {
-    const lastToast = visibleToasts[visibleToasts.length - 2];
-    setTimeout(() => {
-      lastToast.remove();
-    }, 100);
-  }
 };
 
 const updateFollowersText = (countElement, action, isProfile) => {

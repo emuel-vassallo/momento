@@ -71,17 +71,7 @@ if (isset($_GET['user_id']) && !empty($_GET['user_id'])) {
     <?php include('partials/post_modal.php') ?>
     <?php include('partials/delete_post_modal.php') ?>
     <?php include('partials/post_likes_modal.php') ?>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="post-link-copied-toast" class="toast align-items-center" role="alert" aria-live="assertive"
-            aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Link copied to clipboard.
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
+    <?php include('partials/toast.php') ?>
     <div class="w-100 h-100 body-container container-fluid m-0 p-0">
         <?php include('partials/sidebar.php'); ?>
         <?php include('partials/header.php'); ?>
