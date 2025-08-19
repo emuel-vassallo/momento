@@ -55,7 +55,7 @@ Before you proceed with the installation, make sure you have the following prere
 
 ### Installing and Running the Project
 
-1. Clone the repository using `git clone https://github.com/emuel-vassallo/momento`
+1.repo Clone the repository using `git clone https://github.com/emuel-vassallo/momento`
 2. Move the project files to the appropriate directory:
    - Windows: Extract the files to `C:\xampp\htdocs\momento`.
    - Linux: Extract the files to `/opt/lampp/htdocs/momento`.
